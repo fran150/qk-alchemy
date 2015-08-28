@@ -1,0 +1,28 @@
+<quark-component>
+    <div data-bind="onBind: getContainer">
+        <!-- ko if: config.type == 'input' -->
+            <input type="text" class="form-control" value="" data-bind="value: value, onBind: getAndLoad, enable: enabled" />
+        <!-- /ko -->
+        <!-- ko if: config.type == 'group' -->
+            <!-- ko if: enabled -->
+                <div class="input-group date" data-bind="onBind: getElement">
+                    <input type="text" class="form-control" value="" data-bind="value: value, onBind: load, enable: enabled">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+                    </div>
+                </div>
+            <!-- /ko -->
+            <!--ko ifnot: enabled -->
+                <div class="input-group date">
+                    <input type="text" class="form-control" value="" data-bind="value: value" disabled="true">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+                    </div>
+                </div>
+            <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: config.type == 'inline' -->
+            <div data-date="" data-bind="onBind: getAndLoad"></div>
+        <!-- /ko -->
+    </div>
+</quark-component>

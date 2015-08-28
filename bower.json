@@ -1,0 +1,40 @@
+{
+  "name": "alchemy",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "crossroads": "~0.12.0",
+    "hasher": "~1.2.0",
+    "requirejs": "~2.1.11",
+    "requirejs-text": "~2.0.10",
+    "knockout": "~3.3.0",
+    "knockout-projections": "~1.1.0",
+    "knockout-mapping": "~2.4.1",
+    "blockui": "*",
+    "accounting.js": "~0.4.1",
+    "quark": "~0.5.4",
+    "bootstrap-datepicker": "~1.4.0"
+  },
+  "main": [],
+  "components": {
+	 "al-sidebar-search": "src/components/alchemy/sidebar-search/sidebar-search.js",
+	 "al-sidebar-item": "src/components/alchemy/sidebar-item/sidebar-item.js",
+	 "al-sidebar": "src/components/alchemy/sidebar/sidebar.js",
+    "al-pillbox": "src/components/alchemy/pillbox/pillbox.js",
+    "al-spinbox": "src/components/alchemy/spinbox/spinbox.js",
+    "al-datepicker": "src/components/alchemy/datepicker/datepicker.js"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "src/bower_modules",
+    "test",
+    "src/app",
+    "src/components/home-page",
+    "src/components/nav-bar",
+    "src/components/about-page",
+    "src/css/styles.css",
+    "src/index.html"
+  ]
+}

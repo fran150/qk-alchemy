@@ -1,0 +1,28 @@
+<quark-component>
+    <li class="sidebar-menu-item">
+        <!-- ko hasContent: '*' -->
+            <a href="#" class="sidebar-menu-link" data-bind="click: toggle">
+                <!-- ko if: icon -->
+                    <span data-bind="css: icon"></span>
+                <!-- /ko -->
+                <span data-bind="text: text"></span>
+                <span class="glyphicon" data-bind="css: _arrow"></span>
+            </a>
+            <!-- ko if: opened -->
+                <ul class="sidebar-menu-list">
+                    <!-- ko content: '*' -->
+                    <!-- /ko -->
+                </ul>
+            <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko hasNotContent: '*' -->
+            <a class="sidebar-menu-link" data-bind="attr: { href: url }">
+                <!-- ko if: icon -->
+                    <span data-bind="css: icon"></span>
+                <!-- /ko -->
+                <span data-bind="text: text"></span>
+            </a>
+        <!-- /ko -->
+    </li>
+</quark-component>

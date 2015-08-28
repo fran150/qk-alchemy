@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-sm-12 form-group">
+        <al-datepicker params="value: value, date: date, enabled: enabled"></al-datepicker>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" data-bind="checked: enabled" />
+                Activado
+            </label>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <input type="text" data-bind="value: value"></p>
+        Valor: <p data-bind="text: value"></p>
+        fecha: <p data-bind="text: date"></p>
+    </div>
+</div>
