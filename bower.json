@@ -35,5 +35,41 @@
     "src/components/about-page",
     "src/css/styles.css",
     "src/index.html"
-  ]
+  ],
+  "overrides": {
+    "bootstrap": {
+        "shims": ["jquery"],
+        "components": {
+            "bt-navbar": "dist/js/bootstrap.js",
+            "bt-other": "dist/js/bootstrap.min.js"
+        }
+    },
+    "crossroads": {
+        "main": "dist/crossroads.min.js"
+    },
+    "js-signals": {
+        "moduleName": "signals"
+    },
+    "accounting.js": {
+        "main": "accounting.js",
+        "moduleName": "accounting-js"
+
+    },
+    "knockout-mapping": {
+        "main": "knockout.mapping.js",
+        "shims": ["knockout", "jquery"]
+    },
+    "bootstrap-datepicker": {
+        "main": [
+            "dist/css/bootstrap-datepicker.css",
+            "dist/js/bootstrap-datepicker.min.js"
+        ],
+        "fakes": {
+            "bootstrap-datepicker-es": {
+                "main": ["dist/locales/bootstrap-datepicker.es.min.js"],
+                "shims": ["bootstrap-datepicker"]
+            }
+        }
+    }
+  }
 }

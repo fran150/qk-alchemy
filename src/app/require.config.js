@@ -16,14 +16,15 @@ var require = {
         "blockUI": "bower_modules/blockui/jquery.blockUI",
         "accounting-js": "bower_modules/accounting.js/accounting",
         "quark": "bower_modules/quark/dist/quark",
-        "bootstrap-datepicker": "bower_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min",
         "bootstrap-datepicker-es": "bower_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min",
+        "bootstrap-datepicker": "bower_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min",
         // endbower
     },
     shim: {
         // bower:shim
         "bootstrap": { deps: ["jquery"] },
         "knockout-mapping": { deps: ["knockout","jquery"] },
+        "bootstrap-datepicker-es": { deps: ["bootstrap-datepicker"] },
         // endbower
     }
 };
