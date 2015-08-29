@@ -65,7 +65,7 @@ define(['knockout', 'quark', 'text!./datepicker.html', 'bootstrap-datepicker', '
         this.load = function (elem) {
             // Set base options
             var options = {
-                container: container,
+                //container: $(container),
                 language: 'es'
             };
 

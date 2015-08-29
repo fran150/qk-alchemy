@@ -16,13 +16,12 @@
     "quark": "~0.5.4",
     "bootstrap-datepicker": "~1.4.0"
   },
-  "main": [],
+  "main": [
+  ],
   "components": {
-	 "al-sidebar-search": "src/components/alchemy/sidebar-search/sidebar-search.js",
-	 "al-sidebar-item": "src/components/alchemy/sidebar-item/sidebar-item.js",
-	 "al-sidebar": "src/components/alchemy/sidebar/sidebar.js",
-    "al-pillbox": "src/components/alchemy/pillbox/pillbox.js",
-    "al-spinbox": "src/components/alchemy/spinbox/spinbox.js",
+    "al-sidebar-search": "src/components/alchemy/sidebar-search/sidebar-search.js",
+    "al-sidebar-item": "src/components/alchemy/sidebar-item/sidebar-item.js",
+    "al-sidebar": "src/components/alchemy/sidebar/sidebar.js",
     "al-datepicker": "src/components/alchemy/datepicker/datepicker.js"
   },
   "ignore": [
