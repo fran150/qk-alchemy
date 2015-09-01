@@ -48,8 +48,11 @@ define(['knockout', 'quark', 'text!./datepicker.html', 'bootstrap-datepicker', '
         // Updates date param reading from control
         function updateDate() {
             var date = $(element).datepicker('getDate');
+
             if ($$.isValidDate(date)) {
-                self.date(date);
+                if (!self.date() || !date || date.getTime() != self.date().getTime()) {
+                    self.date(date);
+                }
             } else {
                 self.date(undefined);
             }

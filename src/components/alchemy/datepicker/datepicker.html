@@ -4,22 +4,22 @@
             <input type="text" class="form-control" value="" data-bind="value: value, onBind: getAndLoad, enable: enabled" />
         <!-- /ko -->
         <!-- ko if: config.type == 'group' -->
-            <!-- ko if: enabled -->
+            <div data-bind="visible: enabled">
                 <div class="input-group date" data-bind="onBind: getElement">
                     <input type="text" class="form-control" value="" data-bind="value: value, onBind: load, enable: enabled">
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
                     </div>
                 </div>
-            <!-- /ko -->
-            <!--ko ifnot: enabled -->
+            </div>
+            <div data-bind="visible: !enabled()">
                 <div class="input-group date">
                     <input type="text" class="form-control" value="" data-bind="value: value" disabled="true">
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
                     </div>
                 </div>
-            <!-- /ko -->
+            </div>
         <!-- /ko -->
         <!-- ko if: config.type == 'inline' -->
             <div data-date="" data-bind="onBind: getAndLoad"></div>
