@@ -17,6 +17,7 @@
     "bootstrap-datepicker": "~1.4.0"
   },
   "main": [
+	 "src/css/alchemy.css"
   ],
   "components": {
     "al-sidebar-search": "src/components/alchemy/sidebar-search/sidebar-search.js",
