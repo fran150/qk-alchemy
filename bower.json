@@ -13,11 +13,11 @@
     "knockout-mapping": "~2.4.1",
     "blockui": "*",
     "accounting.js": "~0.4.1",
-    "quark": "~0.5.4",
-    "bootstrap-datepicker": "~1.4.0"
+    "bootstrap-datepicker": "~1.4.0",
+    "quark": "~0.5.3"
   },
   "main": [
-	 "src/css/alchemy.css"
+    "src/css/alchemy.css"
   ],
   "components": {
     "al-sidebar-search": "src/components/alchemy/sidebar-search/sidebar-search.js",
@@ -39,38 +39,46 @@
   ],
   "overrides": {
     "bootstrap": {
-        "shims": ["jquery"],
-        "components": {
-            "bt-navbar": "dist/js/bootstrap.js",
-            "bt-other": "dist/js/bootstrap.min.js"
-        }
+      "shims": [
+        "jquery"
+      ],
+      "components": {
+        "bt-navbar": "dist/js/bootstrap.js",
+        "bt-other": "dist/js/bootstrap.min.js"
+      }
     },
     "crossroads": {
-        "main": "dist/crossroads.min.js"
+      "main": "dist/crossroads.min.js"
     },
     "js-signals": {
-        "moduleName": "signals"
+      "moduleName": "signals"
     },
     "accounting.js": {
-        "main": "accounting.js",
-        "moduleName": "accounting-js"
-
+      "main": "accounting.js",
+      "moduleName": "accounting-js"
     },
     "knockout-mapping": {
-        "main": "knockout.mapping.js",
-        "shims": ["knockout", "jquery"]
+      "main": "knockout.mapping.js",
+      "shims": [
+        "knockout",
+        "jquery"
+      ]
     },
     "bootstrap-datepicker": {
-        "main": [
-            "dist/css/bootstrap-datepicker.css",
-            "dist/js/bootstrap-datepicker.min.js"
-        ],
-        "fakes": {
-            "bootstrap-datepicker-es": {
-                "main": ["dist/locales/bootstrap-datepicker.es.min.js"],
-                "shims": ["bootstrap-datepicker"]
-            }
+      "main": [
+        "dist/css/bootstrap-datepicker.css",
+        "dist/js/bootstrap-datepicker.min.js"
+      ],
+      "fakes": {
+        "bootstrap-datepicker-es": {
+          "main": [
+            "dist/locales/bootstrap-datepicker.es.min.js"
+          ],
+          "shims": [
+            "bootstrap-datepicker"
+          ]
         }
+      }
     }
   }
 }
