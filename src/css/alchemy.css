@@ -1,64 +1,107 @@
-.sidebar-menu {
-    padding-top:50px;
+.sidebar {
     background-color: #F8F8F8;
     border: #e7e7e7 solid 1px;
     list-style: none;
-    padding-left: 0px;
+    overflow: auto;
+
+    top: 50px;
+    left:0px;
+    bottom:-10px;
+    position:fixed;
+
+    padding:0;
 }
 
-/* Extra small devices (phones, less than 768px) */
-/* No media query since this is the default in Bootstrap */
-
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-    .sidebar-menu-sm {
-        height: 99vh;
-    }
-}
-
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-    .sidebar-menu-md {
-        height: 99vh;
-    }
-}
-
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-    .sidebar-menu-lg {
-        height: 99vh;
-    }
-}
-
-.sidebar-menu-list {
-    padding: 0;
+.sidebar ul {
     list-style: none;
+    padding-left: 15px;
 }
 
-.sidebar-menu-item,
-.sidebar-menu-link,
-.sidebar-menu-link:hover,
-.sidebar-menu-link:active,
-.sidebar-menu-link:visited,
-.sidebar-menu-link:link {
+.sidebar-lg {
+    width: 300px;
+}
+
+.sidebar-md {
+    width: 200px;
+}
+
+.sidebar-sm {
+    width: 100px;
+}
+
+.sidebar-xs {
+    width: 70px;
+}
+
+.with-sidebar-lg {
+    margin-left: 300px;
+}
+.with-sidebar-md {
+    margin-left: 200px;
+}
+.with-sidebar-sm {
+    margin-left: 100px;
+}
+.with-sidebar-xs {
+    margin-left: 70px;
+}
+
+@media (max-width: 1200px) {
+    .sidebar-col-lg {
+        width: 100%;
+        position:relative;
+    }
+
+    .with-sidebar-col-lg {
+        margin-left: inherit;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-col-md {
+        width: 100%;
+        position:relative;
+    }
+
+    .with-sidebar-col-md {
+        margin-left: inherit;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-col-sm {
+        width: 100%;
+        position:relative;
+    }
+
+    .with-sidebar-col-sm {
+        margin-left: inherit;
+    }
+}
+
+.sidebar li,
+.sidebar li a:active,
+.sidebar li a:visited,
+.sidebar li a:link {
     line-height: 50px;
     color: #777;
-    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
-    font-size: 14px;
     text-decoration: none;
-    padding-left: 5px;
 }
 
-.sidebar-menu-item input {
+.sidebar li:hover {
+    background-color: #e7e7e7;
+}
+
+.sidebar li input {
     margin-top: 8px;
 }
 
-.sidebar-menu-link .glyphicon {
+.sidebar li a .glyphicon {
     padding-right: 5px;
 }
 
-.sidebar-menu-link .glyphicon-menu-down,
-.sidebar-menu-link .glyphicon-menu-right {
+.sidebar li a .glyphicon-menu-down,
+.sidebar li a .glyphicon-menu-right {
     float:right;
     line-height: 45px;
     padding-right: 8px;

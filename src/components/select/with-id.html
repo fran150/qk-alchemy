@@ -1,0 +1,16 @@
+<quark-component>
+    <div class="row">
+        <div class="col-sm-3">
+            <input type="text" class="form-control" data-bind="textInput: model.code, onBind: getInput" />
+        </div>
+        <div class="col-sm-9">
+            <select class="form-control" data-bind="
+                options: model.options,
+                optionsText: model.config.textField,
+                value: model.selected,
+                optionsCaption: model.caption">
+            </select>
+        </div>
+    </div>
+
+</quark-component>

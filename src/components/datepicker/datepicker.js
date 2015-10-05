@@ -1,6 +1,5 @@
-define(['knockout', 'quark', 'text!./datepicker.html', 'bootstrap-datepicker', 'bootstrap-datepicker-es'], function (ko, $$, templateMarkup) {
-
-    function Datepicker(params) {
+define(['knockout', 'quark', 'text!./datepicker.html', 'bootstrap-datepicker', 'bootstrap-datepicker-es'], function (ko, $$, template) {
+    return $$.component(function(params, $scope) {
         var self = this;
 
         // ELement container for datepicker
@@ -41,7 +40,7 @@ define(['knockout', 'quark', 'text!./datepicker.html', 'bootstrap-datepicker', '
         }, params, this);
 
         // Gets datepicker container
-        this.getContainer = function(elem) {
+        $scope.getContainer = function(elem) {
             container = elem;
         }
 
@@ -59,13 +58,13 @@ define(['knockout', 'quark', 'text!./datepicker.html', 'bootstrap-datepicker', '
         }
 
         // Get the base element
-        this.getElement = function(elem) {
+        $scope.getElement = function(elem) {
             // Get Base Element
             element = elem;
         }
 
         // On datepicker load...
-        this.load = function (elem) {
+        $scope.load = function (elem) {
             // Set base options
             var options = {
                 //container: $(container),
@@ -91,7 +90,7 @@ define(['knockout', 'quark', 'text!./datepicker.html', 'bootstrap-datepicker', '
         }
 
         // Gets element and loads code
-        this.getAndLoad = function(elem) {
+        $scope.getAndLoad = function(elem) {
             self.getElement(elem);
             self.load(elem);
         }
@@ -114,7 +113,7 @@ define(['knockout', 'quark', 'text!./datepicker.html', 'bootstrap-datepicker', '
         }, params, this);
 
         // Set subscriptions
-        this.subscriptions = {
+        var subscriptions = {
             // When date is changed reset the value on the control
             date: this.date.subscribe(function(newValue) {
                 $(element).datepicker('setDate', newValue);
@@ -140,15 +139,11 @@ define(['knockout', 'quark', 'text!./datepicker.html', 'bootstrap-datepicker', '
         this.update = function(date) {
             $(element).datepicker('update', date);
         }
-    }
 
-    // Esto corre cuando el componente se destruye. Pon aqui cualquier logica necesaria
-    // para limpiar. Por ejemplo cancelar setTimeouts o llamar a dispose de cualquier
-    Datepicker.prototype.dispose = function () {
-        this.date.dispose();
-        this.subscriptions.date.dispose();
-        this.subscriptions.value.dispose();
-    };
-
-    return { viewModel: Datepicker, template: templateMarkup };
+        this.dispose = function() {
+            this.date.dispose();
+            subscriptions.date.dispose();
+            subscriptions.value.dispose();
+        }
+    }, template);
 });
