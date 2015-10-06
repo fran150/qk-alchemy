@@ -14,7 +14,7 @@
     "blockui": "*",
     "accounting.js": "~0.4.1",
     "bootstrap-datepicker": "~1.4.0",
-    "quark": "~0.5.3"
+    "quark": "~0.7"
   },
   "main": [
     "src/css/alchemy.css"

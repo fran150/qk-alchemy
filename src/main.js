@@ -1,6 +1,5 @@
 define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
-    debugger;
-    $$.module(mod, {
+    return $$.module(mod, {
         prefix: 'al',
         components: {
             "datepicker": "components/datepicker/datepicker",
@@ -10,6 +9,9 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
             "sidebar-imagebutton": "components/sidebar/controls/imagebutton",
             "sidebar-link": "components/sidebar/controls/link",
             "sidebar-search": "components/sidebar/controls/search",
+            "submenu": "components/submenu/submenu",
+            "submenu-link": "components/submenu/controls/link",
+            "submenu-version": "components/submenu/controls/version"
         },
         require: {
             paths: {
@@ -19,11 +21,9 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
             shim: {
                 "bootstrap-datepicker-es": { deps: ["bootstrap-datepicker"] }
             }
-        }
-    }, function(moduleName) {
-        require(['link!./alchemy/css/alchemy.css'], function(some) {
-            debugger;
-        })
+        },
+        css: [
+            "css/alchemy.css"
+        ]
     });
 });
-

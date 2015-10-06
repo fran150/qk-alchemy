@@ -1,4 +1,4 @@
-define(['knockout', 'quark', 'text!./imagebutton.html'], function(ko, $$, template) {
+define(['knockout', 'quark', 'text!./link.html'], function(ko, $$, template) {
     return $$.component(function(params, $scope) {
         var self = this;
 
@@ -6,7 +6,7 @@ define(['knockout', 'quark', 'text!./imagebutton.html'], function(ko, $$, templa
             routeName: ko.observable(),
             icon: ko.observable(''),
             text: ko.observable('')
-        }, params, [$scope, this]);
+        }, params, this);
 
         $scope.url = ko.pureComputed(function() {
             if (self.routeName()) {
