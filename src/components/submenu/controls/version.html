@@ -1,6 +1,13 @@
 <quark-component>
-    <div class="pull-right" style="font-size: 10px; padding-right: 20px">
+    <div class="item" style="font-size: 10px;">
+        <!-- ko if: model.moduleName -->
+            <span data-bind="text: model.moduleName"></span>
+            <!-- ko if: model.moduleVersion -->
+                <span>v </span><span data-bind="text: model.moduleVersion"></span>
+            <!-- /ko -->
+            <span> | </span>
+        <!-- /ko -->
         <span data-bind="text: model.appName"></span>
-        v <span data-bind="text: model.version"></span>
+        <span>v</span><span data-bind="text: model.appVersion"></span>
     </div>
 </quark-component>

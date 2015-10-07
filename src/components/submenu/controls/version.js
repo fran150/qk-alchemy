@@ -4,7 +4,9 @@ define(['knockout', 'quark', 'text!./version.html'], function(ko, $$, template) 
 
         $$.parameters({
             appName: ko.observable('Optimus'),
-            version: ko.observable('1.0.0')
+            appVersion: ko.observable('1.0.0'),
+            moduleName: ko.observable(''),
+            moduleVersion: ko.observable('')
         }, params, this);
 
     }, template);
