@@ -11,6 +11,7 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
             "sidebar-search": "components/sidebar/controls/search",
             "submenu": "components/submenu/submenu",
             "submenu-link": "components/submenu/controls/link",
+            "submenu-button": "components/submenu/controls/button",
             "submenu-version": "components/submenu/controls/version"
         },
         require: {
