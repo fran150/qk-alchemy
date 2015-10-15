@@ -1,7 +1,8 @@
 <quark-component>
     <div class="panel" data-bind="css: panelType">
         <div class="panel-heading" data-bind="click: toggle">
-            <span data-bind="text: title"></span>
+            <!-- ko content: 'heading' -->
+            <!-- /ko -->
             <span class="pull-right">
                 <span data-bind="css: icon"></span>
             </span>
