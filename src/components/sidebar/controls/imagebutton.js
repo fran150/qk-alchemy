@@ -8,6 +8,10 @@ define(['knockout', 'quark', 'text!./imagebutton.html'], function(ko, $$, templa
             text: ko.observable('')
         }, params, [$scope, this]);
 
+        $scope.click = function() {
+            $$.redirect($scope.url());
+        }
+
         $scope.url = ko.pureComputed(function() {
             if (self.routeName()) {
                 return "#" + $$.routing.hash(self.routeName());

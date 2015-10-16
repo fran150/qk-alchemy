@@ -9,6 +9,10 @@ define(['knockout', 'quark', 'text!./link.html'], function(ko, $$, template) {
             text: ko.observable('')
         }, params, this);
 
+        $scope.click = function() {
+            $$.redirect($scope.url());
+        }
+
         $scope.url = ko.pureComputed(function() {
             if (self.routeName()) {
                 return "#" + $$.routing.hash(self.routeName());
