@@ -16,7 +16,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         }
 
         // Apply configuration
-        $.extend(true, config, object.config);
+        $.extend(config, object.config);
 
         var editor = {
             editing: ko.observable(),
@@ -29,20 +29,22 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                 config.onNew();
             },
             edit: function(item) {
-                // Save item to edit untoched in editing variable
+                // Save item to edit untouched in editing variable
                 editor.editing(item);
-                // Copy item values into the editor item
-                $$.inject(item, target[config.editorProperty].item);
+                // Copy editing item into editor
+                $$.inject(editor.editing(), target[config.editorProperty].item);
                 // Callback
                 config.onEdit(item);
             },
             remove: function(item) {
+                debugger;
                 // If callback is true remove item from collection
                 if (config.onRemove(item)) {
                     config.collection.remove(item);
                 }
             },
             save: function() {
+                debugger;
                 // Check if we are adding new item or editing
                 var adding = editor.editing() ? false : true;
 
@@ -55,8 +57,8 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                 } else {
                     // If callback is true clone editor into new object and insert into collection
                     if (config.onSave(adding, target[config.editorProperty].item)) {
-                        var newItem = $$.cloneObservable(target[config.editorProperty].item);
-                        config.collection.push(newItem);
+                        var newItem = target[config.editorProperty].item;
+                        config.collection.push($$.cloneObservable(newItem));
                         config.onSaved();
                     }
                 }

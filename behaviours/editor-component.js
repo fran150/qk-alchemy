@@ -3,15 +3,15 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         // Get target object
         var target = object.target;
 
-        // Get config
+        // Get params and default properties
         var params = object.params || {};
         var properties = object.properties || [];
 
-        // Create item property
-        target.item = properties;
+        // Clone original properties into new object to keep them for default
+        target.default = $$.cloneObservable(properties);
 
-        // Apply item property as component parameter
-        $$.parameters(target.item, params, target);
+        // Create parameters for properties and publish them on item property
+        $$.parameters(properties, params, target.item = {});
 
         // Create editable parameter
         $$.parameters({
@@ -20,7 +20,8 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
 
         // Create clear method
         target.clear = function() {
-            $$.clear(target.item);
+            var clean = $$.cloneObservable(target.default);
+            $$.inject(clean, target.item);
         }
     });
 });
