@@ -8,58 +8,68 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         var text = {
             create: 'Guardando...',
             read: 'Cargando Registro...',
-            update: 'Guardando...',
+            update: 'Actualizando...',
             delete: 'Eliminando...'
         }
 
         // Apply configuration
         $.extend(text, object.text);
 
+        if (!target.blocker) {
+            $$.parameters({
+                blocker: ko.observable()
+            }, params, target);
+        }
+
         $$.parameters({
             $item: ko.observable()
         }, params, target);
 
         target.create = function(callback) {
-            ko.tryBlock(target.$item, 'Guardando...');
-            $$.ajax(url, 'POST', ko.mapToJS(target.$item), {
+            target.blocker(text.create);
+            $$.ajax(url, 'POST', ko.mapToJS(target.$item()), {
                 onSuccess: function(data) {
                     $$.call(callback, data);
                 },
                 onComplete: function() {
-                    ko.tryUnblock(target.$item);
+                    target.blocker('');
                 }
             });
         }
 
         target.read = function(id, callback) {
-            ko.tryBlock(target.$item);
+            target.blocker(text.read);
             $$.ajax(url + '/' + id, 'GET', {}, {
                 onSuccess: function(data) {
                     target.$item(ko.mapFromJS(data));
                     $$.call(callback, data);
                 },
                 onComplete: function() {
-                    ko.tryUnblock(target.$item);
+                   target.blocker('');
                 }
             });
         }
 
         target.update = function(id, callback) {
-            ko.tryBlock(target.$item, 'Guardando...');
-            $$.ajax(url + '/' + id, 'PUT', ko.mapToJS(target.$item), {
+            target.blocker(text.update);
+            $$.ajax(url + '/' + id, 'PUT', ko.mapToJS(target.$item()), {
                 onSuccess: function(data) {
                     $$.call(callback, data);
                 },
                 onComplete: function() {
-                    ko.tryUnblock(target.$item);
+                    target.blocker('');
                 }
             });
         }
 
         target.delete = function(id, callback) {
+            target.blocker(text.delete);
             $$.ajax(url + '/' + id, 'DELETE', {}, {
                 onSuccess: function(data) {
                     $$.call(callback, data);
+                },
+                onComplete: function() {
+                    target.blocker('');
                 }
             });
         }

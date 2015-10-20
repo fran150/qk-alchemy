@@ -6,18 +6,24 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         var url = object.url;
         var params = object.params;
         var text = {
-            list: 'Cargando...'
+            list: 'Cargando Registros...'
         }
 
         // Apply configuration
         $.extend(text, object.text);
+
+        if (!target.blocker) {
+            $$.parameters({
+                blocker: ko.observable()
+            }, params, target);
+        }
 
         $$.parameters({
             $list: ko.observableArray()
         }, params, target);
 
         target.list = function(page, size, callback) {
-            ko.tryBlock(target.$list);
+            target.blocker(text.list);
 
             if ($$.isInt(page) && $$.isInt(size)) {
                 url += '?page=' + page & '&size=' + size;
@@ -29,7 +35,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                     $$.call(callback, data);
                 },
                 onComplete: function() {
-                    ko.tryUnblock(target.$list);
+                    target.blocker('');
                 }
             });
         }

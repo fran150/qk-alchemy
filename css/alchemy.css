@@ -3,10 +3,11 @@
     top: 50px;
     right:0px;
     line-height:38px;
-    /*background-color: #e7e7e7;/*#F8F8F8; #e7e7e7;*/
+    background-color: white;
     color: #777;
     border-bottom: #e7e7e7 solid 1px;
     padding-left: 30px;
+    z-index: 1000;
 }
 
 .submenu .item {

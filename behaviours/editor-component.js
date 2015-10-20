@@ -19,7 +19,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         }, params, target);
 
         // Create clear method
-        target.clear = function() {
+        target.reset = function() {
             var clean = $$.cloneObservable(target.default);
             $$.inject(clean, target.item);
         }

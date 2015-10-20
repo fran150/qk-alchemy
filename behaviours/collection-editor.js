@@ -20,48 +20,52 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
 
         var editor = {
             editing: ko.observable(),
+            getComponent: function() {
+                return target[config.editorProperty];
+            },
             new: function() {
                 // Clear editing item
-                editor.editing(undefined);
+                $$.undefine(editor.editing);
                 // Clear editor screen
-                target[config.editorProperty].clear();
+                editor.getComponent().reset();
                 // Callback
                 config.onNew();
             },
             edit: function(item) {
                 // Save item to edit untouched in editing variable
                 editor.editing(item);
-                // Copy editing item into editor
-                $$.inject(editor.editing(), target[config.editorProperty].item);
+                // Copy the editing item into editor component
+                $$.inject(editor.editing(), editor.getComponent().item);
                 // Callback
                 config.onEdit(item);
             },
             remove: function(item) {
-                debugger;
                 // If callback is true remove item from collection
                 if (config.onRemove(item)) {
                     config.collection.remove(item);
                 }
             },
             save: function() {
-                debugger;
                 // Check if we are adding new item or editing
                 var adding = editor.editing() ? false : true;
+                var item = editor.getComponent().item;
 
-                if (!adding) {
-                    // If callback is true copy values from editor to edited item
-                    if (config.onSave(adding, target[config.editorProperty].item)) {
-                        $$.inject(target[config.editorProperty].item, editor.editing());
-                        config.onSaved();
-                    }
-                } else {
-                    // If callback is true clone editor into new object and insert into collection
-                    if (config.onSave(adding, target[config.editorProperty].item)) {
-                        var newItem = target[config.editorProperty].item;
-                        config.collection.push($$.cloneObservable(newItem));
-                        config.onSaved();
-                    }
+                // Check callback and if it's false exit
+                if (!config.onSave(adding, item)) {
+                    return;
                 }
+
+                if (adding) {
+                    // Clone editor into new object and insert it into collection
+                    var newItem = $$.cloneObservable(item);
+                    config.collection.push(newItem);
+                } else {
+                    // Copy the editor values into the edited item
+                    $$.inject(item, editor.editing());
+                }
+
+                // Callback
+                config.onSaved();
             }
         }
 
