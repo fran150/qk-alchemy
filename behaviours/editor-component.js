@@ -18,10 +18,9 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
             editable: ko.observable(true)
         }, params, target);
 
-        // Create clear method
+        // Create reset method
         target.reset = function() {
-            var clean = $$.cloneObservable(target.default);
-            $$.inject(clean, target.item);
+            $$.inject(target.default, target.item);
         }
     });
 });
