@@ -18,6 +18,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
             onCreate: function() { return true; },
             onUpdate: function() { return true; },
             onDelete: function() { return true; },
+            onSave: function() { return true; },
             readed: function() {},
             saved: function(data) { },
             deleted: function(data) { }
@@ -60,17 +61,19 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
 
             var ok = false;
 
-            if (target.updating()) {
-                ok = config.onUpdate();
-            } else {
-                ok = config.onCreate();
-            }
-
-            if (ok) {
+            if (config.onSave()) {
                 if (target.updating()) {
-                    config.update(config.saved);
+                    ok = config.onUpdate();
                 } else {
-                    config.create(config.saved);
+                    ok = config.onCreate();
+                }
+
+                if (ok) {
+                    if (target.updating()) {
+                        config.update(config.saved);
+                    } else {
+                        config.create(config.saved);
+                    }
                 }
             }
         }

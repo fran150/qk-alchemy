@@ -62,6 +62,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                 } else {
                     // Copy the editor values into the edited item
                     $$.inject(item, editor.editing());
+                    config.collection.refresh();
                 }
 
                 // Callback
