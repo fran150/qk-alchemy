@@ -27,7 +27,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
 
         target.create = function(callback) {
             target.blocker(text.create);
-            $$.ajax(url, 'POST', ko.mapToJS(target.$item()), {
+            $$.ajax(url, 'POST', target.$item(), {
                 onSuccess: function(data) {
                     $$.call(callback, data);
                 },
@@ -41,7 +41,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
             target.blocker(text.read);
             $$.ajax(url + '/' + id, 'GET', {}, {
                 onSuccess: function(data) {
-                    target.$item(ko.mapFromJS(data));
+                    target.$item(data);
                     $$.call(callback, data);
                 },
                 onComplete: function() {
@@ -52,7 +52,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
 
         target.update = function(id, callback) {
             target.blocker(text.update);
-            $$.ajax(url + '/' + id, 'PUT', ko.mapToJS(target.$item()), {
+            $$.ajax(url + '/' + id, 'PUT', target.$item(), {
                 onSuccess: function(data) {
                     $$.call(callback, data);
                 },

@@ -31,7 +31,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
 
             $$.ajax(url, 'GET', {}, {
                 onSuccess: function(data) {
-                    target.$list(ko.mapFromJS(data));
+                    target.$list(data);
                     $$.call(callback, data);
                 },
                 onComplete: function() {

@@ -3,9 +3,11 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
     $$.behaviour('simple-editor-page', function(object) {
         // Get target object
         var target = object.target;
+        // Get params
+        var params = object.params || {};
         // Set default config
         var config = {
-            dataProperty: '',
+            dataProperty: 'data',
             editorProperty: 'editor',
             create: function(callback) { callback(); },
             read: function(callback) { callback() },
@@ -25,7 +27,9 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         $.extend(config, object.config);
 
         // Current Mode
-        target.updating = ko.observable(false);
+        $$.parameters({
+            updating: ko.observable(false)
+        }, params, target);
 
         // Creates a property for the data
         target[config.dataProperty] = ko.observable();
