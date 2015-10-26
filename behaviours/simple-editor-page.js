@@ -1,33 +1,120 @@
 define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
 
     $$.behaviour('simple-editor-page', function(object) {
+
+        if (!object) {
+            throw 'Must specify this behaviour configuration';
+        }
+
         // Get target object
-        var target = object.target;
+        var target;
+        if (object.target) {
+            target = object.target;
+        } else {
+            throw 'Must specify the object where to apply this behaviour on the \'target\' property';
+        }
+
         // Get params
         var params = object.params || {};
+
         // Set default config
         var config = {
+            id: undefined,
             dataProperty: 'data',
             editorProperty: 'editor',
-            create: function(callback) { callback(); },
-            read: function(callback) { callback() },
-            update: function(callback) { callback(); },
-            delete: function(callback) { callback(); },
-
-            onNew: function() { return true; },
-            onCreate: function() { return true; },
-            onUpdate: function() { return true; },
-            onDelete: function() { return true; },
-            onSave: function() { return true; },
-            readed: function() {},
-            saved: function(data) { },
-            deleted: function(data) { }
+            dataSourceProperty: 'dataSource',
         }
 
         // Apply configuration
         $.extend(config, object.config);
 
-        // Current Mode
+
+        // Get the datasource from target using configured property name
+        function dataSource() {
+            return target[config.dataSourceProperty];
+        }
+
+
+        // Generic error on operations
+        function errorOnId(oper) {
+            throw 'Id must be an observable, config.id must be an observable containing the id of the object to ' + oper + '. Assign a valid observable to the config.id or redefine the ' + oper + ' operation specifying a function in the operations.' + oper + ' config';
+        }
+
+        function errorOnOperation(oper) {
+            throw 'Could not find a ' + oper + ' method on the datasource, check config.dataSourceProperty to be a targets property containing a valid datasource o redefine the ' + oper + ' operation specifying a function in the operations.' + oper + ' config';
+        }
+
+
+        // Set default operations
+        var operations = {
+            create: function(callback) {
+                if (dataSource() && dataSource().create) {
+                    dataSource().create(callback);
+                } else {
+                    errorOnOperation('create');
+                }
+            },
+            read: function(callback) {
+                if (dataSource() && dataSource().read) {
+                    if (!ko.isObservable(config.id)) {
+                        errorOnId('read');
+                    }
+
+                    var id = config.id();
+                    dataSource().read(id, callback);
+                } else {
+                    errorOnOperation('read');
+                }
+            },
+            update: function(callback) {
+                if (dataSource() && dataSource().update) {
+                    if (!ko.isObservable(config.id)) {
+                        errorOnId('update');
+                    }
+
+                    var id = config.id();
+                    dataSource().update(id, callback);
+                } else {
+                    errorOnOperation('update');
+                }
+            },
+            delete: function(callback) {
+                if (dataSource() && dataSource().delete) {
+                    if (!ko.isObservable(config.id)) {
+                        errorOnId('delete');
+                    }
+
+                    var id = config.id();
+                    dataSource().delete(id, callback);
+                } else {
+                    errorOnOperation('delete');
+                }
+            },
+        }
+
+        $.extend(operations, object.operations);
+
+
+        // Set default events
+        var events = {
+            onNew: function() { return true; },
+            onCreate: function() { return true; },
+            onRead: function() { return true; },
+            onUpdate: function() { return true; },
+            onDelete: function() { return true; },
+            onSave: function() { return true; },
+
+            created: function(data) {},
+            readed: function() {},
+            updated: function(data) {},
+            deleted: function(data) {},
+            saved: function(data) {}
+        }
+
+        $.extend(events, object.events);
+
+
+        // Create current mode parameter
         $$.parameters({
             updating: ko.observable(false)
         }, params, target);
@@ -35,53 +122,66 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         // Creates a property for the data
         target[config.dataProperty] = ko.observable();
 
-        // Configures object for add item
+        // Creates a new method wich configures component for creating a new object
         target.new = function() {
-            // Undefine the current item and reset the editor
-            if (config.onNew()) {
+            if (events.onNew()) {
+                // Undefine the current item, reset the editor and set the updating flag to false
                 $$.undefine(target[config.dataProperty]);
                 target[config.editorProperty].reset();
                 target.updating(false);
             }
         }
 
-        // Reads a new record into the current item
+        // Creates a method that reads a new record into the data property
         target.read = function() {
-            // Read the record, call the event and inject it into the editor
-            config.read(function(data) {
-                $$.inject(target[config.dataProperty](), target[config.editorProperty].item);
-                target.updating(true);
-                config.readed();
-            });
+            if (events.onRead()) {
+                // Read the record, when finish inject it into the editor and call the after event
+                operations.read(function(data) {
+                    $$.inject(target[config.dataProperty](), target[config.editorProperty].item);
+                    target.updating(true);
+                    events.readed();
+                });
+            }
         }
 
-        // Saves the changes
+        // Creates a method that saves changes in the editor to the data
         target.save = function() {
-            target[config.dataProperty](target[config.editorProperty].item);
-
             var ok = false;
 
-            if (config.onSave()) {
+            // Call the generic save event
+            if (events.onSave()) {
+                // Call the specific event based on updating observable
                 if (target.updating()) {
-                    ok = config.onUpdate();
+                    ok = events.onUpdate();
                 } else {
-                    ok = config.onCreate();
+                    ok = events.onCreate();
                 }
 
+                // If all events allow to continue
                 if (ok) {
+                    // Copy editor value into data item
+                    target[config.dataProperty](target[config.editorProperty].item);
+
+                    // Based on updating flag call the corresponding operation and events
                     if (target.updating()) {
-                        config.update(config.saved);
+                        operations.update(function(data) {
+                            events.updated(data);
+                            events.saved(data);
+                        });
                     } else {
-                        config.create(config.saved);
+                        operations.create(function(data) {
+                            events.created(data);
+                            events.saved(data);
+                        });
                     }
                 }
             }
         }
 
-        // Deletes the record
+        // Creates a method that deletes the record with the id
         target.delete = function() {
-            if (config.onDelete()) {
-                config.delete(config.deleted);
+            if (events.onDelete()) {
+                operations.delete(events.deleted);
             }
         }
     });

@@ -12,7 +12,10 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
             "submenu": "components/submenu/submenu",
             "submenu-link": "components/submenu/controls/link",
             "submenu-button": "components/submenu/controls/button",
-            "submenu-version": "components/submenu/controls/version"
+            "submenu-version": "components/submenu/controls/version",
+
+            "menu-new-refresh": "menu/new-refresh",
+            "menu-save-delete-cancel": "menu/save-delete-cancel"
         },
         require: {
             paths: {
