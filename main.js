@@ -3,6 +3,7 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
         prefix: 'al',
         components: {
             "datepicker": "components/datepicker/datepicker",
+            "menu-user": "components/menu/user",
             "panel-collapsable": "components/panel/collapsable",
             "select-with-id": "components/select/with-id",
             "sidebar": "components/sidebar/sidebar",
