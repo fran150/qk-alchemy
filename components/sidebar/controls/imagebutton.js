@@ -4,6 +4,7 @@ define(['knockout', 'quark', 'text!./imagebutton.html'], function(ko, $$, templa
 
         $$.parameters({
             routeName: ko.observable(),
+            routeParams: ko.observable(),
             icon: ko.observable(''),
             text: ko.observable('')
         }, params, [$scope, this]);
@@ -14,7 +15,8 @@ define(['knockout', 'quark', 'text!./imagebutton.html'], function(ko, $$, templa
 
         $scope.url = ko.pureComputed(function() {
             if (self.routeName()) {
-                return "#" + $$.routing.hash(self.routeName());
+                var url = "#" + $$.routing.hash(self.routeName(), self.routeParams());
+                return url;
             }
 
             return "#";

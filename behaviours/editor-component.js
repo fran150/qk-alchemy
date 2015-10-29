@@ -20,7 +20,12 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
 
         // Create reset method
         target.reset = function() {
+            ko.unsubscribeValidation(target.item);
             $$.inject(target.default, target.item);
         }
+    }, function(object) {
+        var target = object.target;
+
+        ko.unsubscribeValidation(target.item);
     });
 });
