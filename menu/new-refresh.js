@@ -1,5 +1,5 @@
 define(['knockout', 'quark', 'text!./new-refresh.html'], function(ko, $$, template) {
-    return $$.component(function(params, $scope) {
+    return $$.component(function(params, $scope, $errorHandler) {
         var self = this;
 
         function dispatchSignal(propertyName, parameterName) {
@@ -25,6 +25,8 @@ define(['knockout', 'quark', 'text!./new-refresh.html'], function(ko, $$, templa
                 }
             })
         }, params, this);
+
+        $scope.errors = $errorHandler.getByLevel(1000, 9999);
 
     }, template);
 });

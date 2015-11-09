@@ -1,5 +1,5 @@
 define(['knockout', 'quark', 'text!./save-delete-cancel.html'], function(ko, $$, template) {
-    return $$.component(function(params, $scope) {
+    return $$.component(function(params, $scope, $errorHandler) {
         var self = this;
 
         function dispatchSignal(propertyName, parameterName) {
@@ -35,5 +35,8 @@ define(['knockout', 'quark', 'text!./save-delete-cancel.html'], function(ko, $$,
                 }
             })
         }, params, this);
+
+        $scope.errors = $errorHandler.getByLevel(1000, 9999);
+
     }, template);
 });

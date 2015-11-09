@@ -97,12 +97,12 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
 
         // Set default events
         var events = {
-            onNew: function() { return true; },
-            onCreate: function() { return true; },
-            onRead: function() { return true; },
-            onUpdate: function() { return true; },
-            onDelete: function() { return true; },
-            onSave: function() { return true; },
+            onNew: function(callback) { callback(); },
+            onCreate: function(callback) { callback(); },
+            onRead: function(callback) { callback(); },
+            onUpdate: function(callback) { callback(); },
+            onDelete: function(callback) { callback(); },
+            onSave: function(callback) { callback(); },
 
             created: function(data) {},
             readed: function() {},
@@ -124,24 +124,24 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
 
         // Creates a new method wich configures component for creating a new object
         target.new = function() {
-            if (events.onNew()) {
+            events.onNew(function() {
                 // Undefine the current item, reset the editor and set the updating flag to false
                 $$.undefine(target[config.dataProperty]);
                 target[config.editorProperty].reset();
                 target.updating(false);
-            }
+            });
         }
 
         // Creates a method that reads a new record into the data property
         target.read = function() {
-            if (events.onRead()) {
+            events.onRead(function() {
                 // Read the record, when finish inject it into the editor and call the after event
                 operations.read(function(data) {
                     $$.inject(target[config.dataProperty](), target[config.editorProperty].item);
                     target.updating(true);
                     events.readed();
                 });
-            }
+            });
         }
 
         // Creates a method that saves changes in the editor to the data
@@ -149,16 +149,9 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
             var ok = false;
 
             // Call the generic save event
-            if (events.onSave()) {
-                // Call the specific event based on updating observable
-                if (target.updating()) {
-                    ok = events.onUpdate();
-                } else {
-                    ok = events.onCreate();
-                }
-
-                // If all events allow to continue
-                if (ok) {
+            events.onSave(function() {
+                // Save Callback Function
+                function save() {
                     // Copy editor value into data item
                     target[config.dataProperty](target[config.editorProperty].item);
 
@@ -175,14 +168,22 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                         });
                     }
                 }
-            }
+
+                // Call the specific event based on updating observable
+                if (target.updating()) {
+                    events.onUpdate(save);
+                } else {
+                    events.onCreate(save);
+                }
+
+            });
         }
 
         // Creates a method that deletes the record with the id
         target.delete = function() {
-            if (events.onDelete()) {
+            events.onDelete(function() {
                 operations.delete(events.deleted);
-            }
+            });
         }
     });
 });

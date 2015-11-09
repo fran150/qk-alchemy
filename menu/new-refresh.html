@@ -1,6 +1,8 @@
 <quark-component>
-    <span data-bind="visible: model.blocker">
-        <al-submenu-button params="icon: 'glyphicon glyphicon glyphicon-plus', text: 'Nuevo', onClick: model.onNewClick"></al-submenu-button>
-        <al-submenu-button params="icon: 'glyphicon glyphicon glyphicon-refresh', text: 'Actualizar', onClick: model.onRefreshClick"></al-submenu-button>
+    <span data-bind="visible: !errors().length">
+        <span data-bind="visible: model.blocker">
+            <al-submenu-button params="icon: 'glyphicon glyphicon glyphicon-plus', text: 'Nuevo', onClick: model.onNewClick"></al-submenu-button>
+            <al-submenu-button params="icon: 'glyphicon glyphicon glyphicon-refresh', text: 'Actualizar', onClick: model.onRefreshClick"></al-submenu-button>
+        </span>
     </span>
 </quark-component>
