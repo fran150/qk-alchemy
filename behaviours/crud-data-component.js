@@ -53,7 +53,8 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
             target.blocker(text.create);
 
             // Post the $item to the service, when finish invoke the callback and unblock
-            $$.ajax(url, 'POST', target.$item(), {
+            var json = ko.toJSON(target.$item);
+            $$.ajax(url, 'POST', json, {
                 onSuccess: function(data) {
                     $$.call(callback, data);
                 },
@@ -86,7 +87,8 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
             target.blocker(text.update);
 
             // Put the $item into the service when finish invoke the callback and unblock
-            $$.ajax(url + '/' + id, 'PUT', target.$item(), {
+            var json = ko.toJSON(target.$item());
+            $$.ajax(url + '/' + id, 'PUT', json, {
                 onSuccess: function(data) {
                     $$.call(callback, data);
                 },
