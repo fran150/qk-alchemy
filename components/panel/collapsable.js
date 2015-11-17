@@ -12,12 +12,13 @@ define(['knockout', 'quark', 'text!./collapsable.html'], function(ko, $$, templa
         };
 
         $$.parameters({
-            type: ko.observable('default')
+            type: ko.observable('')
         }, params, self);
 
         $$.parameters({
             title: ko.observable('Titulo'),
-            collapsed: ko.observable(false)
+            collapsed: ko.observable(false),
+            click: function () {}
         }, params, [self, $scope]);
 
         $scope.panelType = ko.pureComputed(function() {
@@ -37,6 +38,9 @@ define(['knockout', 'quark', 'text!./collapsable.html'], function(ko, $$, templa
         }
 
         $scope.toggle = self.toggle = function() {
+            if($$.isDefined(self.click)){
+                self.click();
+            }
             self.collapsed(!self.collapsed());
         }
 
