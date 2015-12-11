@@ -24,11 +24,11 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         // Get parameters from config
         var params = object.params || {};
 
-
         var config = {
             blockText: 'Cargando...',
             itemProperty: '$item',
-            methodName: 'read'
+            methodName: 'read',
+            auth: false
         }
 
         // Apply text configuration
@@ -69,7 +69,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                 onComplete: function() {
                    target.blocker('');
                 }
-            });
+            }, config.auth);
         }
     });
 });

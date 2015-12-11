@@ -21,6 +21,25 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
             throw new 'Must specify the service url.';
         }
 
+        // Auth required for methods
+        var auth = {
+            create: false,
+            read: false,
+            update: false,
+            delete: false
+        }
+
+        // If Auth is defined item by item, but is only a boolean set all methods to that value
+        if ($$.isObject(object.auth)) {
+            // Apply text configuration
+            $.extend(auth, object.auth);
+        } else if (object.auth === true) {
+            auth.create = true;
+            auth.read = true;
+            auth.update = true;
+            auth.delete = true;
+        }
+
         // Get parameters from config
         var params = object.params || {};
 
@@ -61,7 +80,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                 onComplete: function() {
                     target.blocker('');
                 }
-            });
+            }, auth.create);
         }
 
         // Create a read method wich reads the record with the specified id and loads it into the $item observable
@@ -78,7 +97,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                 onComplete: function() {
                    target.blocker('');
                 }
-            });
+            }, auth.read);
         }
 
         // Create a update wich edits the record sending the $item to the specified id
@@ -95,7 +114,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                 onComplete: function() {
                     target.blocker('');
                 }
-            });
+            }, auth.update);
         }
 
         // Create a delete method wich deletes the record with the specified id
@@ -111,7 +130,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                 onComplete: function() {
                     target.blocker('');
                 }
-            });
+            }, auth.delete);
         }
     });
 });
