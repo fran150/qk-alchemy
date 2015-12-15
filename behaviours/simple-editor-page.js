@@ -22,7 +22,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
             id: undefined,
             dataProperty: 'data',
             editorProperty: 'editor',
-            dataSourceProperty: 'dataSource',
+            dataSourceProperty: 'dataSource'
         }
 
         // Apply configuration

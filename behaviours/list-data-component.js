@@ -1,6 +1,10 @@
 define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
 
     $$.behaviour('list-data-component', function(object) {
+        if (!object) {
+            throw 'Must specify this behaviour configuration.';
+        }
+
         // Get target object
         var target = object.target;
         var url = object.url;
@@ -8,6 +12,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         var text = {
             list: 'Cargando Registros...'
         }
+        var auth = object.auth;
 
         // Apply configuration
         $.extend(text, object.text);
@@ -37,7 +42,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                 onComplete: function() {
                     target.blocker('');
                 }
-            });
+            }, auth, { source: object.source });
         }
 
     });

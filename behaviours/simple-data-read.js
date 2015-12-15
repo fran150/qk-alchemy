@@ -69,7 +69,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                 onComplete: function() {
                    target.blocker('');
                 }
-            }, config.auth);
+            }, config.auth, { source: config.source });
         }
     });
 });

@@ -80,7 +80,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                 onComplete: function() {
                     target.blocker('');
                 }
-            }, auth.create);
+            }, auth.create, { source: object.source });
         }
 
         // Create a read method wich reads the record with the specified id and loads it into the $item observable
@@ -97,7 +97,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                 onComplete: function() {
                    target.blocker('');
                 }
-            }, auth.read);
+            }, auth.read, { source: object.source });
         }
 
         // Create a update wich edits the record sending the $item to the specified id
@@ -114,7 +114,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                 onComplete: function() {
                     target.blocker('');
                 }
-            }, auth.update);
+            }, auth.update, { source: object.source });
         }
 
         // Create a delete method wich deletes the record with the specified id
@@ -130,7 +130,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
                 onComplete: function() {
                     target.blocker('');
                 }
-            }, auth.delete);
+            }, auth.delete, { source: object.source });
         }
     });
 });
