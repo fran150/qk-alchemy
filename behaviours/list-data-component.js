@@ -3,11 +3,12 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
     $$.behaviour('list-data-component', function(object) {
         // Get target object
         var target = object.target;
-        var url = object.url;
+        var paramUrl = object.url;
         var params = object.params;
         var text = {
             list: 'Cargando Registros...'
         }
+        var functionName = object.functionName || 'list';
 
         // Apply configuration
         $.extend(text, object.text);
@@ -22,11 +23,18 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
             $list: ko.observableArray()
         }, params, target);
 
-        target.list = function(page, size, callback) {
+        target[functionName] = function(args, callback, page, size) {
             target.blocker(text.list);
 
             if ($$.isInt(page) && $$.isInt(size)) {
                 url += '?page=' + page & '&size=' + size;
+            }
+
+            if ($$.isFunction(paramUrl)) {
+                url = paramUrl(args);
+            }
+            if ($$.isString(paramUrl)) {
+                url = paramUrl;
             }
 
             $$.ajax(url, 'GET', {}, {

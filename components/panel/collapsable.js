@@ -8,7 +8,9 @@ define(['knockout', 'quark', 'text!./collapsable.html'], function(ko, $$, templa
             info: 'panel-info',
             success: 'panel-success',
             warning: 'panel-warning',
-            danger: 'panel-danger'
+            danger: 'panel-danger',
+            green: 'panel-green',
+            red: 'panel-red'
         };
 
         $$.parameters({
