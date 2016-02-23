@@ -12,6 +12,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         var text = {
             list: 'Cargando Registros...'
         }
+        var functionName = object.functionName || 'list';
 
         var auth = object.auth;
 
