@@ -24,6 +24,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         // Get parameters from config
         var params = object.params || {};
 
+
         var config = {
             blockText: 'Cargando...',
             itemProperty: '$item',
