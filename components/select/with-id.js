@@ -5,6 +5,9 @@ define(['knockout', 'quark', 'text!./with-id.html'], function(ko, $$, template) 
         var input;
 
         $$.parameters({
+            cssInput: ko.observable(),
+            cssSelect: ko.observable(),
+            title: ko.observable(),
             options: ko.observableArray(),
             selected: ko.observable(),
             optionsCaption: ko.observable(),

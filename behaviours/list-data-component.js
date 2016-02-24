@@ -47,6 +47,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
 
             $$.ajax(url, 'GET', {}, {
                 onSuccess: function(data) {
+                    debugger;
                     target.$list(data);
                     $$.call(callback, data);
                 },
