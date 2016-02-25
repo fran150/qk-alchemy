@@ -25,10 +25,10 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
         },
         require: {
             paths: {
-                "bootstrap-datepicker-es": "bower_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min",
-                "bootstrap-datepicker": "bower_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min",
+                "bootstrap-datepicker-es": "bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min",
+                "bootstrap-datepicker": "bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min",
 
-                "bootstrap-switch": "bower_modules/bootstrap-switch/bootstrap-switch.min"
+                "bootstrap-switch": "bower_components/bootstrap-switch/dist/js/bootstrap-switch.min"
             },
             shim: {
                 "bootstrap-datepicker-es": { deps: ["bootstrap-datepicker"] }
@@ -36,7 +36,7 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
         },
         css: [
             "css/alchemy.css",
-            "bower_modules/bootstrap-switch/bootstrap-switch.min.css"
+            "bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css"
 
         ]
     });
