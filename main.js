@@ -15,6 +15,7 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
             "submenu-link": "components/submenu/controls/link",
             "submenu-button": "components/submenu/controls/button",
             "submenu-version": "components/submenu/controls/version",
+            "submenu-close-module": "components/submenu/controls/close-module",
 
             "data-session-storage": "data/session-storage",
             "data-local-storage": "data/local-storage",

@@ -8,7 +8,7 @@ define(['knockout', 'quark', 'text!./datepicker.html', 'bootstrap-datepicker', '
         var element = null;
 
         // Set config options
-        $$.config({
+        $$.parameters({
             type: 'group',
             autoclose: true,
             calendarWeeks: false,
@@ -37,7 +37,7 @@ define(['knockout', 'quark', 'text!./datepicker.html', 'bootstrap-datepicker', '
             toggleActive: false,
             weekStart: 0,
             zIndexOffset: 10
-        }, params, this);
+        }, params, this.config = {});
 
         // Gets datepicker container
         $scope.getContainer = function(elem) {
@@ -98,7 +98,7 @@ define(['knockout', 'quark', 'text!./datepicker.html', 'bootstrap-datepicker', '
         // Set component parameters
         $$.parameters({
             // Transforms any input on a valid date and updating the parameter
-            date: ko.computedParameter(params['date'], {
+            date: /*ko.computedParameter(params['date'], {
                 read: function(param) {
                     return $$.makeDate(param(), true);
                 },
@@ -106,7 +106,7 @@ define(['knockout', 'quark', 'text!./datepicker.html', 'bootstrap-datepicker', '
                     newValue = $$.makeDate(newValue, true);
                     param(newValue);
                 }
-            }, this),
+            }, this)*/ ko.observable(),
             // Text Input value
             value: ko.observable(),
             enabled: ko.observable(true)
