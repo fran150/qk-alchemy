@@ -7,15 +7,6 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
             "switch": "components/switch/switch",
             "panel-collapsable": "components/panel/collapsable",
             "select-with-id": "components/select/with-id",
-            "sidebar": "components/sidebar/sidebar",
-            "sidebar-imagebutton": "components/sidebar/controls/imagebutton",
-            "sidebar-link": "components/sidebar/controls/link",
-            "sidebar-search": "components/sidebar/controls/search",
-            "submenu": "components/submenu/submenu",
-            "submenu-link": "components/submenu/controls/link",
-            "submenu-button": "components/submenu/controls/button",
-            "submenu-version": "components/submenu/controls/version",
-            "submenu-close-module": "components/submenu/controls/close-module",
 
             "data-session-storage": "data/session-storage",
             "data-local-storage": "data/local-storage",
@@ -34,11 +25,6 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
             shim: {
                 "bootstrap-datepicker-es": { deps: ["bootstrap-datepicker"] }
             }
-        },
-        css: [
-            "css/alchemy.css",
-            "bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css"
-
-        ]
+        }
     });
 });
