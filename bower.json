@@ -23,6 +23,7 @@
   ],
   "dependencies": {
     "bootstrap-datepicker": "~1.6.0",
-    "bootstrap-switch": "~3.3.2"
+    "bootstrap-switch": "~3.3.2",
+    "jquery-ui": "~1.11.4"
   }
 }

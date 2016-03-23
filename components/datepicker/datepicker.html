@@ -1,28 +1,4 @@
 <quark-component>
-    <div data-bind="onBind: getContainer">
-        <!-- ko if: model.config.type == 'input' -->
-            <input type="text" class="form-control" value="" data-bind="value: model.value, onBind: getAndLoad, enable: model.enabled" />
-        <!-- /ko -->
-        <!-- ko if: model.config.type == 'group' -->
-            <div data-bind="visible: model.enabled">
-                <div class="input-group date" data-bind="onBind: getElement">
-                    <input type="text" class="form-control" value="" data-bind="value: model.value, onBind: load, enable: model.enabled">
-                    <div class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                    </div>
-                </div>
-            </div>
-            <div data-bind="visible: !model.enabled()">
-                <div class="input-group date">
-                    <input type="text" class="form-control" value="" data-bind="value: model.value" disabled="true">
-                    <div class="input-group-addon">
-                        <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
-                    </div>
-                </div>
-            </div>
-        <!-- /ko -->
-        <!-- ko if: model.config.type == 'inline' -->
-            <div data-date="" data-bind="onBind: getAndLoad"></div>
-        <!-- /ko -->
-    </div>
+    <input type="text" class="form-control" data-bind="onBind: getElement,
+                                                       value: model.text" />
 </quark-component>
