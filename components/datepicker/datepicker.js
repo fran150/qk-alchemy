@@ -97,19 +97,23 @@ define(['knockout', 'quark', 'text!./datepicker.html', 'bootstrap-datepicker', '
 
         // Set component parameters
         $$.parameters({
+            // Text Input value
+            value: ko.observable(),
+            // Control enabled
+            enabled: ko.observable(true)
+        }, params, this);
+
+        $$.computedParameters({
             // Transforms any input on a valid date and updating the parameter
-            date: /*ko.computedParameter(params['date'], {
+            date: {
                 read: function(param) {
                     return $$.makeDate(param(), true);
                 },
-                write: function(param, newValue) {
-                    newValue = $$.makeDate(newValue, true);
-                    param(newValue);
+                write: function(newValue) {
+                    return $$.makeDate(newValue, true);
+
                 }
-            }, this)*/ ko.observable(),
-            // Text Input value
-            value: ko.observable(),
-            enabled: ko.observable(true)
+            }
         }, params, this);
 
         // Set subscriptions
