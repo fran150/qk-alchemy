@@ -48,7 +48,7 @@ define(['knockout', 'quark', 'text!./switch.html', 'bootstrap-switch'], function
 
             //Obtengo el elemento y aplico el switch
             element = elem;
-            $("#switch").bootstrapSwitch(options);
+            $(element).bootstrapSwitch(options);
         }
 
     }, template);
