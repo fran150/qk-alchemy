@@ -7,14 +7,6 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
             "switch": "components/switch/switch",
             "panel-collapsable": "components/panel/collapsable",
             "select-with-id": "components/select/with-id",
-            "sidebar": "components/sidebar/sidebar",
-            "sidebar-imagebutton": "components/sidebar/controls/imagebutton",
-            "sidebar-link": "components/sidebar/controls/link",
-            "sidebar-search": "components/sidebar/controls/search",
-            "submenu": "components/submenu/submenu",
-            "submenu-link": "components/submenu/controls/link",
-            "submenu-button": "components/submenu/controls/button",
-            "submenu-version": "components/submenu/controls/version",
 
             "data-session-storage": "data/session-storage",
             "data-local-storage": "data/local-storage",
@@ -25,19 +17,14 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
         },
         require: {
             paths: {
-                "bootstrap-datepicker-es": "bower_modules/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min",
-                "bootstrap-datepicker": "bower_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min",
+                "bootstrap-datepicker-es": "bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min",
+                "bootstrap-datepicker": "bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min",
 
-                "bootstrap-switch": "bower_modules/bootstrap-switch/bootstrap-switch.min"
+                "bootstrap-switch": "bower_components/bootstrap-switch/dist/js/bootstrap-switch.min"
             },
             shim: {
                 "bootstrap-datepicker-es": { deps: ["bootstrap-datepicker"] }
             }
-        },
-        css: [
-            "css/alchemy.css",
-            "bower_modules/bootstrap-switch/bootstrap-switch.min.css"
-
-        ]
+        }
     });
 });

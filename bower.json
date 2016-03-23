@@ -1,0 +1,28 @@
+{
+  "name": "Alchemy",
+  "version": "0.1.0",
+  "authors": [
+    "admin <fllopez@bpba.com.ar>"
+  ],
+  "description": "Componentes Web de Quark",
+  "main": "main.js",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "Alchemy"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-datepicker": "~1.6.0",
+    "bootstrap-switch": "~3.3.2"
+  }
+}
