@@ -6,7 +6,8 @@ define(['knockout', 'quark', 'text!./datepicker.html', 'jqueryui/datepicker', 'j
 
         $$.parameters({
             text: ko.observable(),
-            value: ko.observable()
+            value: ko.observable(),
+            maxDate: ko.observable()
         }, params, this);
 
         $scope.getElement = function(htmlElement) {
@@ -26,6 +27,9 @@ define(['knockout', 'quark', 'text!./datepicker.html', 'jqueryui/datepicker', 'j
             }),
             value: self.value.subscribe(function(newValue) {
                 $(element).datepicker("setDate", newValue);
+            }),
+            maxDate: self.maxDate.subscribe(function(newValue) {
+                $(element).datepicker("option", "maxDate", newValue);
             })
         }
 
