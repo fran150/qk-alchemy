@@ -15,15 +15,13 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
             "menu-new-refresh": "menu/new-refresh",
             "menu-save-delete-cancel": "menu/save-delete-cancel"
         },
+        css: [
+            "bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css"
+        ],
         require: {
             paths: {
-                "bootstrap-datepicker-es": "bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min",
-                "bootstrap-datepicker": "bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min",
-
+                "jqueryui":         "bower_components/jquery-ui/ui",
                 "bootstrap-switch": "bower_components/bootstrap-switch/dist/js/bootstrap-switch.min"
-            },
-            shim: {
-                "bootstrap-datepicker-es": { deps: ["bootstrap-datepicker"] }
             }
         }
     });
