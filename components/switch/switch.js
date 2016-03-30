@@ -13,27 +13,8 @@ define(['knockout', 'quark', 'text!./switch.html', 'bootstrap-switch'], function
             disabled: ko.observable(false)
         }, params, this);
 
-        // ELement container for switch
-        var container = null;
-        // switch base element
-        var element = null;
-
-        // Gets switch container
-        $scope.getContainer = function(elem) {
-            container = elem;
-        }
-
         // Get element
-        $scope.getElement = function(elem) {
-            //Cuando hace click, cambia el valor de la variable
-            var onChange = function() {
-                if (self.value()) {
-                    self.value(false);
-                } else {
-                    self.value(true);
-                }
-            }
-
+        $scope.getElement = function(element) {
             //Define las opciones para el switch
             var options = {
                 state: self.value(),
@@ -43,12 +24,13 @@ define(['knockout', 'quark', 'text!./switch.html', 'bootstrap-switch'], function
                 offText: self.offText(),
                 onColor: self.onColor(),
                 offColor: self.offColor(),
-                onSwitchChange: onChange
+                onSwitchChange: function(event, state) {
+                    self.value(state);
+                }
             };
 
-            //Obtengo el elemento y aplico el switch
-            element = elem;
-            $("#switch").bootstrapSwitch(options);
+            // Le aplico el estilo del bootstrap switch
+            $(element).bootstrapSwitch(options);
         }
 
     }, template);
