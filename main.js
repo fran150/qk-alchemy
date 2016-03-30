@@ -16,6 +16,7 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
             "menu-save-delete-cancel": "menu/save-delete-cancel"
         },
         css: [
+            "bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css",
             "bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css"
         ],
         require: {
