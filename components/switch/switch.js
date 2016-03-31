@@ -29,7 +29,6 @@ define(['knockout', 'quark', 'text!./switch.html', 'bootstrap-switch'], function
                 }
             };
 
-            // Le aplico el estilo del bootstrap switch
             $(element).bootstrapSwitch(options);
         }
 
