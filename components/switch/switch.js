@@ -5,11 +5,11 @@ define(['knockout', 'quark', 'text!./switch.html', 'bootstrap-switch'], function
         // Set component parameters
         $$.parameters({
             value: ko.observable(false),
-            size: ko.observable(),
+            size: ko.observable('mini'),
             onColor: ko.observable(),
-            onText: ko.observable(),
+            onText: ko.observable('Si'),
             offColor: ko.observable(),
-            offText: ko.observable(),
+            offText: ko.observable('No'),
             disabled: ko.observable(false)
         }, params, this);
 
