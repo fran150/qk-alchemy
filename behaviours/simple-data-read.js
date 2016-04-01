@@ -14,9 +14,9 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         }
 
         // Get the url object
-        var url;
+        var paramUrl;
         if (object.url) {
-            url = object.url;
+            paramUrl = object.url;
         } else {
             throw new 'Must specify the service url.';
         }
@@ -48,21 +48,23 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         // Create a parameter for the service data result
         $$.parameters(parameters, params, target);
 
-        function createUrl(args) {
-            var target = url;
-            for (var i = 0; i < args.length; i++) {
-                target += '/' + args[i];
-            }
-            return target;
-        }
-
         // Create a read method wich reads the record with the specified id and loads it into the $item observable
-        target[config.methodName] = function(callback) {
+        target[config.methodName] = function(args, callback) {
             // Block screen
             target.blocker(config.blockText);
 
+            var url;
+
+            if ($$.isFunction(paramUrl)) {
+                url = paramUrl(args);
+            }
+
+            if ($$.isString(paramUrl)) {
+                url = paramUrl;
+            }
+
             // Get the $item from the service and load it into the $item observable, when finish invoke the callback and unblock
-            $$.ajax(createUrl(arguments), 'GET', {}, {
+            $$.ajax(url, 'GET', {}, {
                 onSuccess: function(data) {
                     target[config.itemProperty](data);
                     $$.call(callback, data);

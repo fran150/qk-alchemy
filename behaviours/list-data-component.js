@@ -34,6 +34,8 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         target[functionName] = function(args, callback, page, size) {
             target.blocker(text.list);
 
+            var url;
+
             if ($$.isInt(page) && $$.isInt(size)) {
                 url += '?page=' + page & '&size=' + size;
             }
