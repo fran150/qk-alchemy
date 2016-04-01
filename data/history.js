@@ -1,13 +1,10 @@
-define(['knockout', 'quark', 'text!./history.html'], function(ko, $$, template) {
-    return $$.component(function(params, $scope) {
+define(['knockout', 'quark'], function(ko, $$) {
+    return function() {
         var self = this;
 
-        // Item con el resultado
-        $$.parameters({
-            store: ko.observable(),
-            maxLength: ko.observable(10),
-            $list: ko.observableArray()
-        }, params, this);
+        this.store = ko.observable();
+        this.maxLength = ko.observable(10);
+        this.$list = ko.observableArray();
 
         // Lee la clave especificada y transforma el valor en un objeto
         this.read = function() {
@@ -62,5 +59,5 @@ define(['knockout', 'quark', 'text!./history.html'], function(ko, $$, template) 
             localStorage.removeItem(self.store());
             self.$list([]);
         }
-    }, template);
+    }
 });

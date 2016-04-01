@@ -1,11 +1,9 @@
-define(['knockout', 'quark', 'text!./local-storage.html'], function(ko, $$, template) {
-    return $$.component(function(params, $scope) {
+define(['knockout', 'quark'], function(ko, $$) {
+    return function() {
         var self = this;
 
         // Item con el resultado
-        $$.parameters({
-            $item: ko.observable()
-        }, params, this);
+        this.$item: ko.observable();
 
         // Lee la clave especificada y transforma el valor en un objeto
         this.read = function(key) {
@@ -23,6 +21,5 @@ define(['knockout', 'quark', 'text!./local-storage.html'], function(ko, $$, temp
         this.delete = function(key) {
             localStorage.removeItem(key);
         }
-
-    }, template);
+    }
 });
