@@ -8,10 +8,6 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
             "panel-collapsable": "components/panel/collapsable",
             "select-with-id": "components/select/with-id",
 
-            "data-session-storage": "data/session-storage",
-            "data-local-storage": "data/local-storage",
-            "data-history": "data/history",
-
             "menu-new-refresh": "menu/new-refresh",
             "menu-save-delete-cancel": "menu/save-delete-cancel"
         },
