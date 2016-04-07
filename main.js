@@ -1,6 +1,7 @@
 define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
     return $$.module(mod, {
         prefix: 'al',
+        version: '0.3.0',
         components: {
             "datepicker": "components/datepicker/datepicker",
             "spinner": "components/spinner/spinner",
