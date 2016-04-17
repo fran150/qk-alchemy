@@ -29,7 +29,7 @@ define(['knockout', 'quark'], function(ko, $$) {
                 key: key,
                 name: name,
                 routeName: current.route.fullName,
-                params: current.params,
+                params: ko.mapToJS(current.params),
                 data: data
             }
 
