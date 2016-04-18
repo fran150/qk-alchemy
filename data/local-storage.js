@@ -3,7 +3,7 @@ define(['knockout', 'quark'], function(ko, $$) {
         var self = this;
 
         // Item con el resultado
-        this.$item: ko.observable();
+        this.$item = ko.observable();
 
         // Lee la clave especificada y transforma el valor en un objeto
         this.read = function(key) {
