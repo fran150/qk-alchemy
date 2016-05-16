@@ -1,0 +1,26 @@
+<quark-component>
+    <!-- ko content --><!-- /ko -->
+
+    <!-- ko if: model.pages() > 0 -->
+    <nav>
+        <ul class="pagination">
+            <li data-bind="css: { disabled: model.page() == 0 }">
+                <a href="#" data-bind="click: previous">
+                    <span>&laquo;</span>
+                </a>
+            </li>
+            <!-- ko foreach: pageArray -->
+                <li data-bind="css: { active: $parent.model.page() == $data }">
+                    <a href="#" data-bind="text: $data + 1, click: $parent.setPage">
+                    </a>
+                </li>
+            <!-- /ko -->
+            <li data-bind="css: { disabled: model.page() == (model.pages() - 1) }">
+                <a href="#" data-bind="click: next">
+                    <span>&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /ko -->
+</quark-component>

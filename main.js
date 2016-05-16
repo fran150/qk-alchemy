@@ -6,6 +6,7 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
             "datepicker": "components/datepicker/datepicker",
             "spinner": "components/spinner/spinner",
             "switch": "components/switch/switch",
+            "pager": "components/pager/pager",
             "panel-collapsable": "components/panel/collapsable",
             "select-with-id": "components/select/with-id",
 
