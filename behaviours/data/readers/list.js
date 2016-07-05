@@ -1,28 +1,20 @@
 define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
-    $$.behaviour('data/readers/list', function(object) {
+    $$.behaviour('data/readers/list', function(target, config) {
         // Validate that an input parameter is specified
-        if (!$$.isObject(object)) {
+        if (!$$.isObject(config)) {
             throw 'Must specify this behaviour configuration as an object.';
-        }
-
-        // Get target object, the object to wich the behaviour must be applied
-        var target;
-        if (object.target) {
-            target = object.target;
-        } else {
-            throw 'Must specify the object where to apply this behaviour on the \'target\' property.';
         }
 
         // Get the url option
         var paramUrl;
-        if (object.url) {
-            paramUrl = object.url;
+        if (config.url) {
+            paramUrl = config.url;
         } else {
             throw 'Must specify the service url.';
         }
 
         // Initialize config
-        var config = {
+        var defaultConfig = {
             blockText: 'Cargando...',
             methodName: 'list',
             auth: false,
@@ -42,7 +34,7 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         }
 
         // Combine specified configuration with the default
-        $.extend(config, object.config);
+        $.extend(config, defaultConfig);
 
         // Create a read method wich reads the record with the specified id and loads it into the $item observable
         target[config.methodName] = function(args, callback) {

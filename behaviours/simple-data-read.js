@@ -1,31 +1,20 @@
 define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
 
-    $$.behaviour('simple-data-read', function(object) {
-        if (!object) {
-            throw 'Must specify this behaviour configuration.';
-        }
-
-        // Get target object
-        var target;
-        if (object.target) {
-            target = object.target;
-        } else {
-            throw new 'Must specify the object where to apply this behaviour on the \'target\' property.';
-        }
+    $$.behaviour('simple-data-read', function(target, config) {
 
         // Get the url object
         var paramUrl;
-        if (object.url) {
-            paramUrl = object.url;
+        if (config.url) {
+            paramUrl = config.url;
         } else {
             throw new 'Must specify the service url.';
         }
 
         // Get parameters from config
-        var params = object.params || {};
+        var params = config.params || {};
 
 
-        var config = {
+        var defaultConfig = {
             blockText: 'Cargando...',
             itemProperty: '$item',
             methodName: 'read',
@@ -33,10 +22,10 @@ define(['knockout', 'quark', 'jquery'], function(ko, $$, $) {
         }
 
         // Apply text configuration
-        $.extend(config, object.config);
+        $.extend(config, defaultConfig);
 
         // If there isn't a blocker defined in the configuration create one from the parameters
-        if (!target.blocker) {
+        if (!config.blocker) {
             $$.parameters({
                 blocker: ko.observable()
             }, params, target);
