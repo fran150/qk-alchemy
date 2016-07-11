@@ -1,8 +1,8 @@
 {
-  "name": "Alchemy",
+  "name": "qk-alchemy",
   "version": "1.0.0",
   "authors": [
-    "admin <fllopez@bpba.com.ar>"
+    "fran150 <panchi150@gmail.com>"
   ],
   "description": "Componentes Web de Quark",
   "main": "main.js",
@@ -10,7 +10,10 @@
     "amd"
   ],
   "keywords": [
-    "Alchemy"
+    "alchemy",
+    "quark",
+    "module",
+    "components"
   ],
   "license": "MIT",
   "private": true,
