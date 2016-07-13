@@ -1,0 +1,135 @@
+.sidebar {
+    background-color: #F8F8F8;
+    border: #e7e7e7 solid 1px;
+    list-style: none;
+    overflow: auto;
+
+    top: 50px;
+    left:0px;
+    bottom:-10px;
+    position:fixed;
+
+    padding:0;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left:0px;
+}
+
+.sidebar .imagebutton {
+    line-height: 20px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.sidebar .imagebutton a {
+    line-height: 20px !important;
+}
+
+.sidebar .notext {
+    display: none;
+}
+
+@media (max-width: 1199px) {
+    .sidebar-col-lg {
+        left: 0px !important;
+        width: 100% !important;
+        position:relative;
+    }
+
+    .with-sidebar-col-lg {
+        margin-left: inherit !important;
+    }
+
+    .sidebar-col-lg li {
+        display: inline-block;
+        padding: 10px;
+    }
+
+    .sidebar .notext {
+        display: inline;
+    }
+}
+
+@media (max-width: 991px) {
+    .sidebar-col-md {
+        left: 0px !important;
+        width: 100% !important;
+        position:relative;
+    }
+
+    .with-sidebar-col-md {
+        margin-left: inherit !important;
+    }
+
+    .sidebar-col-md li {
+        display: inline-block;
+        padding: 10px;
+    }
+
+    .sidebar .notext {
+        display: inline;
+    }
+}
+
+@media (max-width: 767px) {
+    .sidebar-col-sm {
+        left: 0px !important;
+        width: 100% !important;
+        position:relative;
+    }
+
+    .with-sidebar-col-sm {
+        margin-left: inherit !important;
+    }
+
+    .sidebar-col-sm li {
+        display: inline-block;
+        padding: 10px;
+    }
+
+    .sidebar .notext {
+        display: inline;
+    }
+}
+
+.sidebar li {
+    padding-left:5px;
+}
+
+.sidebar li li {
+    padding-left:10px;
+}
+
+.sidebar li,
+.sidebar li a:active,
+.sidebar li a:visited,
+.sidebar li a:link {
+    line-height: 25px;
+    color: #777;
+    text-decoration: none;
+}
+
+.sidebar li a:hover {
+    text-decoration: underline;
+}
+
+.sidebar .imagebutton:hover {
+    background-color: #e7e7e7;
+}
+
+.sidebar .imagebutton a:hover {
+    text-decoration: none;
+}
+
+.sidebar li input {
+    margin-top: 8px;
+}
+
+.sidebar li a .glyphicon-menu-down,
+.sidebar li a .glyphicon-menu-right {
+    float:right;
+    line-height: 25px;
+    padding-right: 8px;
+}
