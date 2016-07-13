@@ -3,23 +3,17 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
         prefix: 'al',
         version: '1.0.0',
         components: {
-            "datepicker": "components/datepicker/datepicker",
-            "spinner": "components/spinner/spinner",
+            "layout": "components/layout/layout",
             "switch": "components/switch/switch",
             "pager": "components/pager/pager",
-            "panel-collapsable": "components/panel/collapsable",
-            "select-with-id": "components/select/with-id",
-
-            "menu-new-refresh": "menu/new-refresh",
-            "menu-save-delete-cancel": "menu/save-delete-cancel"
+            "panel-collapsable": "components/panel/collapsable"
         },
         css: [
-            "bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css",
-            "bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css"
+            "bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css",
+            "css/style.css"
         ],
         require: {
             paths: {
-                "jqueryui":         "bower_components/jquery-ui/ui",
                 "bootstrap-switch": "bower_components/bootstrap-switch/dist/js/bootstrap-switch.min"
             }
         }
