@@ -1,0 +1,32 @@
+<quark-component>
+    <ul>
+        <!-- ko hasContent: 'submenu' -->
+            <li>
+                <!-- ko if: icon -->
+                    <span data-bind="css: icon"></span>
+                <!-- /ko -->
+
+                <a href="#" data-bind="click: toggle">
+                    <small data-bind="text: text"></small>
+                    <small class="glyphicon" data-bind="css: _arrow"></small>
+                </a>
+
+                <!-- ko if: opened -->
+                    <!-- ko content: 'submenu' -->
+                    <!-- /ko -->
+                <!-- /ko -->
+            </li>
+        <!-- /ko -->
+
+        <!-- ko hasNotContent: 'submenu' -->
+            <li>
+                <!-- ko if: icon -->
+                    <span data-bind="css: icon"></span>
+                <!-- /ko -->
+                <a data-bind="attr: { href: link }">
+                    <small data-bind="text: text"></small>
+                </a>
+            </li>
+        <!-- /ko -->
+    </ul>
+</quark-component>

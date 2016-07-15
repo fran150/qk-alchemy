@@ -8,6 +8,11 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
             "pager": "components/pager/pager",
             "panel-collapsable": "components/panel/collapsable"
         },
+        namespaces: {
+            "layout": {
+                "sidebar": "components/layout/sidebar/sidebar"
+            }
+        },
         css: [
             "bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css",
             "css/style.css"
