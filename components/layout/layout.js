@@ -3,7 +3,7 @@ define(['quark', 'knockout', 'text!./layout.html'], function($$, ko, template) {
         var self = this;
 
         $$.parameters({
-            sidebarSize: ko.observable(50),
+            sidebarSize: ko.observable(90),
             containerSize: ko.observable('md'),
             minSidebarSize: ko.observable(20)
         }, params, this);

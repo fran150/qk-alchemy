@@ -10,9 +10,9 @@ define(['knockout', 'quark', 'text!./imagebutton.html'], function(ko, $$, templa
             // Parametros de la ruta que se deve invocar al hacer clic en el boton
             routeParams: ko.observable(),
             // Clase glyphicon o fontawesome del icono a mostrar
-            icon: ko.observable(''),
+            icon: ko.observable('glyphicon glyphicon-heart'),
             // Texto del elemento
-            text: ko.observable('')
+            text: ko.observable('Button')
         }, params, [$scope, this]);
 
         // Tamaño del sidebar

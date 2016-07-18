@@ -11,6 +11,9 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
         namespaces: {
             "layout": {
                 "sidebar": "components/layout/sidebar/sidebar"
+            },
+            "layout-sidebar": {
+                "imagebutton": "components/layout/sidebar/controls/imageButton"
             }
         },
         css: [

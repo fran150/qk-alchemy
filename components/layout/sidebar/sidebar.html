@@ -1,10 +1,14 @@
 <quark-component>
-    <ul data-bind="onBind: init,
+    <div class="sidebar" data-bind="onBind: init,
                    css: classes,
-                   style: { width: width },
-                   event: { mousedown: startResizing }"
-        class="sidebar">
-        <!-- ko content -->
-        <!-- /ko -->
-    </ul>
+                   style: { width: width }">
+       <button class="resizer" data-bind="onBind: configResizer">
+           <span class="glyphicon glyphicon-option-vertical"></span>
+       </button>
+
+        <ul>
+            <!-- ko content -->
+            <!-- /ko -->
+        </ul>
+    </div>
 </quark-component>
