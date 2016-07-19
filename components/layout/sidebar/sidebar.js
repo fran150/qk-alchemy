@@ -1,62 +1,82 @@
 define(['knockout', 'quark', 'text!./sidebar.html', '../layout'],
-       function(ko, $$, template, LayoutComponent) {
-    // Menu lateral
+    function(ko, $$, template, LayoutComponent) {
+
     return $$.component(function(params, $scope) {
         var self = this;
 
-        var elem;
+        // Indicates if the sidebar is resizing
+        this.resizing = ko.observable(false);
 
-        $scope.resizing = ko.observable(false);
+        // Layout variable values
+        var layout = {
+            containerSize: ko.observable(),
+            sidebarSize: ko.observable()
+        }
 
-        this.sidebarSize = ko.observable();
-        $scope.containerSize = ko.observable();
-
+        // On first tag bind init component
         $scope.init = function(element, viewModel, context) {
+            // Get the main layout component
             var layoutMain = context.$child;
 
-            if (context && layoutMain) {
-                if (layoutMain instanceof LayoutComponent.modelType) {
-                    self.sidebarSize = layoutMain.sidebarSize;
-                    $scope.containerSize = layoutMain.containerSize;
-                }
+            // Copy main layout component observables to local variables
+            if (layoutMain instanceof LayoutComponent.modelType) {
+                layout.sidebarSize = layoutMain.sidebarSize;
+                layout.containerSize = layoutMain.containerSize;
             }
-
         }
 
-        $scope.configResizer = function(element) {
+        function resizeSidebar(event) {
+            if (self.resizing()) {
+                layout.sidebarSize(event.pageX);
+            }
+        }
+
+        function stopResizing(event) {
+            self.resizing(false);
+        }
+
+        // Init component resizer
+        $scope.initResizer = function(element) {
+            // Attach mouse down event to resizer element
             $(element).on('mousedown', function(event) {
-                var size = self.sidebarSize();
-                if (event.pageX >= size - 10) {
-                    $scope.resizing(true);
-                    self.sidebarSize(event.pageX + 10);
-                }
+                // On mouse down start resizing and set initial size
+                self.resizing(true);
+                layout.sidebarSize(event.pageX);
             });
-
         }
 
-        // Al mover el mouse si esta en actualizando el tamaño del sidebar, setea el tamaño del mismo a la posicion del mouse
-        $(window).on('mousemove', function(event) {
-            if ($scope.resizing()) {
-                self.sidebarSize(event.pageX + 10);
-            }
+        var subscriptions = {
+            // Subscribe to the resizing flag
+            resizing: self.resizing.subscribe(function(newValue) {
+                // If its resizing attach events to the window, if not detach
+                if (newValue) {
+                    $(window).on('mousemove', resizeSidebar);
+                    $(window).on('mouseup', stopResizing);
+                } else {
+                    $(window).off('mousemove', resizeSidebar);
+                    $(window).off('mouseup', stopResizing);
+                }
+            })
+        }
+
+        // Sidebar's width
+        this.width = ko.pureComputed(function() {
+            return layout.sidebarSize() + "px";
         });
 
-        // Al soltar el boton del mouse no importa donde sea, marcar que no se esta cambiando el tamaño del sidebar y guardar el
-        // tamaño actual en local storage
-        $(window).on('mouseup', function() {
-            $scope.resizing(false);
-        });
-
-
-        // Ancho a aplicar al sidebar
-        $scope.width = ko.pureComputed(function() {
-            return self.sidebarSize() + "px";
-        });
-
-        // Clases a aplicar en base al tamaño del sidebar, el contenendor principal y el punto de quiebre en donde se desea
-        // que el componente se reacomode en la parte superior de la pantalla
+        // Sidebar's classes
         $scope.classes = ko.pureComputed(function() {
-            return "sidebar-col-" + $scope.containerSize();
+            return "sidebar-col-" + layout.containerSize();
         });
+
+        // Classes to apply to the resizer element
+        $scope.resizerClass = ko.pureComputed(function() {
+            return "resizer resizer-" + layout.containerSize();
+        });
+
+        // Dispose the component
+        this.dispose = function() {
+            subscriptions.resizing.dispose();
+        }
     }, template);
 });

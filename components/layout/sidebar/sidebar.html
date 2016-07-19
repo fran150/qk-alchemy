@@ -1,8 +1,9 @@
 <quark-component>
     <div class="sidebar" data-bind="onBind: init,
-                   css: classes,
-                   style: { width: width }">
-       <button class="resizer" data-bind="onBind: configResizer">
+                                    css: classes,
+                                    style: { width: model.width }">
+       <button data-bind="onBind: initResizer,
+                          css: resizerClass">
            <span class="glyphicon glyphicon-option-vertical"></span>
        </button>
 

@@ -10,7 +10,7 @@ define(['knockout', 'quark', 'text!./imagebutton.html'], function(ko, $$, templa
             // Parametros de la ruta que se deve invocar al hacer clic en el boton
             routeParams: ko.observable(),
             // Clase glyphicon o fontawesome del icono a mostrar
-            icon: ko.observable('glyphicon glyphicon-heart'),
+            icon: ko.observable('glyphicon glyphicon-star'),
             // Texto del elemento
             text: ko.observable('Button')
         }, params, [$scope, this]);
@@ -22,7 +22,8 @@ define(['knockout', 'quark', 'text!./imagebutton.html'], function(ko, $$, templa
         // Esto permite aplicar los estilos que corresponden en base al tamaño de ambos elementos
         $scope.init = function(element, viewModel, context) {
             if (context && context.$child) {
-                if (context.$child.sidebarSize) {
+                debugger;
+                if (context.$parentContext.$child.sidebarSize) {
                     self.sidebarSize = context.$child.sidebarSize;
                 }
             }

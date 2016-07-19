@@ -15,6 +15,7 @@
 
     list-style: none;
     padding-left:0px;
+    margin-bottom: 0px;
 }
 
 .sidebar .resizer {
@@ -46,7 +47,12 @@
 }
 
 @media (max-width: 1199px) {
+    .sidebar .resizer-lg {
+        display:none;
+    }
+
     .sidebar-col-lg {
+        top: 0px !important;
         left: 0px !important;
         width: 100% !important;
         position:relative;
@@ -67,7 +73,12 @@
 }
 
 @media (max-width: 991px) {
+    .sidebar .resizer-md {
+        display:none;
+    }
+
     .sidebar-col-md {
+        top: 0px !important;
         left: 0px !important;
         width: 100% !important;
         position:relative;
@@ -88,7 +99,12 @@
 }
 
 @media (max-width: 767px) {
+    .sidebar .resizer-sm {
+        display:none;
+    }
+
     .sidebar-col-sm {
+        top: 0px !important;
         left: 0px !important;
         width: 100% !important;
         position:relative;
