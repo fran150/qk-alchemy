@@ -1,6 +1,9 @@
 define(['quark', 'knockout', 'text!./layout.html'], function($$, ko, template) {
-    return $$.component(function(params, $scope) {
+    return $$.component(function(params, $scope, $imports) {
         var self = this;
+
+        this.hasNavbar = ko.observable(false);
+        this.hasSidebar = ko.observable(false);
 
         $$.parameters({
             sidebarSize: ko.observable(90),
@@ -8,8 +11,9 @@ define(['quark', 'knockout', 'text!./layout.html'], function($$, ko, template) {
             minSidebarSize: ko.observable(20)
         }, params, this);
 
-        this.initComponent = function() {
-            validateSize(20);
+        $imports.initComponent = function() {
+            validateSize(self.sidebarSize());
+            setBodyMargin(self.hasNavbar());
         }
 
         function validateSize(size) {
@@ -29,15 +33,27 @@ define(['quark', 'knockout', 'text!./layout.html'], function($$, ko, template) {
             }
         }
 
+        function setBodyMargin(hasNavbar) {
+            if (hasNavbar) {
+                $(document).css('margin-top', '50px');
+            } else {
+                $(document).css('margin-top', 'auto');
+            }
+        }
+
         var subscriptions = {
             sidebarSize: self.sidebarSize.subscribe(function(newValue) {
                 validateSize(newValue);
+            }),
+            hasNavbar: self.hasNavbar.subscribe(function(newValue) {
+                setBodyMargin(newValue);
             })
         };
 
         // Al eliminar el componente limpia las subscripciones y listeners
-        this.dispose = function() {
+        $scope.dispose = function() {
             subscriptions.sidebarSize.dispose();
+            subscriptions.hasNavbar.dispose();
         }
     }, template)
 })

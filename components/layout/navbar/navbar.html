@@ -1,0 +1,36 @@
+<quark-component>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation" data-bind="onBind: init">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Desplegar menu</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- ko if: visibleIcon -->
+                <a href="#" class="pull-left" style="margin-left: 15px">
+                    <!-- ko ifnot: iconType() == 'font' -->
+                        <img style="margin-top: 11px; margin-left: 10px; height:30px;" data-bind="attr: { src: iconUrl, href: url }" />
+                    <!-- /ko -->
+                </a>
+            <!-- /ko -->
+            <a class="navbar-brand" style="padding-left: 15px" data-bind="attr: { href: url }">
+                <!-- ko if: visibleIcon -->
+                    <!-- ko if: iconType() == 'font' -->
+                        <span data-bind="css: iconUrl"></span>
+                    <!-- /ko -->
+                <!-- /ko -->
+                <span data-bind="html: html"></span>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <!-- ko content: 'left' --><!-- /ko -->
+            </ul>
+
+            <ul class="nav navbar-right" style="padding-right: 20px">
+                <!-- ko content: 'right' --><!-- /ko -->
+            </ul>
+        </div>
+    </div>
+</quark-component>

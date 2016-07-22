@@ -21,10 +21,12 @@ define(['knockout', 'quark', 'text!./imagebutton.html'], function(ko, $$, templa
         // Al inicializar el componente toma los tamaños del sidebar y el contenedor principal del componente padre
         // Esto permite aplicar los estilos que corresponden en base al tamaño de ambos elementos
         $scope.init = function(element, viewModel, context) {
-            if (context && context.$child) {
-                debugger;
-                if (context.$parentContext.$child.sidebarSize) {
-                    self.sidebarSize = context.$child.sidebarSize;
+            debugger;
+            var container = context.$containerContext.$container;
+
+            if (container) {
+                if (container.sidebarSize) {
+                    self.sidebarSize = container.sidebarSize;
                 }
             }
         }

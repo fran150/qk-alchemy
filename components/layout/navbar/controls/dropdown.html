@@ -1,0 +1,20 @@
+<quark-component>
+    <div class="nav navbar-nav">
+        <li class="dropdown" data-bind="css: { active: isMainActive }">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span data-bind="text: text"></span>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" data-bind="foreach: options">
+                <!-- ko if: $parent.isDivider($data) -->
+                    <li role="separator" class="divider"></li>
+                <!-- /ko -->
+                <!-- ko ifnot: $parent.isDivider($data) -->
+                    <li data-bind="css: { active: $parent.isActive($data.routeName) }">
+                        <a data-bind="attr: { href: $parent.url($data.routeName) }, text: text"></a>
+                    </li>
+                <!-- /ko -->
+            </ul>
+        </li>
+    </div>
+</quark-component>
