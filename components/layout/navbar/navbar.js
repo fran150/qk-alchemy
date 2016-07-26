@@ -2,11 +2,12 @@ define(['knockout', 'quark', 'text!./navbar.html', '../layout'], function(ko, $$
     return $$.component(function(params, $scope) {
         var self = this;
 
+        // Component's parameters
         $$.parameters({
-            url: ko.observable('#'),
+            link: ko.observable('#'),
             html: ko.observable('Brand'),
             icon: ko.observable()
-        }, params, [this, $scope]);
+        }, params, this);
 
         // When binding the main div
         $scope.init = function(element, viewModel, context) {
@@ -18,24 +19,25 @@ define(['knockout', 'quark', 'text!./navbar.html', '../layout'], function(ko, $$
 
             // Copy main layout component observables to local variables
             if (layoutMain instanceof LayoutComponent.modelType) {
-/*                layout.containerSize = layoutMain.containerSize;
-                layout.hasNavbar = layoutMain.hasNavbar;*/
                 layoutMain.hasNavbar(true);
             } else {
                 self.componentErrors.throw('The navbar component must be used inside a layout component');
             }
         }
 
-
+        // Return true if an icon is defined
         $scope.visibleIcon = ko.pureComputed(function() {
             return $$.isString(self.icon());
         }, $scope);
 
+        // If the icon url starts with 
         $scope.iconType = ko.pureComputed(function() {
-            if ($$.isString(self.icon())) {
-                if (self.icon().substring(0, 4) == 'url:') {
+            var icon = self.icon();
+
+            if ($$.isString(icon)) {
+                if (icon.substring(0, 4) == 'url:') {
                     return "image";
-                } else if (self.icon().substring(0, 5) == 'font:') {
+                } else if (icon.substring(0, 5) == 'font:') {
                     return "font";
                 }
             }
@@ -44,13 +46,26 @@ define(['knockout', 'quark', 'text!./navbar.html', '../layout'], function(ko, $$
         }, $scope);
 
         $scope.iconUrl = ko.pureComputed(function() {
-            if ($scope.iconType() == "image") {
-                return self.icon().substring(4);
-            } if ($scope.iconType() == "font") {
-                return self.icon().substring(5);
+            var type = $scope.iconType();
+            var icon = self.icon();
+
+            if (type == "image") {
+                return icon.substring(4);
+            } if (type == "font") {
+                return icon.substring(5);
             } else {
-                return self.icon();
+                return icon;
             }
         }, $scope);
+
+        $scope.url = ko.pureComputed(function() {
+            var link = self.link();
+
+            if (link.substring(0, 1) == "#") {
+                return "#" + $$.routing.hash(link.substring(1));
+            } else {
+                return link;
+            }
+        });
     }, template);
 });
