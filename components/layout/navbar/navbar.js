@@ -4,7 +4,7 @@ define(['knockout', 'quark', 'text!./navbar.html', '../layout'], function(ko, $$
 
         // Component's parameters
         $$.parameters({
-            link: ko.observable('#'),
+            link: ko.observable(),
             html: ko.observable('Brand'),
             icon: ko.observable()
         }, params, this);
@@ -30,7 +30,7 @@ define(['knockout', 'quark', 'text!./navbar.html', '../layout'], function(ko, $$
             return $$.isString(self.icon());
         }, $scope);
 
-        // If the icon url starts with 
+        // If the icon url starts with
         $scope.iconType = ko.pureComputed(function() {
             var icon = self.icon();
 
@@ -60,11 +60,8 @@ define(['knockout', 'quark', 'text!./navbar.html', '../layout'], function(ko, $$
 
         $scope.url = ko.pureComputed(function() {
             var link = self.link();
-
-            if (link.substring(0, 1) == "#") {
-                return "#" + $$.routing.hash(link.substring(1));
-            } else {
-                return link;
+            if (link) {
+                return $$.routing.link(link);
             }
         });
     }, template);
