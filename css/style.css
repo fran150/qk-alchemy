@@ -130,11 +130,41 @@
 }
 
 .sidebar li {
+    cursor: hand;
+    padding-left:0px;
+}
+
+.sidebar li > .line {
+    cursor: hand;
     padding-left:5px;
 }
 
-.sidebar li li {
+.sidebar li li > .line {
+    cursor: hand;
     padding-left:10px;
+}
+
+.sidebar li li li > .line {
+    cursor: hand;
+    padding-left:15px;
+}
+
+.sidebar li li li li > .line {
+    cursor: hand;
+    padding-left:20px;
+}
+
+.sidebar li li li li li > .line {
+    cursor: hand;
+    padding-left:25px;
+}
+
+.sidebar .option {
+    white-space: nowrap;
+}
+
+.sidebar .option:hover {
+    background-color: #e7e7e7;
 }
 
 .sidebar li,
@@ -146,10 +176,6 @@
     text-decoration: none;
 }
 
-.sidebar li a:hover {
-    text-decoration: underline;
-}
-
 .sidebar .imagebutton:hover {
     background-color: #e7e7e7;
 }
@@ -159,14 +185,15 @@
 }
 
 .sidebar li input {
+    margin-left: 6px;
     margin-top: 8px;
 }
 
-.sidebar li a .glyphicon-menu-down,
-.sidebar li a .glyphicon-menu-right {
-    float:right;
+.sidebar li .glyphicon-menu-down,
+.sidebar li .glyphicon-menu-right {
+    position: absolute;
+    right: 10px;
     line-height: 25px;
-    padding-right: 8px;
 }
 
 .sidebar .searchbutton {

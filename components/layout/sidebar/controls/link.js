@@ -1,36 +1,60 @@
-define(['knockout', 'quark', 'text!./link.html'], function(ko, $$, template) {
-    // Menu lateral, permite anidar mas menus dentro del contenido submenu
-    return $$.component(function(params, $scope) {
+define(['knockout', 'quark', 'text!./link.html', '../sidebar'], function(ko, $$, template, Sidebar) {
+    function SidebarLink(params, $scope) {
         var self = this;
 
-        // Parametros del componente
+        // Component's parameters
         $$.parameters({
-            // Clase Glyphicon o fontawesome a mostrar como icono
+            // Font icon class to show
             icon: ko.observable('glyphicon glyphicon-star'),
-            // Texto del menu
+            // Text of the menu
             text: ko.observable('Menu Option'),
-            // Nombre de la ruta
+            // Route name
             routeName: ko.observable(),
-            // Configuracion de la ruta
+            // Route parameters
             routeParams: ko.observable(),
-            // Si es un submenu indica si esta desplegado o no
+            // True if the menu is opened showing submenus
             opened: ko.observable(false)
         }, params, this);
 
-        // Devuelve la flecha que debe mostrar en base a si el menu se encuentra desplegado o no
+        // Store sidebarSize observable from the sidebar component
+        var sidebarSize = ko.observable();
+
+        // On components init
+        $scope.init = function(element, viewModel, context) {
+            // Gets the model of the container component
+            var container = context.$container;
+
+            // Check if its a Sidebar component
+            if (container instanceof Sidebar.modelType || container instanceof SidebarLink) {
+                // Get the sidebar size observable
+                if (container.sidebarSize) {
+                    sidebarSize = container.sidebarSize;
+                }
+            } else {
+                self.componentErrors.throw('This component must be used inside an al-sidebar or an al-sidebar-link component');
+            }
+        }
+
+        // Glyphicon of the arrow to show if the component is opened or not
         $scope.arrow = ko.pureComputed(function() {
            return self.opened() ? "glyphicon-menu-down" : "glyphicon-menu-right";
         }, $scope);
 
-        // Cambia de estado el menu deplegando o plegando los submenu
+        // Toggles the menu state
         this.toggle = function() {
             self.opened(!self.opened());
         };
 
+        // The the user clicks on the div redirect to the url
         $scope.click = function() {
-            $$.redirect($scope.url());
+            var link = $scope.url();
+
+            if (link) {
+                $$.redirect(link);
+            }
         }
 
+        // Returns the url given the route name and parameters
         $scope.url = ko.pureComputed(function() {
             var routeName = self.routeName();
             var routeParams = self.routeParams();
@@ -38,9 +62,10 @@ define(['knockout', 'quark', 'text!./link.html'], function(ko, $$, template) {
             if (routeName) {
                 return $$.routing.link(routeName, routeParams);
             } else {
-                return "#";
+                return "";
             }
         });
+    }
 
-    }, template);
+    return $$.component(SidebarLink, template);
 });

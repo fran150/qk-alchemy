@@ -1,25 +1,25 @@
 define(['knockout', 'quark', 'text!./search.html'], function(ko, $$, template) {
-    // Campo de busqueda en el sidebar
-    return $$.component(function(params, $scope) {
+    function SidebarSearch(params, $scope) {
         var self = this;
 
-        // Parametros del componente
+        // Component's parameters
         $$.parameters({
-            // Texto ingresado en el campo de busqueda
-            text: ko.observable(''),
-            // Texto placeholder
+            // Component value
+            value: ko.observable(''),
+            // Placeholder text
             placeholder: ko.observable('Search...'),
-            // Tipo de boton
+            // Button's bootstrap type
             style: ko.observable('default'),
-            // Se dispara al hacer click en el boton buscar
+            // Search event
             onSearch: function(texto) {}
         }, params, this);
 
-        // Al hacer clic en el boton buscar invoca al evento con el texto ingresado
+        // On form submit call search event
         $scope.search = function() {
-            $$.call(self.onSearch, self.text());
+            $$.call(self.onSearch, self.value());
         };
 
+        // Button's bootstrap class
         $scope.btnClass = ko.pureComputed(function() {
             var style = self.style();
 
@@ -34,5 +34,7 @@ define(['knockout', 'quark', 'text!./search.html'], function(ko, $$, template) {
                     return "btn-default";
             }
         }, $scope);
-    }, template);
+    }
+
+    return $$.component(SidebarSearch, template);
 });

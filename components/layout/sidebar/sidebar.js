@@ -1,11 +1,15 @@
 define(['knockout', 'quark', 'text!./sidebar.html', '../layout'],
     function(ko, $$, template, LayoutComponent) {
 
-    return $$.component(function(params, $scope) {
+    function Sidebar(params, $scope) {
         var self = this;
 
         // Indicates if the sidebar is resizing
         this.resizing = ko.observable(false);
+        // Stores the sidebar size observable of the layout component
+        this.sidebarSize = ko.observable();
+        // Stores the min sidebar size observable of the layout component
+        this.minSidebarSize = ko.observable();
 
         const SIDEBAR_WIDTH = 10;
 
@@ -34,7 +38,7 @@ define(['knockout', 'quark', 'text!./sidebar.html', '../layout'],
         // If corresponds show the resizer bar
         function showResizerBar(event) {
             // If the mouse is on the edge of the div show the resizer bar
-            if (event.pageX > (layout.sidebarSize() - SIDEBAR_WIDTH)) {
+            if (event.pageX > (self.sidebarSize() - SIDEBAR_WIDTH)) {
                 $(resizerElement).show();
             } else {
                 $(resizerElement).hide();
@@ -53,7 +57,7 @@ define(['knockout', 'quark', 'text!./sidebar.html', '../layout'],
             // On mouse down start resizing and set initial size
             offset = event.offsetX;
             self.resizing(true);
-            layout.sidebarSize(event.pageX + (SIDEBAR_WIDTH - offset));
+            self.sidebarSize(event.pageX + (SIDEBAR_WIDTH - offset));
         }
 
         // Stop resizing the sidebar
@@ -64,7 +68,7 @@ define(['knockout', 'quark', 'text!./sidebar.html', '../layout'],
         // Change the sidebar size
         function resizeSidebar(event) {
             if (self.resizing()) {
-                layout.sidebarSize(event.pageX + (SIDEBAR_WIDTH - offset));
+                self.sidebarSize(event.pageX + (SIDEBAR_WIDTH - offset));
             }
         }
 
@@ -82,9 +86,13 @@ define(['knockout', 'quark', 'text!./sidebar.html', '../layout'],
                 layout.sidebarSize = layoutMain.sidebarSize;
                 layout.containerSize = layoutMain.containerSize;
                 layout.hasNavbar = layoutMain.hasNavbar;
+
                 layoutMain.hasSidebar(true);
+
+                self.sidebarSize = layout.sidebarSize;
+                self.minSidebarSize = layoutMain.minSidebarSize;
             } else {
-                self.componentErrors.throw('The sidebar component must be used inside a layout component');
+                self.componentErrors.throw('The sidebar component must be used inside an al-layout component');
 
             }
 
@@ -147,5 +155,7 @@ define(['knockout', 'quark', 'text!./sidebar.html', '../layout'],
             $(window).off('mouseup', stopResizing);
 
         }
-    }, template);
+    }
+
+    return $$.component(Sidebar, template);
 });

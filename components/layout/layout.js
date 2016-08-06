@@ -1,21 +1,30 @@
 define(['quark', 'knockout', 'text!./layout.html'], function($$, ko, template) {
-    return $$.component(function(params, $scope, $imports) {
+    function Layout(params, $scope, $imports) {
         var self = this;
 
+        // The layout has a navbar
         this.hasNavbar = ko.observable(false);
+        // The layout has a sidebar
         this.hasSidebar = ko.observable(false);
 
+        // Component parameters
         $$.parameters({
+            // Sidebar's width in pixels
             sidebarSize: ko.observable(90),
+            // Main container responsive size
             containerSize: ko.observable('md'),
+            // Min sidebar size in pixels
             minSidebarSize: ko.observable(20)
         }, params, this);
 
+        // On component init
         $imports.initComponent = function() {
+            // Validate sidebar size and apply body margin
             validateSize(self.sidebarSize());
             setBodyMargin(self.hasNavbar());
         }
 
+        // Limit sidebar size
         function validateSize(size) {
             var minSize = self.minSidebarSize();
             var maxSize = $(window).width() / 2;
@@ -33,6 +42,7 @@ define(['quark', 'knockout', 'text!./layout.html'], function($$, ko, template) {
             }
         }
 
+        // Applies the body margin if it has a navbar
         function setBodyMargin(hasNavbar) {
             if (hasNavbar) {
                 $(document).css('margin-top', '50px');
@@ -42,18 +52,18 @@ define(['quark', 'knockout', 'text!./layout.html'], function($$, ko, template) {
         }
 
         var subscriptions = {
-            sidebarSize: self.sidebarSize.subscribe(function(newValue) {
-                validateSize(newValue);
-            }),
-            hasNavbar: self.hasNavbar.subscribe(function(newValue) {
-                setBodyMargin(newValue);
-            })
+            // Validate sidebar size on size change
+            sidebarSize: self.sidebarSize.subscribe(validateSize),
+            // Apply body margin when hasNavbar changes
+            hasNavbar: self.hasNavbar.subscribe(setBodyMargin)
         };
 
-        // Al eliminar el componente limpia las subscripciones y listeners
+        // Cleans component on dispose
         $scope.dispose = function() {
             subscriptions.sidebarSize.dispose();
             subscriptions.hasNavbar.dispose();
         }
-    }, template)
+    }
+
+    return $$.component(Layout, template)
 })

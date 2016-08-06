@@ -1,37 +1,44 @@
-define(['knockout', 'quark', 'text!./imagebutton.html'], function(ko, $$, template) {
-    // Boton de imagen de la barra lateral
-    return $$.component(function(params, $scope) {
+define(['knockout', 'quark', 'text!./imagebutton.html', '../sidebar'], function(ko, $$, template, Sidebar) {
+    function SidebarImageButton(params, $scope) {
         var self = this;
 
-        // Parametros del componente
+        // Component's parameters
         $$.parameters({
-            // Nombre de la ruta que se debe invocar al hacer clic en el boton
+            // Name of the route to redirect when clicking on the button
             routeName: ko.observable(),
-            // Parametros de la ruta que se deve invocar al hacer clic en el boton
+            // Route parameters
             routeParams: ko.observable(),
-            // Clase glyphicon o fontawesome del icono a mostrar
+            // Font icon class to show
             icon: ko.observable('glyphicon glyphicon-star'),
-            // Texto del elemento
-            text: ko.observable('Button')
+            // Option text
+            text: ko.observable('Button'),
+            // Hide button text when sidebar width is less than this
+            hideTextAt: ko.observable(85)
         }, params, this);
 
-        // Tamaño del sidebar
-        $scope.sidebarSize = ko.observable();
+        // Store sidebarSize observable from the sidebar component
+        var sidebarSize = ko.observable();
 
-        // Al inicializar el componente toma los tamaños del sidebar y el contenedor principal del componente padre
-        // Esto permite aplicar los estilos que corresponden en base al tamaño de ambos elementos
+        // On components init
         $scope.init = function(element, viewModel, context) {
-            var container = context.$containerContext.$container;
+            // Gets the model of the container component
+            var container = context.$container;
 
-            if (container) {
+            // Check if its a Sidebar component
+            if (container instanceof Sidebar.modelType) {
+                // Get the sidebar size observable
                 if (container.sidebarSize) {
-                    self.sidebarSize = container.sidebarSize;
+                    sidebarSize = container.sidebarSize;
                 }
+            } else {
+                self.componentErrors.throw('This component must be used inside an al-sidebar component');
             }
         }
 
-        $scope.ocultarTexto = ko.pureComputed(function() {
-            if (self.sidebarSize() < 85) {
+        // Applies an style that hides the button text when size is narrower
+        // than this
+        $scope.hideText = ko.pureComputed(function() {
+            if (sidebarSize() < self.hideTextAt()) {
                 return true;
             }
 
@@ -39,25 +46,26 @@ define(['knockout', 'quark', 'text!./imagebutton.html'], function(ko, $$, templa
         });
 
 
-        // Se dispara al hacer clic en el elemento, redirige a la url de la ruta
+        // When the user clicks on the div redirect to the url
         $scope.click = function() {
-            $$.redirect($scope.url());
+            var link = $scope.url();
+            if (link) {
+                $$.redirect(link);
+            }
         }
 
-        // Devuelve la url de la ruta especificada
+        // Creates the url with the given route name and config
         $scope.url = ko.pureComputed(function() {
-            // Si se especifico un nombre de ruta devuelvo el hash correspondiente a la ruta,
-            // sino devuelvo el hash vacio
             var routeName = self.routeName();
             var routeParams = self.routeParams();
 
             if (routeName) {
-                var url = $$.routing.link(routeName, routeParams);
-                return url;
+                return $$.routing.link(routeName, routeParams);
+            } else {
+                return "";
             }
+        });
+    }
 
-            return "";
-        }, $scope);
-
-    }, template);
+    return $$.component(SidebarImageButton, template);
 });

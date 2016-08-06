@@ -1,16 +1,21 @@
 <quark-component>
-    <ul>
+    <ul data-bind="onBind: init">
         <!-- ko hasContent: 'submenu' -->
-            <li data-bind="click: model.toggle">
-                <!-- ko if: model.icon -->
-                    <span data-bind="css: model.icon"></span>
-                <!-- /ko -->
+            <li class="option" style="position: relative" data-bind="click: model.toggle">
+                <small style="position: absolute" class="glyphicon" data-bind="css: arrow">
+                </small>
 
-                <a href="#">
-                    <small data-bind="text: model.text"></small>
-                    <small class="glyphicon" data-bind="css: arrow"></small>
-                </a>
+                <span class="line">
+                    <!-- ko if: model.icon -->
+                        <span data-bind="css: model.icon"></span>
+                    <!-- /ko -->
 
+                    <a href="#" data-bind="attr: { href: url }">
+                        <small data-bind="text: model.text"></small>
+                    </a>
+                </span>
+            </li>
+            <li style="position: relative">
                 <!-- ko if: model.opened -->
                     <!-- ko content: 'submenu' -->
                     <!-- /ko -->
@@ -19,13 +24,15 @@
         <!-- /ko -->
 
         <!-- ko hasNotContent: 'submenu' -->
-            <li data-bind="click: click">
-                <!-- ko if: model.icon -->
-                    <span data-bind="css: model.icon"></span>
-                <!-- /ko -->
-                <a href="#" data-bind="click: click">
-                    <small data-bind="text: model.text"></small>
-                </a>
+            <li data-bind="click: click" class="option">
+                <span class="line">
+                    <!-- ko if: model.icon -->
+                        <span data-bind="css: model.icon"></span>
+                    <!-- /ko -->
+                    <a href="#" data-bind="click: click, attr: { href: url }">
+                        <small data-bind="text: model.text"></small>
+                    </a>
+                </span>
             </li>
         <!-- /ko -->
     </ul>
