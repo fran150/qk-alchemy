@@ -12,14 +12,9 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
                 "": "components/layout/layout",
                 "sidebar": {
                     "": "components/layout/sidebar/sidebar",
-                    "imagebutton": "components/layout/sidebar/controls/imageButton"
-                },
-                "navbar": {
-                    "": "components/layout/navbar/navbar",
-                    "alert": "components/layout/navbar/controls/alert",
-                    "button": "components/layout/navbar/controls/button",
-                    "dropdown": "components/layout/navbar/controls/dropdown",
-                    "link": "components/layout/navbar/controls/link",
+                    "imagebutton": "components/layout/sidebar/controls/imageButton",
+                    "link": "components/layout/sidebar/controls/link",
+                    "search": "components/layout/sidebar/controls/search"
                 }
             }
         },

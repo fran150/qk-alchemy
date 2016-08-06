@@ -1,11 +1,11 @@
 <quark-component>
     <li class="text-center imagebutton" data-bind="onBind: init,
                                                    click: click">
-        <a href="attr: { href: url }">
-            <!-- ko if: icon -->
-                <div data-bind="css: icon"></div><br />
+        <a data-bind="attr: { href: url }">
+            <!-- ko if: model.icon -->
+                <div data-bind="css: model.icon"></div><br />
             <!-- /ko -->
-            <small class="sidebar-text" data-bind="text: text,
+            <small class="sidebar-text" data-bind="text: model.text,
                                                    css: { notext: ocultarTexto }">
             </small>
         </a>

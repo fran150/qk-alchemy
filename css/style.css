@@ -168,3 +168,8 @@
     line-height: 25px;
     padding-right: 8px;
 }
+
+.sidebar .searchbutton {
+    margin-top: 8px;
+    margin-right: 6px;
+}

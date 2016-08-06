@@ -1,10 +1,12 @@
 <quark-component>
     <li>
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Buscar..." data-bind="value: text">
+            <input type="text" class="form-control" data-bind="value: model.text,
+                                                               attr: { placeholder: model.placeholder }">
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button" data-bind="click: search">
-                    <span class="glyphicon glyphicon-search"></span>
+                <button class="btn btn-default searchbutton" type="button" data-bind="click: search,
+                                                                                      css: btnClass">
+                    &nbsp;<span class="glyphicon glyphicon-search"></span>
                 </button>
             </span>
         </div>

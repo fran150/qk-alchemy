@@ -13,7 +13,7 @@ define(['knockout', 'quark', 'text!./imagebutton.html'], function(ko, $$, templa
             icon: ko.observable('glyphicon glyphicon-star'),
             // Texto del elemento
             text: ko.observable('Button')
-        }, params, [$scope, this]);
+        }, params, this);
 
         // Tamaño del sidebar
         $scope.sidebarSize = ko.observable();
@@ -21,7 +21,6 @@ define(['knockout', 'quark', 'text!./imagebutton.html'], function(ko, $$, templa
         // Al inicializar el componente toma los tamaños del sidebar y el contenedor principal del componente padre
         // Esto permite aplicar los estilos que corresponden en base al tamaño de ambos elementos
         $scope.init = function(element, viewModel, context) {
-            debugger;
             var container = context.$containerContext.$container;
 
             if (container) {
@@ -49,12 +48,15 @@ define(['knockout', 'quark', 'text!./imagebutton.html'], function(ko, $$, templa
         $scope.url = ko.pureComputed(function() {
             // Si se especifico un nombre de ruta devuelvo el hash correspondiente a la ruta,
             // sino devuelvo el hash vacio
-            if (self.routeName()) {
-                var url = "#" + $$.routing.hash(self.routeName(), self.routeParams());
+            var routeName = self.routeName();
+            var routeParams = self.routeParams();
+
+            if (routeName) {
+                var url = $$.routing.link(routeName, routeParams);
                 return url;
             }
 
-            return "#";
+            return "";
         }, $scope);
 
     }, template);

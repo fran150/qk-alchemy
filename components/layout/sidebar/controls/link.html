@@ -1,17 +1,17 @@
 <quark-component>
     <ul>
         <!-- ko hasContent: 'submenu' -->
-            <li>
-                <!-- ko if: icon -->
-                    <span data-bind="css: icon"></span>
+            <li data-bind="click: model.toggle">
+                <!-- ko if: model.icon -->
+                    <span data-bind="css: model.icon"></span>
                 <!-- /ko -->
 
-                <a href="#" data-bind="click: toggle">
-                    <small data-bind="text: text"></small>
-                    <small class="glyphicon" data-bind="css: _arrow"></small>
+                <a href="#">
+                    <small data-bind="text: model.text"></small>
+                    <small class="glyphicon" data-bind="css: arrow"></small>
                 </a>
 
-                <!-- ko if: opened -->
+                <!-- ko if: model.opened -->
                     <!-- ko content: 'submenu' -->
                     <!-- /ko -->
                 <!-- /ko -->
@@ -19,12 +19,12 @@
         <!-- /ko -->
 
         <!-- ko hasNotContent: 'submenu' -->
-            <li>
-                <!-- ko if: icon -->
-                    <span data-bind="css: icon"></span>
+            <li data-bind="click: click">
+                <!-- ko if: model.icon -->
+                    <span data-bind="css: model.icon"></span>
                 <!-- /ko -->
-                <a data-bind="attr: { href: link }">
-                    <small data-bind="text: text"></small>
+                <a href="#" data-bind="click: click">
+                    <small data-bind="text: model.text"></small>
                 </a>
             </li>
         <!-- /ko -->

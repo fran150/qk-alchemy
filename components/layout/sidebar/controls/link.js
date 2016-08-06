@@ -6,42 +6,39 @@ define(['knockout', 'quark', 'text!./link.html'], function(ko, $$, template) {
         // Parametros del componente
         $$.parameters({
             // Clase Glyphicon o fontawesome a mostrar como icono
-            icon: ko.observable(),
+            icon: ko.observable('glyphicon glyphicon-star'),
             // Texto del menu
             text: ko.observable('Menu Option'),
-            // Url a la que debe redirigir al hacer clic
-            url: ko.observable(),
             // Nombre de la ruta
-            route: ko.observable(),
+            routeName: ko.observable(),
+            // Configuracion de la ruta
+            routeParams: ko.observable(),
             // Si es un submenu indica si esta desplegado o no
             opened: ko.observable(false)
-        }, params, [$scope, this]);
+        }, params, this);
 
         // Devuelve la flecha que debe mostrar en base a si el menu se encuentra desplegado o no
-        $scope._arrow = ko.pureComputed(function() {
-           return this.opened() ? "glyphicon-menu-down" : "glyphicon-menu-right";
+        $scope.arrow = ko.pureComputed(function() {
+           return self.opened() ? "glyphicon-menu-down" : "glyphicon-menu-right";
         }, $scope);
 
         // Cambia de estado el menu deplegando o plegando los submenu
-        $scope.toggle = this.toggle = function() {
+        this.toggle = function() {
             self.opened(!self.opened());
         };
 
-        $scope.link = ko.pureComputed(function() {
-            if (self.url()) {
-                return '#' + self.url();
-            } else {
-                var route = self.route();
+        $scope.click = function() {
+            $$.redirect($scope.url());
+        }
 
-                if (route) {
-                    if ($$.isObject(route)) {
-                        return '#' + $$.routing.hash(route.name, route.config);
-                    } else {
-                        return '#' + $$.routing.hash(route);
-                    }
-                } else {
-                    return '#';
-                }
+        $scope.url = ko.pureComputed(function() {
+            var routeName = self.routeName();
+            var routeParams = self.routeParams();
+
+            if (routeName) {
+                return $$.routing.link(routeName, routeParams);
+            } else {
+                return "#";
             }
         });
 
