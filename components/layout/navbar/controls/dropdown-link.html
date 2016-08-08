@@ -1,5 +1,5 @@
 <!-- quark-component -->
-    <li data-bind="onBind: init, css: { active: isActive }">
+    <li data-bind="onBind: init, css: { active: isActive, disabled: model.disabled }">
         <a data-bind="attr: { href: url }">
             <!-- ko if: model.iconFont -->
                 <span data-bind="css: model.iconFont"></span>&nbsp;

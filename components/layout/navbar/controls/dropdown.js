@@ -1,60 +1,24 @@
-define(['knockout', 'quark', 'text!./dropdown.html'], function(ko, $$, template) {
-    return $$.component(function(params, $scope) {
+define(['knockout', 'quark', 'text!./dropdown.html', '../navbar'], function(ko, $$, template, Navbar) {
+    function NavbarDropdown(params, $scope) {
         var self = this;
 
         $$.parameters({
+            iconFont: ko.observable('glyphicon glyphicon-star'),
             text: ko.observable('Dropdown'),
-            options: ko.observableArray([
-                {
-                    routeName: 'main/home',
-                    text: 'Option 1'
-                },
-                {
-                    divider: true
-                },
-                {
-                    routeName: 'main/home',
-                    text: 'Option 2'
-                }
-            ])
-        }, params, [this, $scope]);
+            active: ko.observable(false)
+        }, params, this);
 
-        $scope.isDivider = function(item) {
-            if ($$.isDefined(item['divider'])) {
-                return true;
-            } else {
-                return false;
+        // On components init
+        $scope.init = function(element, viewModel, context) {
+            // Gets the model of the container component
+            var container = context.$container;
+
+            // Check if its a Navbar component
+            if (!(container instanceof Navbar.modelType)) {
+                self.componentErrors.throw('This component must be used inside an al-navbar component');
             }
         }
+    }
 
-        $scope.isMainActive = ko.pureComputed(function() {
-            var current = $$.routing.current().config.fullName;
-
-            for (var i = 0; i < self.options().length; i++) {
-                var item = self.options()[i];
-                if ($$.isDefined(item.routeName)) {
-                    if (item.routeName == current) {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }, $scope);
-
-        $scope.url = function(routeName) {
-            return $$.routing.link(routeName);
-        };
-
-        $scope.isActive = function(routeName) {
-            var current = $$.routing.current().config.fullName;
-
-            if (current == routeName) {
-                return true;
-            }
-
-            return false;
-        }
-
-    }, template);
+    return $$.component(NavbarDropdown, template);
 });

@@ -18,7 +18,12 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
                 },
                 "navbar": {
                     "": "components/layout/navbar/navbar",
-                    "button": "components/layout/navbar/controls/button"
+                    "button": "components/layout/navbar/controls/button",
+                    "link": "components/layout/navbar/controls/link",
+                    "dropdown": "components/layout/navbar/controls/dropdown",
+                    "dropdown-link": "components/layout/navbar/controls/dropdown-link",
+                    "dropdown-divider": "components/layout/navbar/controls/dropdown-divider",
+                    "dropdown-header": "components/layout/navbar/controls/dropdown-header"
                 }
             }
         },
