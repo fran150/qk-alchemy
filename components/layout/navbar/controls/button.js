@@ -1,20 +1,20 @@
 define(['knockout', 'quark', 'text!./button.html'], function(ko, $$, template) {
-    return $$.component(function(params, $scope) {
+    function NavbarButton(params, $scope) {
+        debugger;
+
         var self = this;
 
         $$.parameters({
+            text: ko.observable('Navbar Button'),
+            iconFont: ko.observable('glyphicon glyphicon-star'),
+            visible: ko.observable(true),
             onClick: function() {}
         }, params, this);
-
-        $$.parameters({
-            text: ko.observable(''),
-            icon: ko.observable(''),
-            visible: ko.observable(true)
-        }, params, [this, $scope]);
 
         $scope.click = function() {
             $$.call(self.onClick);
         }
+    }
 
-    }, template);
+    return $$.component(NavbarButton, template);
 });

@@ -1,14 +1,12 @@
-<quark-component>
-    <div class="nav navbar-nav" data-bind="visible: visible">
-        <li>
-            <a href="#" data-bind="click: click">
-                <!-- ko if: icon -->
-                    <span data-bind="css: icon"></span>&nbsp;
-                <!-- /ko -->
-                <!-- ko if: text -->
-                    <span data-bind="text: text"></span>
-                <!-- /ko -->
-            </a>
-        </li>
-    </div>
-</quark-component>
+<!-- quark-component -->
+    <li data-bind="visible: model.visible">
+        <a href="#" data-bind="click: click">
+            <!-- ko if: model.iconFont -->
+                <span data-bind="css: model.iconFont"></span>&nbsp;
+            <!-- /ko -->
+            <!-- ko if: model.text -->
+                <span data-bind="text: model.text"></span>
+            <!-- /ko -->
+        </a>
+    </li>
+<!-- /quark-component -->

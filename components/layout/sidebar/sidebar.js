@@ -126,6 +126,9 @@ define(['knockout', 'quark', 'text!./sidebar.html', '../layout'],
                     $(window).off('mousemove', resizeSidebar);
                     $(window).off('mouseup', stopResizing);
                 }
+            }),
+            hasNavbar: layout.hasNavbar.subscribe(function(newValue) {
+                setSidebarTop(newValue);
             })
         }
 
@@ -147,7 +150,8 @@ define(['knockout', 'quark', 'text!./sidebar.html', '../layout'],
         // Dispose the component
         $scope.dispose = function() {
             subscriptions.resizing.dispose();
-
+            subscriptions.hasNavbar.dispose();
+            
             $(resizerElement).off('mousedown', startResizing);
             $(sidebarElement).off('mousemove', showResizerBar);
             $(sidebarElement).off('mouseleave', hideResizerBar);

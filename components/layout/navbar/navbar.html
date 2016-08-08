@@ -7,28 +7,24 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <!-- ko if: visibleIcon -->
-                <a href="#" class="pull-left" style="margin-left: 15px">
-                    <!-- ko ifnot: iconType() == 'font' -->
-                        <img style="margin-top: 11px; margin-left: 10px; height:30px;" data-bind="attr: { src: iconUrl, href: url }" />
+                <a data-bind="attr: { href: url }" class="navbar-brand">
+                    <!-- ko if: visibleIcon -->
+                        <!-- ko ifnot: iconType() == 'font' -->
+                            <img data-bind="attr: { src: iconUrl }" />
+                        <!-- /ko -->
+                        <!-- ko if: iconType() == 'font' -->
+                            <span class="font-icon" data-bind="css: iconUrl"></span>
+                        <!-- /ko -->
                     <!-- /ko -->
+                    <span data-bind="text: model.brand"></span>
                 </a>
-            <!-- /ko -->
-            <a class="navbar-brand" style="padding-left: 15px" data-bind="attr: { href: url }">
-                <!-- ko if: visibleIcon -->
-                    <!-- ko if: iconType() == 'font' -->
-                        <span data-bind="css: iconUrl"></span>
-                    <!-- /ko -->
-                <!-- /ko -->
-                <span data-bind="html: model.html"></span>
-            </a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <!-- ko content: 'left' --><!-- /ko -->
             </ul>
 
-            <ul class="nav navbar-right" style="padding-right: 20px">
+            <ul class="nav navbar-right">
                 <!-- ko content: 'right' --><!-- /ko -->
             </ul>
         </div>

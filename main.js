@@ -15,12 +15,17 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
                     "imagebutton": "components/layout/sidebar/controls/imageButton",
                     "link": "components/layout/sidebar/controls/link",
                     "search": "components/layout/sidebar/controls/search"
+                },
+                "navbar": {
+                    "": "components/layout/navbar/navbar",
+                    "button": "components/layout/navbar/controls/button"
                 }
             }
         },
         css: [
             "bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css",
-            "css/style.css"
+            "css/style.css",
+            "css/navbar.css"
         ],
         require: {
             paths: {

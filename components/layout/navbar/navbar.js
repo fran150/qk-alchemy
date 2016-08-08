@@ -1,11 +1,12 @@
 define(['knockout', 'quark', 'text!./navbar.html', '../layout'], function(ko, $$, template, LayoutComponent) {
-    return $$.component(function(params, $scope) {
+    function Navbar(params, $scope) {
         var self = this;
 
         // Component's parameters
         $$.parameters({
-            link: ko.observable(),
-            html: ko.observable('Brand'),
+            routeName: ko.observable(),
+            routeParams: ko.observable(),
+            brand: ko.observable('Brand Name'),
             icon: ko.observable()
         }, params, this);
 
@@ -17,11 +18,11 @@ define(['knockout', 'quark', 'text!./navbar.html', '../layout'], function(ko, $$
             // Get the main layout component
             var layoutMain = context.$container;
 
-            // Copy main layout component observables to local variables
+            // Set the main layout component hasNavbar property to true
             if (layoutMain instanceof LayoutComponent.modelType) {
                 layoutMain.hasNavbar(true);
             } else {
-                self.componentErrors.throw('The navbar component must be used inside a layout component');
+                self.componentErrors.throw('The navbar component must be used inside an al-layout component');
             }
         }
 
@@ -30,7 +31,8 @@ define(['knockout', 'quark', 'text!./navbar.html', '../layout'], function(ko, $$
             return $$.isString(self.icon());
         }, $scope);
 
-        // If the icon url starts with
+        // Get the icon type, font or image based on the icon property
+        // first chars
         $scope.iconType = ko.pureComputed(function() {
             var icon = self.icon();
 
@@ -45,6 +47,7 @@ define(['knockout', 'quark', 'text!./navbar.html', '../layout'], function(ko, $$
             return "unknown";
         }, $scope);
 
+        // Based on icon type returns the icon Url or class
         $scope.iconUrl = ko.pureComputed(function() {
             var type = $scope.iconType();
             var icon = self.icon();
@@ -59,10 +62,14 @@ define(['knockout', 'quark', 'text!./navbar.html', '../layout'], function(ko, $$
         }, $scope);
 
         $scope.url = ko.pureComputed(function() {
-            var link = self.link();
-            if (link) {
-                return $$.routing.link(link);
+            var routeName = self.routeName();
+            var routeParams = self.routeParams();
+
+            if (routeName) {
+                return $$.routing.link(routeName, routeParams);
             }
         });
-    }, template);
+    }
+
+    return $$.component(Navbar, template);
 });
