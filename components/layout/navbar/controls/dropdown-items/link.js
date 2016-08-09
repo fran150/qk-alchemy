@@ -1,4 +1,4 @@
-define(['knockout', 'quark', 'text!./dropdown-link.html', './dropdown'], function(ko, $$, template, NavbarDropdown) {
+define(['knockout', 'quark', 'text!./link.html', '../dropdown'], function(ko, $$, template, NavbarDropdown) {
     function NavbarDropdownLink(params, $scope) {
         var self = this;
 

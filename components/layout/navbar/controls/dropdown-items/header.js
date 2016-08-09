@@ -1,6 +1,10 @@
-define(['knockout', 'quark', 'text!./dropdown-divider.html', './dropdown'], function(ko, $$, template, NavbarDropdown) {
-    function NavbarDropdownDivider(params, $scope) {
+define(['knockout', 'quark', 'text!./header.html', '../dropdown'], function(ko, $$, template, NavbarDropdown) {
+    function NavbarDropdownHeader(params, $scope) {
         var self = this;
+
+        $$.parameters({
+            text: ko.observable('Header')
+        }, params, this);
 
         // On components init
         $scope.init = function(element, viewModel, context) {
@@ -14,5 +18,5 @@ define(['knockout', 'quark', 'text!./dropdown-divider.html', './dropdown'], func
         }
     }
 
-    return $$.component(NavbarDropdownDivider, template);
+    return $$.component(NavbarDropdownHeader, template);
 });
