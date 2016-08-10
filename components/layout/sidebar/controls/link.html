@@ -1,6 +1,6 @@
 <quark-component>
     <ul data-bind="onBind: init">
-        <!-- ko hasContent: 'submenu' -->
+        <!-- ko hasContent: 'submenu', virtual: true -->
             <li class="option" style="position: relative" data-bind="click: model.toggle">
                 <small style="position: absolute" class="glyphicon" data-bind="css: arrow">
                 </small>
@@ -17,13 +17,13 @@
             </li>
             <li style="position: relative">
                 <!-- ko if: model.opened -->
-                    <!-- ko content: 'submenu' -->
+                    <!-- ko content: 'submenu', virtual: true -->
                     <!-- /ko -->
                 <!-- /ko -->
             </li>
         <!-- /ko -->
 
-        <!-- ko hasNotContent: 'submenu' -->
+        <!-- ko hasNotContent: 'submenu', virtual: true -->
             <li data-bind="click: click" class="option">
                 <span class="line">
                     <!-- ko if: model.icon -->
