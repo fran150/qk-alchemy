@@ -1,18 +1,25 @@
 <quark-component>
     <div class="panel" data-bind="css: panelType">
-        <div class="panel-heading" data-bind="click: toggle">
-            <!-- ko content: 'heading' -->
+        <div class="panel-heading" data-bind="click: model.toggle">
+            <!-- ko hasContent: 'heading' -->
+                <!-- ko content: 'heading' -->
+                <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko hasNotContent: 'heading' -->
+                &nbsp;
             <!-- /ko -->
             <span class="pull-right">
                 <span data-bind="css: icon"></span>
-            </span>
+            </span>            
         </div>
-        <div class="panel-body" data-bind="visible: !collapsed()">
+        <div class="panel-body" data-bind="visible: !model.collapsed()">
             <!-- ko content: 'content' -->
             <!-- /ko -->
         </div>
         <!-- ko hasContent: 'footer' -->
             <div class="panel-footer">
+                <!-- ko content: 'footer' -->
+                <!-- /ko -->
             </div>
         <!-- /ko -->
     </div>

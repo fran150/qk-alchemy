@@ -1,5 +1,5 @@
 define(['knockout', 'quark', 'text!./collapsable.html'], function(ko, $$, template) {
-    return $$.component(function(params, $scope) {
+    function PanelCollapsable(params, $scope) {
         var self = this;
 
         var panelTypes = {
@@ -14,14 +14,10 @@ define(['knockout', 'quark', 'text!./collapsable.html'], function(ko, $$, templa
         };
 
         $$.parameters({
-            type: ko.observable('')
-        }, params, self);
-
-        $$.parameters({
-            title: ko.observable('Titulo'),
+            type: ko.observable(),
             collapsed: ko.observable(false),
             click: function () {}
-        }, params, [self, $scope]);
+        }, params, this);
 
         $scope.panelType = ko.pureComputed(function() {
             if ($$.isDefined(panelTypes[self.type()])) {
@@ -31,18 +27,16 @@ define(['knockout', 'quark', 'text!./collapsable.html'], function(ko, $$, templa
             }
         }, self);
 
-        self.open = function() {
+        this.open = function() {
             self.collapsed(false);
         }
 
-        self.close = function() {
+        this.close = function() {
             self.collapsed(true);
         }
 
-        $scope.toggle = self.toggle = function() {
-            if($$.isDefined(self.click)){
-                self.click();
-            }
+        this.toggle = function() {
+            $$.call(self.click);
             self.collapsed(!self.collapsed());
         }
 
@@ -52,6 +46,8 @@ define(['knockout', 'quark', 'text!./collapsable.html'], function(ko, $$, templa
             } else {
                 return "glyphicon glyphicon-chevron-down";
             }
-        }, self);
-    }, template);
+        }, $scope);
+    }
+
+    return $$.component(PanelCollapsable, template);
 });

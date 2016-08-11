@@ -30,7 +30,6 @@ define(['knockout', 'quark', 'text!./link.html', '../navbar'], function(ko, $$, 
         }, $scope);
 
         $scope.isActive = ko.pureComputed(function() {
-            debugger;
             var current = $$.routing.current();
 
             if (current.config.fullName == self.routeName()) {

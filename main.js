@@ -3,13 +3,13 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
         prefix: 'al',
         version: '1.0.0',
         components: {
-            "switch": "components/switch/switch",
             "pager": "components/pager/pager",
             "panel-collapsable": "components/panel/collapsable"
         },
         namespaces: {
             "layout": {
                 "": "components/layout/layout",
+                "container": "components/layout/container",
                 "sidebar": {
                     "": "components/layout/sidebar/sidebar",
                     "imagebutton": "components/layout/sidebar/controls/imageButton",
