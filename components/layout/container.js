@@ -9,6 +9,8 @@ define(['knockout', 'quark', 'text!./container.html', './layout'], function(ko, 
         this.sidebarSize = ko.observable();
         // Stores the container size observable of the layout component
         this.containerSize = ko.observable();
+        // Is container fluid?
+        this.containerFluid = ko.observable();
 
         // When binding the main div
         $scope.init = function(element, viewModel, context) {
@@ -24,6 +26,7 @@ define(['knockout', 'quark', 'text!./container.html', './layout'], function(ko, 
                 self.hasSidebar = layoutMain.hasSidebar;
                 self.sidebarSize = layoutMain.sidebarSize;
                 self.containerSize = layoutMain.containerSize;
+                self.containerFluid = layoutMain.containerFluid;
             } else {
                 self.componentErrors.throw('The al-layout-container component must be used inside an al-layout component');
             }
@@ -44,9 +47,18 @@ define(['knockout', 'quark', 'text!./container.html', './layout'], function(ko, 
 
         // Clases que se deben aplicar al elemento para que se muestre como corresponde.
         $scope.classes = ko.pureComputed(function() {
-            if (self.hasSidebar()) {
-                return "with-sidebar-col-" + self.containerSize();
+            var res = "container";
+
+            if (self.containerFluid()) {
+                res += "-fluid";
             }
+
+
+            if (self.hasSidebar()) {
+                res += " with-sidebar-col-" + self.containerSize();
+            }
+
+            return res;
         });
     }, template);
 });

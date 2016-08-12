@@ -14,7 +14,9 @@ define(['quark', 'knockout', 'text!./layout.html'], function($$, ko, template) {
             // Main container responsive size
             containerSize: ko.observable('md'),
             // Min sidebar size in pixels
-            minSidebarSize: ko.observable(20)
+            minSidebarSize: ko.observable(20),
+            // Container fluid?
+            containerFluid: ko.observable(true)
         }, params, this);
 
         // On component init
