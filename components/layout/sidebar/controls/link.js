@@ -5,7 +5,7 @@ define(['knockout', 'quark', 'text!./link.html', '../sidebar'], function(ko, $$,
         // Component's parameters
         $$.parameters({
             // Font icon class to show
-            icon: ko.observable('glyphicon glyphicon-star'),
+            iconFont: ko.observable('glyphicon glyphicon-star'),
             // Text of the menu
             text: ko.observable('Menu Option'),
             // Route name

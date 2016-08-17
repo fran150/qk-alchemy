@@ -6,8 +6,8 @@
                 </small>
 
                 <span class="line">
-                    <!-- ko if: model.icon -->
-                        <span data-bind="css: model.icon"></span>
+                    <!-- ko if: model.iconFont -->
+                        <span data-bind="css: model.iconFont"></span>
                     <!-- /ko -->
 
                     <a href="#" data-bind="attr: { href: url }">
@@ -26,8 +26,8 @@
         <!-- ko hasNotContent: 'submenu', virtual: true -->
             <li data-bind="click: click" class="option">
                 <span class="line">
-                    <!-- ko if: model.icon -->
-                        <span data-bind="css: model.icon"></span>
+                    <!-- ko if: model.iconFont -->
+                        <span data-bind="css: model.iconFont"></span>
                     <!-- /ko -->
                     <a href="#" data-bind="click: click, attr: { href: url }">
                         <small data-bind="text: model.text"></small>

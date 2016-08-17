@@ -11,6 +11,10 @@ define(['knockout', 'quark', 'text!./sidebar.html', '../layout'],
         // Stores the min sidebar size observable of the layout component
         this.minSidebarSize = ko.observable();
 
+        $$.parameters({
+            marginTop: ko.observable(0)
+        }, params, this);
+
         const SIDEBAR_WIDTH = 10;
 
         // Main div DOM element
@@ -151,7 +155,7 @@ define(['knockout', 'quark', 'text!./sidebar.html', '../layout'],
         $scope.dispose = function() {
             subscriptions.resizing.dispose();
             subscriptions.hasNavbar.dispose();
-            
+
             $(resizerElement).off('mousedown', startResizing);
             $(sidebarElement).off('mousemove', showResizerBar);
             $(sidebarElement).off('mouseleave', hideResizerBar);
