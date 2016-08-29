@@ -14,7 +14,8 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
                     "": "components/layout/sidebar/sidebar",
                     "imagebutton": "components/layout/sidebar/controls/imageButton",
                     "link": "components/layout/sidebar/controls/link",
-                    "search": "components/layout/sidebar/controls/search"
+                    "search": "components/layout/sidebar/controls/search",
+                    "title": "components/layout/sidebar/controls/title"
                 },
                 "navbar": {
                     "": "components/layout/navbar/navbar",
