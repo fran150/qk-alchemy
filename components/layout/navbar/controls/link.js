@@ -1,4 +1,4 @@
-define(['knockout', 'quark', 'text!./link.html', '../navbar'], function(ko, $$, template, Navbar) {
+define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../navbar'], function(ko, $$, template, utils, Navbar) {
     function NavbarLink(params, $scope) {
         var self = this;
 
@@ -11,12 +11,12 @@ define(['knockout', 'quark', 'text!./link.html', '../navbar'], function(ko, $$, 
 
         // On components init
         $scope.init = function(element, viewModel, context) {
-            // Gets the model of the container component
-            var container = context.$container;
+            // Get the main layout component
+            var container = utils.findContainer(context, Navbar.modelType);;
 
             // Check if its a Navbar component
             if (!(container instanceof Navbar.modelType)) {
-                self.componentErrors.throw('This component must be used inside an al-navbar component');
+                throw new Error('This component must be used inside an al-navbar component');
             }
         }
 
@@ -25,14 +25,14 @@ define(['knockout', 'quark', 'text!./link.html', '../navbar'], function(ko, $$, 
             var routeParams = self.routeParams();
 
             if (routeName) {
-                return $$.routing.link(routeName, routeParams);
+                return '#' + $$.routing.hash(routeName, routeParams);
             }
         }, $scope);
 
         $scope.isActive = ko.pureComputed(function() {
             var current = $$.routing.current();
 
-            if (current.config.fullName == self.routeName()) {
+            if (current == self.routeName()) {
                 return true;
             }
 

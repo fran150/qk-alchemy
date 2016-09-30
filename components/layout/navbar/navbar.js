@@ -1,4 +1,4 @@
-define(['knockout', 'quark', 'text!./navbar.html', '../layout'], function(ko, $$, template, LayoutComponent) {
+define(['knockout', 'quark', 'text!./navbar.html', 'qk-alchemy/lib/utils', '../layout'], function(ko, $$, template, utils, LayoutComponent) {
     function Navbar(params, $scope) {
         var self = this;
 
@@ -12,17 +12,14 @@ define(['knockout', 'quark', 'text!./navbar.html', '../layout'], function(ko, $$
 
         // When binding the main div
         $scope.init = function(element, viewModel, context) {
-            // Get the DOM element
-            navbarElement = element;
-
             // Get the main layout component
-            var layoutMain = context.$container;
+            var layoutMain = utils.findContainer(context, LayoutComponent.modelType);;
 
             // Set the main layout component hasNavbar property to true
-            if (layoutMain instanceof LayoutComponent.modelType) {
+            if (layoutMain) {
                 layoutMain.hasNavbar(true);
             } else {
-                self.componentErrors.throw('The navbar component must be used inside an al-layout component');
+                throw new Error('The navbar component must be used inside an al-layout component');
             }
         }
 

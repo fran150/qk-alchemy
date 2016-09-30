@@ -14,9 +14,6 @@ define(['knockout', 'quark', 'text!./container.html', './layout'], function(ko, 
 
         // When binding the main div
         $scope.init = function(element, viewModel, context) {
-            // Get the DOM element
-            sidebarElement = element;
-
             // Get the main layout component
             var layoutMain = context.$container;
 
@@ -27,8 +24,10 @@ define(['knockout', 'quark', 'text!./container.html', './layout'], function(ko, 
                 self.sidebarSize = layoutMain.sidebarSize;
                 self.containerSize = layoutMain.containerSize;
                 self.containerFluid = layoutMain.containerFluid;
+
+                self.hasSidebar(false);
             } else {
-                self.componentErrors.throw('The al-layout-container component must be used inside an al-layout component');
+                throw Error('The al-layout-container component must be used inside an al-layout component');
             }
         }
 

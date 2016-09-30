@@ -1,7 +1,7 @@
-define(['knockout', 'quark', 'text!./sidebar.html', '../layout'],
-    function(ko, $$, template, LayoutComponent) {
+define(['knockout', 'quark', 'text!./sidebar.html', 'qk-alchemy/lib/utils', '../layout'],
+    function(ko, $$, template, utils, LayoutComponent) {
 
-    function Sidebar(params, $scope) {
+    function Sidebar(params, $scope, $imports) {
         var self = this;
 
         // Indicates if the sidebar is resizing
@@ -83,10 +83,10 @@ define(['knockout', 'quark', 'text!./sidebar.html', '../layout'],
             sidebarElement = element;
 
             // Get the main layout component
-            var layoutMain = context.$container;
+            var layoutMain = utils.findContainer(context, LayoutComponent.modelType);;
 
-            // Copy main layout component observables to local variables
-            if (layoutMain instanceof LayoutComponent.modelType) {
+            // Set the main layout component hasNavbar property to true
+            if (layoutMain) {
                 layout.sidebarSize = layoutMain.sidebarSize;
                 layout.containerSize = layoutMain.containerSize;
                 layout.hasNavbar = layoutMain.hasNavbar;
