@@ -1,4 +1,4 @@
-define(['knockout', 'quark', 'text!./search.html'], function(ko, $$, template) {
+define(['knockout', 'quark', 'qk-alchemy/lib/utils', 'text!./search.html', '../Sidebar'], function(ko, $$, utils, template, Sidebar) {
     function SidebarSearch(params, $scope) {
         var self = this;
 
@@ -18,6 +18,17 @@ define(['knockout', 'quark', 'text!./search.html'], function(ko, $$, template) {
         $scope.search = function() {
             $$.call(self.onSearch, self.value());
         };
+
+        // On components init
+        $scope.init = function(element, viewModel, context) {
+            // Gets the model of the container component
+            var container = utils.findContainer(context, Sidebar.modelType);
+
+            // Check if its a Sidebar component
+            if (!container) {
+                throw new Error('This component must be used inside an al-sidebar component');
+            }
+        }
 
         // Button's bootstrap class
         $scope.btnClass = ko.pureComputed(function() {

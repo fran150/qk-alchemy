@@ -1,10 +1,10 @@
-define(['knockout', 'quark', 'text!./link.html', '../dropdown'], function(ko, $$, template, NavbarDropdown) {
+define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../dropdown'], function(ko, $$, template, utils, NavbarDropdown) {
     function NavbarDropdownLink(params, $scope) {
         var self = this;
 
         $$.parameters({
-            routeName: ko.observable(),
-            routeParams: ko.observable(),
+            pageName: ko.observable(),
+            pageParams: ko.observable(),
             iconFont: ko.observable('glyphicon glyphicon-star'),
             text: ko.observable('Navbar Link'),
             disabled: ko.observable(false)
@@ -12,39 +12,39 @@ define(['knockout', 'quark', 'text!./link.html', '../dropdown'], function(ko, $$
 
         var dropdownActive = ko.observable();
 
-        // On components init
-        $scope.init = function(element, viewModel, context) {
-            // Gets the model of the container component
-            var container = context.$container;
-
-            // Check if its a Navbar component
-            if (container instanceof NavbarDropdown.modelType) {
-                dropdownActive = container.active;
-                checkActive();
-            } else {
-                self.componentErrors.throw('This component must be used inside an al-navbar-dropdown component');
-            }
-        }
-
-        $scope.url = ko.pureComputed(function() {
-            var routeName = self.routeName();
-            var routeParams = self.routeParams();
-
-            if (routeName) {
-                return $$.routing.link(routeName, routeParams);
-            }
-        }, $scope);
-
         function checkActive() {
             var current = $$.routing.current();
 
-            if (current.config.fullName == self.routeName()) {
+            if (current == self.pageName()) {
                 dropdownActive(true);
                 return true;
             }
 
             return false;
         }
+
+        // On components init
+        $scope.init = function(element, viewModel, context) {
+            // Gets the model of the container component
+            var container = utils.findContainer(context, NavbarDropdown.modelType);
+
+            // Check if its a Navbar component
+            if (container) {
+                dropdownActive = container.active;
+                checkActive();
+            } else {
+                throw new Error('This component must be used inside an al-navbar-dropdown component');
+            }
+        }
+
+        $scope.url = ko.pureComputed(function() {
+            var pageName = self.pageName();
+            var pageParams = self.pageParams();
+
+            if (pageName) {
+                return '#' + $$.routing.hash(pageName, pageParams);
+            }
+        }, $scope);
 
         $scope.isActive = ko.computed(function() {
             return checkActive();

@@ -1,13 +1,13 @@
-define(['knockout', 'quark', 'text!./imagebutton.html', '../sidebar'], function(ko, $$, template, Sidebar) {
+define(['knockout', 'quark', 'text!./imagebutton.html', 'qk-alchemy/lib/utils', '../sidebar'], function(ko, $$, template, utils, Sidebar) {
     function SidebarImageButton(params, $scope) {
         var self = this;
 
         // Component's parameters
         $$.parameters({
             // Name of the route to redirect when clicking on the button
-            routeName: ko.observable(),
+            pageName: ko.observable(),
             // Route parameters
-            routeParams: ko.observable(),
+            pageParams: ko.observable(),
             // Font icon class to show
             icon: ko.observable('glyphicon glyphicon-star'),
             // Option text
@@ -22,16 +22,16 @@ define(['knockout', 'quark', 'text!./imagebutton.html', '../sidebar'], function(
         // On components init
         $scope.init = function(element, viewModel, context) {
             // Gets the model of the container component
-            var container = context.$container;
+            var container = utils.findContainer(context, Sidebar.modelType);
 
             // Check if its a Sidebar component
-            if (container instanceof Sidebar.modelType) {
+            if (container) {
                 // Get the sidebar size observable
                 if (container.sidebarSize) {
                     sidebarSize = container.sidebarSize;
                 }
             } else {
-                self.componentErrors.throw('This component must be used inside an al-sidebar component');
+                throw new Error('This component must be used inside an al-sidebar component');
             }
         }
 
@@ -56,11 +56,11 @@ define(['knockout', 'quark', 'text!./imagebutton.html', '../sidebar'], function(
 
         // Creates the url with the given route name and config
         $scope.url = ko.pureComputed(function() {
-            var routeName = self.routeName();
-            var routeParams = self.routeParams();
+            var pageName = self.pageName();
+            var pageParams = self.pageParams();
 
-            if (routeName) {
-                return $$.routing.link(routeName, routeParams);
+            if (pageName) {
+                return '#' + $$.routing.hash(pageName, pageParams);
             } else {
                 return "";
             }

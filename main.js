@@ -32,7 +32,7 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
         },
         css: [
             "bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css",
-            "css/style.css",
+            "css/sidebar.css",
             "css/navbar.css"
         ],
         require: {

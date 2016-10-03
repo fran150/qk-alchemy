@@ -28,8 +28,9 @@
 
     cursor: ew-resize;
 
-    font-size: 10px;
     display: none;
+
+    z-index: 10;
 }
 
 .sidebar .resizer:focus {

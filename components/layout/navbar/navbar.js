@@ -4,8 +4,8 @@ define(['knockout', 'quark', 'text!./navbar.html', 'qk-alchemy/lib/utils', '../l
 
         // Component's parameters
         $$.parameters({
-            routeName: ko.observable(),
-            routeParams: ko.observable(),
+            pageName: ko.observable(),
+            pageParams: ko.observable(),
             brand: ko.observable('Brand Name'),
             icon: ko.observable()
         }, params, this);
@@ -59,11 +59,11 @@ define(['knockout', 'quark', 'text!./navbar.html', 'qk-alchemy/lib/utils', '../l
         }, $scope);
 
         $scope.url = ko.pureComputed(function() {
-            var routeName = self.routeName();
-            var routeParams = self.routeParams();
+            var pageName = self.pageName();
+            var pageParams = self.pageParams();
 
-            if (routeName) {
-                return $$.routing.link(routeName, routeParams);
+            if (pageName) {
+                return '#' + $$.routing.hash(pageName, pageParams);
             }
         });
     }

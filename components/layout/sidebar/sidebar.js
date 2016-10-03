@@ -4,18 +4,19 @@ define(['knockout', 'quark', 'text!./sidebar.html', 'qk-alchemy/lib/utils', '../
     function Sidebar(params, $scope, $imports) {
         var self = this;
 
+        // Indicates if the layout has a navbar
+        var hasNavbar = ko.observable();
+        // Container bootstrap's size (when breaks to the top of page)
+        var containerSize = ko.observable();
+
         // Indicates if the sidebar is resizing
         this.resizing = ko.observable(false);
-        // Stores the sidebar size observable of the layout component
-        this.sidebarSize = ko.observable();
-        // Stores the min sidebar size observable of the layout component
-        this.minSidebarSize = ko.observable();
 
+        // This component local parameters
         $$.parameters({
+            resizerWidth: ko.observable(10),
             marginTop: ko.observable(0)
         }, params, this);
-
-        const SIDEBAR_WIDTH = 10;
 
         // Main div DOM element
         var sidebarElement;
@@ -24,13 +25,15 @@ define(['knockout', 'quark', 'text!./sidebar.html', 'qk-alchemy/lib/utils', '../
         // Offset of click in the resizer button
         var offset;
 
-        // Layout variable values
+        // Layout variable values that can be overriden by local parameters
         var layout = {
-            containerSize: ko.observable(),
+            // Stores the sidebar size observable of the layout component
             sidebarSize: ko.observable(),
-            hasNavbar: ko.observable()
+            // Min sidebar's size
+            minSidebarSize: ko.observable()
         }
 
+        // Set's the sidebar top if the layout has a navbar or not
         function setSidebarTop(hasNavbar) {
             if (hasNavbar) {
                 $(sidebarElement).css('top', '50px');
@@ -39,17 +42,17 @@ define(['knockout', 'quark', 'text!./sidebar.html', 'qk-alchemy/lib/utils', '../
             }
         }
 
-        // If corresponds show the resizer bar
+        // Show the resizer bar if mouse is in the correct position
         function showResizerBar(event) {
             // If the mouse is on the edge of the div show the resizer bar
-            if (event.pageX > (self.sidebarSize() - SIDEBAR_WIDTH)) {
+            if (event.pageX > (layout.sidebarSize() - self.resizerWidth())) {
                 $(resizerElement).show();
             } else {
                 $(resizerElement).hide();
             }
         }
 
-        // Hide the resizer bar
+        // Hide the resizer bar if not resizing
         function hideResizerBar() {
             if (!self.resizing()) {
                 $(resizerElement).hide();
@@ -61,7 +64,7 @@ define(['knockout', 'quark', 'text!./sidebar.html', 'qk-alchemy/lib/utils', '../
             // On mouse down start resizing and set initial size
             offset = event.offsetX;
             self.resizing(true);
-            self.sidebarSize(event.pageX + (SIDEBAR_WIDTH - offset));
+            layout.sidebarSize(event.pageX + (self.resizerWidth() - offset));
         }
 
         // Stop resizing the sidebar
@@ -72,31 +75,38 @@ define(['knockout', 'quark', 'text!./sidebar.html', 'qk-alchemy/lib/utils', '../
         // Change the sidebar size
         function resizeSidebar(event) {
             if (self.resizing()) {
-                self.sidebarSize(event.pageX + (SIDEBAR_WIDTH - offset));
+                layout.sidebarSize(event.pageX + (self.resizerWidth() - offset));
             }
         }
 
 
         // When binding the main div
         $scope.init = function(element, viewModel, context) {
-            // Get the DOM element
+            // Get the sidebar's DOM element
             sidebarElement = element;
 
             // Get the main layout component
             var layoutMain = utils.findContainer(context, LayoutComponent.modelType);;
 
-            // Set the main layout component hasNavbar property to true
+            // If a layout component is found
             if (layoutMain) {
+                // Extract layout variables
                 layout.sidebarSize = layoutMain.sidebarSize;
-                layout.containerSize = layoutMain.containerSize;
-                layout.hasNavbar = layoutMain.hasNavbar;
+                layout.minSidebarSize = layoutMain.minSidebarSize;
+                hasNavbar = layoutMain.hasNavbar;
+                containerSize = layoutMain.containerSize;
 
+                // Apply local parameter value to layout variables
+                $$.inject(params, layout);
+
+                // Set the has sidebar variable to true on the main layout
                 layoutMain.hasSidebar(true);
 
-                self.sidebarSize = layout.sidebarSize;
-                self.minSidebarSize = layoutMain.minSidebarSize;
+                // Publish properties of the layout as local properties of this model
+                this.sidebarSize = layoutMain.sidebarSize;
+                this.minSidebarSize = layoutMain.minSidebarSize;
             } else {
-                self.componentErrors.throw('The sidebar component must be used inside an al-layout component');
+                throw new Error('The sidebar component must be used inside an al-layout component');
 
             }
 
@@ -109,20 +119,23 @@ define(['knockout', 'quark', 'text!./sidebar.html', 'qk-alchemy/lib/utils', '../
             $(sidebarElement).on('mouseleave', hideResizerBar);
 
             // Sets the sidebar top checking if it has navbar or not
-            setSidebarTop(layout.hasNavbar())
+            setSidebarTop(hasNavbar())
         }
 
-        // When the
+        // When the resizer inits
         $scope.initResizer = function(element) {
+            // Get the resizer DOM element
             resizerElement = element;
-            // Attach mouse down event to resizer element
+            // Attach mouse down event to resizer element for resizing start
             $(resizerElement).on('mousedown', startResizing);
         }
 
+        // Observable subscriptions
         var subscriptions = {
             // Subscribe to the resizing flag
             resizing: self.resizing.subscribe(function(newValue) {
-                // If its resizing attach events to the window, if not detach
+                // If its resizing attach events to the window to do the actual resizing and listen
+                // if it has to stop resizing, otherwise detach those events
                 if (newValue) {
                     $(window).on('mousemove', resizeSidebar);
                     $(window).on('mouseup', stopResizing);
@@ -131,7 +144,9 @@ define(['knockout', 'quark', 'text!./sidebar.html', 'qk-alchemy/lib/utils', '../
                     $(window).off('mouseup', stopResizing);
                 }
             }),
-            hasNavbar: layout.hasNavbar.subscribe(function(newValue) {
+            hasNavbar: hasNavbar.subscribe(function(newValue) {
+                // When the hasNavbar observable changes, move the top value of the sidebar
+                // to make room for it
                 setSidebarTop(newValue);
             })
         }
@@ -141,15 +156,28 @@ define(['knockout', 'quark', 'text!./sidebar.html', 'qk-alchemy/lib/utils', '../
             return layout.sidebarSize() + "px";
         });
 
+        $scope.styles = ko.pureComputed(function() {
+            var style = {
+                width: layout.sidebarSize() + "px"
+            };
+
+            return style;
+        });
+
         // Sidebar's classes
         $scope.classes = ko.pureComputed(function() {
-            return "sidebar-col-" + layout.containerSize();
+            return "sidebar-col-" + containerSize();
         });
 
         // Classes to apply to the resizer element
         $scope.resizerClass = ko.pureComputed(function() {
-            return "resizer resizer-" + layout.containerSize();
+            return "resizer resizer-" + containerSize();
         });
+
+        // Element styles to apply to the resizer button
+        $scope.resizerStyle = ko.pureComputed(function() {
+            return { fontSize: self.resizerWidth() };
+        })
 
         // Dispose the component
         $scope.dispose = function() {

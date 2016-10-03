@@ -1,60 +1,81 @@
-define(['knockout', 'quark', 'text!./container.html', './layout'], function(ko, $$, template, LayoutComponent) {
+define(['knockout', 'quark', 'text!./container.html', 'qk-alchemy/lib/utils', './layout'], function(ko, $$, template, utils, LayoutComponent) {
     return $$.component(function(params, $scope) {
         var self = this;
 
-        this.hasNavbar = ko.observable();
+        // The page has navbar
+        var hasNavbar = ko.observable();
         // The page has sidebar
-        this.hasSidebar = ko.observable();
-        // Stores the sidebar size observable of the layout component
-        this.sidebarSize = ko.observable();
-        // Stores the container size observable of the layout component
-        this.containerSize = ko.observable();
-        // Is container fluid?
-        this.containerFluid = ko.observable();
+        var hasSidebar = ko.observable();
+
+        // Layout values that can be overriden by parameters
+        var layout = {
+            // Stores the sidebar size observable of the layout component
+            sidebarSize: ko.observable(),
+            // Stores the container size observable of the layout component
+            containerSize: ko.observable(),
+            // Is container fluid?
+            containerFluid: ko.observable()
+        };
 
         // When binding the main div
         $scope.init = function(element, viewModel, context) {
             // Get the main layout component
-            var layoutMain = context.$container;
+            var layoutMain = utils.findContainer(context, LayoutComponent.modelType);
 
-            // Copy main layout component observables to local variables
-            if (layoutMain instanceof LayoutComponent.modelType) {
-                self.hasNavbar = layoutMain.hasNavbar;
-                self.hasSidebar = layoutMain.hasSidebar;
-                self.sidebarSize = layoutMain.sidebarSize;
-                self.containerSize = layoutMain.containerSize;
-                self.containerFluid = layoutMain.containerFluid;
+            // If a main layout is defined
+            if (layoutMain) {
+                // Copy main layout component observables to local variables
+                hasNavbar = layoutMain.hasNavbar;
+                hasSidebar = layoutMain.hasSidebar;
+                layout.sidebarSize = layoutMain.sidebarSize;
+                layout.containerSize = layoutMain.containerSize;
+                layout.containerFluid = layoutMain.containerFluid;
 
-                self.hasSidebar(false);
+                // Inject values specified in local parameters
+                $$.inject(params, layout);
+
+                // Set the sidebar to false
+                hasSidebar(false);
+
+                // Publish properties of the layout as local properties of this model
+                self.containerSize = layout.containerSize;
+                self.containerFluid = layout.containerFluid;
             } else {
                 throw Error('The al-layout-container component must be used inside an al-layout component');
             }
         }
 
+        $scope.styles = ko.pureComputed(function() {
+            var styles = {};
 
-        $scope.topMargin = ko.pureComputed(function() {
-            if (self.hasNavbar()) {
-                return "50px";
+            if (hasNavbar()) {
+                styles.marginTop = "50px";
             }
-        });
 
-        $scope.leftMargin = ko.pureComputed(function() {
-            if (self.hasSidebar()) {
-                return self.sidebarSize() + "px";
+            if (hasSidebar()) {
+                styles.paddingLeft = layout.sidebarSize();
+
+                if (layout.containerFluid()) {
+                    styles.paddingLeft += 15;
+                }
+
+                styles.paddingLeft += "px";
             }
-        });
+
+            return styles;
+        })
 
         // Clases que se deben aplicar al elemento para que se muestre como corresponde.
         $scope.classes = ko.pureComputed(function() {
             var res = "container";
 
-            if (self.containerFluid()) {
+            if (layout.containerFluid()) {
                 res += "-fluid";
             }
 
 
-            if (self.hasSidebar()) {
-                res += " with-sidebar-col-" + self.containerSize();
+            if (hasSidebar()) {
+                res += " with-sidebar-col-" + layout.containerSize();
             }
 
             return res;

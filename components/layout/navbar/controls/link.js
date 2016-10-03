@@ -3,8 +3,8 @@ define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../nav
         var self = this;
 
         $$.parameters({
-            routeName: ko.observable(),
-            routeParams: ko.observable(),
+            pageName: ko.observable(),
+            pageParams: ko.observable(),
             iconFont: ko.observable('glyphicon glyphicon-star'),
             text: ko.observable('Navbar Link')
         }, params, this);
@@ -21,18 +21,18 @@ define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../nav
         }
 
         $scope.url = ko.pureComputed(function() {
-            var routeName = self.routeName();
-            var routeParams = self.routeParams();
+            var pageName = self.pageName();
+            var pageParams = self.pageParams();
 
-            if (routeName) {
-                return '#' + $$.routing.hash(routeName, routeParams);
+            if (pageName) {
+                return '#' + $$.routing.hash(pageName, pageParams);
             }
         }, $scope);
 
         $scope.isActive = ko.pureComputed(function() {
             var current = $$.routing.current();
 
-            if (current == self.routeName()) {
+            if (current == self.pageName()) {
                 return true;
             }
 

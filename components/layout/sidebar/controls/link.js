@@ -1,4 +1,4 @@
-define(['knockout', 'quark', 'text!./link.html', '../sidebar'], function(ko, $$, template, Sidebar) {
+define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../sidebar'], function(ko, $$, template, utils, Sidebar) {
     function SidebarLink(params, $scope) {
         var self = this;
 
@@ -9,29 +9,21 @@ define(['knockout', 'quark', 'text!./link.html', '../sidebar'], function(ko, $$,
             // Text of the menu
             text: ko.observable('Menu Option'),
             // Route name
-            routeName: ko.observable(),
+            pageName: ko.observable(),
             // Route parameters
-            routeParams: ko.observable(),
+            pageParams: ko.observable(),
             // True if the menu is opened showing submenus
             opened: ko.observable(false)
         }, params, this);
 
-        // Store sidebarSize observable from the sidebar component
-        var sidebarSize = ko.observable();
-
         // On components init
         $scope.init = function(element, viewModel, context) {
             // Gets the model of the container component
-            var container = context.$container;
+            var container = utils.findContainer(context, [Sidebar.modelType, SidebarLink]);
 
-            // Check if its a Sidebar component
-            if (container instanceof Sidebar.modelType || container instanceof SidebarLink) {
-                // Get the sidebar size observable
-                if (container.sidebarSize) {
-                    sidebarSize = container.sidebarSize;
-                }
-            } else {
-                self.componentErrors.throw('This component must be used inside an al-sidebar or an al-sidebar-link component');
+            // Check if its a Sidebar component or a sidebar link
+            if (!container) {
+                throw new Error('This component must be used inside an al-sidebar or an al-sidebar-link component');
             }
         }
 
@@ -56,11 +48,11 @@ define(['knockout', 'quark', 'text!./link.html', '../sidebar'], function(ko, $$,
 
         // Returns the url given the route name and parameters
         $scope.url = ko.pureComputed(function() {
-            var routeName = self.routeName();
-            var routeParams = self.routeParams();
+            var pageName = self.pageName();
+            var pageParams = self.pageParams();
 
-            if (routeName) {
-                return $$.routing.link(routeName, routeParams);
+            if (pageName) {
+                return '#' + $$.routing.hash(pageName, pageParams);
             } else {
                 return "";
             }

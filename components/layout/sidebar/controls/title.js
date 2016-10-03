@@ -1,4 +1,4 @@
-define(['knockout', 'quark', 'text!./title.html', '../sidebar'], function(ko, $$, template, Sidebar) {
+define(['knockout', 'quark', 'text!./title.html', 'qk-alchemy/lib/utils', '../sidebar'], function(ko, $$, template, utils, Sidebar) {
     function SidebarTitle(params, $scope) {
         var self = this;
 
@@ -7,25 +7,17 @@ define(['knockout', 'quark', 'text!./title.html', '../sidebar'], function(ko, $$
             // Font icon class to show
             iconFont: ko.observable('glyphicon glyphicon-star'),
             // Text of the title
-            text: ko.observable('Menu Option')
+            text: ko.observable('Menu Title')
         }, params, this);
-
-        // Store sidebarSize observable from the sidebar component
-        var sidebarSize = ko.observable();
 
         // On components init
         $scope.init = function(element, viewModel, context) {
             // Gets the model of the container component
-            var container = context.$container;
+            var container = utils.findContainer(context, Sidebar.modelType);
 
             // Check if its a Sidebar component
-            if (container instanceof Sidebar.modelType || container instanceof SidebarLink) {
-                // Get the sidebar size observable
-                if (container.sidebarSize) {
-                    sidebarSize = container.sidebarSize;
-                }
-            } else {
-                self.componentErrors.throw('This component must be used inside an al-sidebar component');
+            if (!container) {
+                throw new Error('This component must be used inside an al-sidebar component');
             }
         }
     }

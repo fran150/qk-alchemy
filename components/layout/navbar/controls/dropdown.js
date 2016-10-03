@@ -1,4 +1,4 @@
-define(['knockout', 'quark', 'text!./dropdown.html', '../navbar'], function(ko, $$, template, Navbar) {
+define(['knockout', 'quark', 'text!./dropdown.html', 'qk-alchemy/lib/utils', '../navbar'], function(ko, $$, template, utils, Navbar) {
     function NavbarDropdown(params, $scope) {
         var self = this;
 
@@ -11,11 +11,11 @@ define(['knockout', 'quark', 'text!./dropdown.html', '../navbar'], function(ko, 
         // On components init
         $scope.init = function(element, viewModel, context) {
             // Gets the model of the container component
-            var container = context.$container;
+            var container = utils.findContainer(context, Navbar.modelType);
 
             // Check if its a Navbar component
-            if (!(container instanceof Navbar.modelType)) {
-                self.componentErrors.throw('This component must be used inside an al-navbar component');
+            if (!container) {
+                throw new Error('This component must be used inside an al-navbar component');
             }
         }
     }

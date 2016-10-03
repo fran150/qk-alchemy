@@ -27,7 +27,8 @@ define(['quark', 'knockout', 'text!./layout.html'], function($$, ko, template) {
         }
 
         // Limit sidebar size
-        function validateSize(size) {
+        function validateSize() {
+            var size = self.sidebarSize();
             var minSize = self.minSidebarSize();
             var maxSize = $(window).width() / 2;
 
@@ -56,6 +57,8 @@ define(['quark', 'knockout', 'text!./layout.html'], function($$, ko, template) {
         var subscriptions = {
             // Validate sidebar size on size change
             sidebarSize: self.sidebarSize.subscribe(validateSize),
+            // Validate sidebar size on min size change
+            minSidebarSize: self.minSidebarSize.subscribe(validateSize),
             // Apply body margin when hasNavbar changes
             hasNavbar: self.hasNavbar.subscribe(setBodyMargin)
         };
@@ -63,6 +66,7 @@ define(['quark', 'knockout', 'text!./layout.html'], function($$, ko, template) {
         // Cleans component on dispose
         $scope.dispose = function() {
             subscriptions.sidebarSize.dispose();
+            subscriptions.minSidebarSize.dispose();
             subscriptions.hasNavbar.dispose();
         }
     }
