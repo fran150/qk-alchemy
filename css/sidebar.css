@@ -7,10 +7,13 @@
     bottom:-10px;
     position:fixed;
 
+    overflow: auto;
+    direction: rtl;
     padding:0;
 }
 
 .sidebar ul {
+    direction: ltr;
     overflow: auto;
 
     list-style: none;
