@@ -103,8 +103,8 @@ define(['knockout', 'quark', 'text!./sidebar.html', 'qk-alchemy/lib/utils', '../
                 layoutMain.hasSidebar(true);
 
                 // Publish properties of the layout as local properties of this model
-                this.sidebarSize = layoutMain.sidebarSize;
-                this.minSidebarSize = layoutMain.minSidebarSize;
+                self.sidebarSize = layoutMain.sidebarSize;
+                self.minSidebarSize = layoutMain.minSidebarSize;
             } else {
                 throw new Error('The sidebar component must be used inside an al-layout component');
 
