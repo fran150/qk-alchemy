@@ -176,7 +176,12 @@ define(['knockout', 'quark', 'text!./sidebar.html', 'qk-alchemy/lib/utils', '../
 
         // Element styles to apply to the resizer button
         $scope.resizerStyle = ko.pureComputed(function() {
-            return { fontSize: self.resizerWidth() };
+            var width = self.resizerWidth();
+            var style = { fontSize: width };
+
+            style.left = (self.sidebarSize() - width) + "px";
+
+            return style;
         })
 
         // Dispose the component
