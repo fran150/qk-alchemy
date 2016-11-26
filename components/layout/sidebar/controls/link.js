@@ -35,6 +35,8 @@ define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../sid
         // Toggles the menu state
         this.toggle = function() {
             self.opened(!self.opened());
+
+            $scope.click();
         };
 
         // The the user clicks on the div redirect to the url

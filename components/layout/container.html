@@ -2,7 +2,9 @@
     <div data-bind="onBind: init,
                     css: classes,
                     style: styles">
-        <!-- ko content -->
-        <!-- /ko -->
+        <div data-bind="css: sidebarClass, style: sidebarStyle">
+            <!-- ko content -->
+            <!-- /ko -->
+        </div>
     </div>
 </quark-component>

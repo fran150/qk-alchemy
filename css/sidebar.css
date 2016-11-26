@@ -15,7 +15,6 @@
 
 .sidebar ul {
     direction: ltr;
-    overflow: auto;
 
     list-style: none;
     padding-left:0px;
@@ -24,8 +23,9 @@
 
 .sidebar .resizer {
     position: absolute;
+    top: 0px;
+    bottom: 0px;
     right: 0px;
-    height: 100%;
 
     border:0;
     padding: 0;
@@ -62,19 +62,13 @@
     }
 
     .sidebar-col-lg {
-        top: 0px !important;
         left: 0px !important;
         width: 100% !important;
         position:relative;
     }
 
     .with-sidebar-col-lg {
-        margin-left: inherit !important;
-    }
-
-    .sidebar-col-lg li {
-        display: inline-block;
-        padding: 10px;
+        padding-left: 0px !important;
     }
 
     .sidebar .notext {
@@ -88,19 +82,13 @@
     }
 
     .sidebar-col-md {
-        top: 0px !important;
         left: 0px !important;
         width: 100% !important;
         position:relative;
     }
 
     .with-sidebar-col-md {
-        margin-left: inherit !important;
-    }
-
-    .sidebar-col-md li {
-        display: inline-block;
-        padding: 10px;
+        padding-left: 0px !important;
     }
 
     .sidebar .notext {
@@ -114,19 +102,13 @@
     }
 
     .sidebar-col-sm {
-        top: 0px !important;
         left: 0px !important;
         width: 100% !important;
         position:relative;
     }
 
     .with-sidebar-col-sm {
-        margin-left: inherit !important;
-    }
-
-    .sidebar-col-sm li {
-        display: inline-block;
-        padding: 10px;
+        padding-left: 0px !important;
     }
 
     .sidebar .notext {
@@ -139,29 +121,13 @@
     padding-left:0px;
 }
 
-.sidebar li > .line {
+.sidebar li .line {
     cursor: hand;
     padding-left:5px;
 }
 
-.sidebar li li > .line {
-    cursor: hand;
-    padding-left:10px;
-}
-
-.sidebar li li li > .line {
-    cursor: hand;
-    padding-left:15px;
-}
-
-.sidebar li li li li > .line {
-    cursor: hand;
-    padding-left:20px;
-}
-
-.sidebar li li li li li > .line {
-    cursor: hand;
-    padding-left:25px;
+.sidebar li li {
+    margin-left: 5px;
 }
 
 .sidebar .option {

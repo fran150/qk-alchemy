@@ -52,6 +52,12 @@ define(['knockout', 'quark', 'text!./container.html', 'qk-alchemy/lib/utils', '.
                 styles.marginTop = "50px";
             }
 
+            return styles;
+        })
+
+        $scope.sidebarStyle = ko.pureComputed(function() {
+            var styles = {};
+
             if (hasSidebar()) {
                 styles.paddingLeft = layout.sidebarSize();
 
@@ -63,7 +69,7 @@ define(['knockout', 'quark', 'text!./container.html', 'qk-alchemy/lib/utils', '.
             }
 
             return styles;
-        })
+        });
 
         // Clases que se deben aplicar al elemento para que se muestre como corresponde.
         $scope.classes = ko.pureComputed(function() {
@@ -73,12 +79,17 @@ define(['knockout', 'quark', 'text!./container.html', 'qk-alchemy/lib/utils', '.
                 res += "-fluid";
             }
 
-
-            if (hasSidebar()) {
-                res += " with-sidebar-col-" + layout.containerSize();
-            }
-
             return res;
         });
+
+        // Clases que se deben aplicar al elemento para que se muestre como corresponde.
+        $scope.sidebarClass = ko.pureComputed(function() {
+            if (hasSidebar()) {
+                return "with-sidebar-col-" + layout.containerSize();
+            }
+
+            return "";
+        });
+
     }, template);
 });
