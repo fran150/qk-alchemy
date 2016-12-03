@@ -1,7 +1,9 @@
-define(['knockout', 'quark', 'text!./sidebar.html', 'qk-alchemy/lib/utils', '../layout'],
-    function(ko, $$, template, utils, LayoutComponent) {
+define(['knockout', 'quark', 'text!./sidebar.component.html',
+        'qk-alchemy/lib/utils',
+        '../layout.component'],
+       function(ko, $$, template, utils, LayoutComponent) {
 
-    function Sidebar(params, $scope, $imports) {
+    function LayoutSidebarComponent(params, $scope, $imports) {
         var self = this;
 
         // Indicates if the layout has a navbar
@@ -198,5 +200,5 @@ define(['knockout', 'quark', 'text!./sidebar.html', 'qk-alchemy/lib/utils', '../
         }
     }
 
-    return $$.component(Sidebar, template);
+    return $$.component(LayoutSidebarComponent, template);
 });

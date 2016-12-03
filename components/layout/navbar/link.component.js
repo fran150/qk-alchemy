@@ -1,5 +1,9 @@
-define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../navbar'], function(ko, $$, template, utils, Navbar) {
-    function NavbarLink(params, $scope) {
+define(['knockout', 'quark', 'text!./link.component.html',
+        'qk-alchemy/lib/utils',
+        '../navbar.component'],
+       function(ko, $$, template, utils, Navbar) {
+
+    function LayoutNavbarLinkComponent(params, $scope) {
         var self = this;
 
         $$.parameters({
@@ -16,7 +20,7 @@ define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../nav
 
             // Check if its a Navbar component
             if (!(container instanceof Navbar.modelType)) {
-                throw new Error('This component must be used inside an al-navbar component');
+                throw new Error('This component must be used inside an al-layout-navbar component');
             }
         }
 
@@ -40,5 +44,5 @@ define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../nav
         }, $scope);
     }
 
-    return $$.component(NavbarLink, template);
+    return $$.component(LayoutNavbarLinkComponent, template);
 });

@@ -1,0 +1,26 @@
+{
+  "name": "qk-alchemy-tests",
+  "homepage": "https://github.com/fran150/qk-alchemy",
+  "authors": [
+    "fran150 <franllopez@yahoo.com.ar>"
+  ],
+  "description": "Quark Alchemy Module Tests",
+  "main": "index.html",
+  "keywords": [
+    "Quark",
+    "Alchemy",
+    "Tests"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jasmine-core": "jasmine#^2.5.2"
+  }
+}

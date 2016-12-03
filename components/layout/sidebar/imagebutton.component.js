@@ -1,5 +1,9 @@
-define(['knockout', 'quark', 'text!./imagebutton.html', 'qk-alchemy/lib/utils', '../sidebar'], function(ko, $$, template, utils, Sidebar) {
-    function SidebarImageButton(params, $scope) {
+define(['knockout', 'quark', 'text!./imagebutton.component.html',
+        'qk-alchemy/lib/utils',
+        '../sidebar.component'],
+        function(ko, $$, template, utils, Sidebar) {
+
+    function LayoutSidebarImageButtonComponent(params, $scope) {
         var self = this;
 
         // Component's parameters
@@ -31,7 +35,7 @@ define(['knockout', 'quark', 'text!./imagebutton.html', 'qk-alchemy/lib/utils', 
                     sidebarSize = container.sidebarSize;
                 }
             } else {
-                throw new Error('This component must be used inside an al-sidebar component');
+                throw new Error('This component must be used inside an al-layout-sidebar component');
             }
         }
 
@@ -67,5 +71,5 @@ define(['knockout', 'quark', 'text!./imagebutton.html', 'qk-alchemy/lib/utils', 
         });
     }
 
-    return $$.component(SidebarImageButton, template);
+    return $$.component(LayoutSidebarImageButtonComponent, template);
 });

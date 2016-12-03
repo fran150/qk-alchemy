@@ -1,5 +1,9 @@
-define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../sidebar'], function(ko, $$, template, utils, Sidebar) {
-    function SidebarLink(params, $scope) {
+define(['knockout', 'quark', 'text!./link.component.html',
+        'qk-alchemy/lib/utils',
+        '../sidebar.component'],
+        function(ko, $$, template, utils, Sidebar) {
+
+    function LayoutSidebarLinkComponent(params, $scope) {
         var self = this;
 
         // Component's parameters
@@ -19,11 +23,11 @@ define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../sid
         // On components init
         $scope.init = function(element, viewModel, context) {
             // Gets the model of the container component
-            var container = utils.findContainer(context, [Sidebar.modelType, SidebarLink]);
+            var container = utils.findContainer(context, [Sidebar.modelType, LayoutSidebarLinkComponent]);
 
             // Check if its a Sidebar component or a sidebar link
             if (!container) {
-                throw new Error('This component must be used inside an al-sidebar or an al-sidebar-link component');
+                throw new Error('This component must be used inside an al-layout-sidebar or an al-layout-sidebar-link component');
             }
         }
 
@@ -61,5 +65,5 @@ define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../sid
         });
     }
 
-    return $$.component(SidebarLink, template);
+    return $$.component(LayoutSidebarLinkComponent, template);
 });

@@ -1,5 +1,9 @@
-define(['knockout', 'quark', 'text!./title.html', 'qk-alchemy/lib/utils', '../sidebar'], function(ko, $$, template, utils, Sidebar) {
-    function SidebarTitle(params, $scope) {
+define(['knockout', 'quark', 'text!./title.component.html',
+        'qk-alchemy/lib/utils',
+        '../sidebar.component'],
+       function(ko, $$, template, utils, Sidebar) {
+
+    function LayoutSidebarTitleComponent(params, $scope) {
         var self = this;
 
         // Component's parameters
@@ -22,5 +26,5 @@ define(['knockout', 'quark', 'text!./title.html', 'qk-alchemy/lib/utils', '../si
         }
     }
 
-    return $$.component(SidebarTitle, template);
+    return $$.component(LayoutSidebarTitleComponent, template);
 });

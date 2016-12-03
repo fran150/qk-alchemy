@@ -1,5 +1,9 @@
-define(['knockout', 'quark', 'qk-alchemy/lib/utils', 'text!./search.html', '../Sidebar'], function(ko, $$, utils, template, Sidebar) {
-    function SidebarSearch(params, $scope) {
+define(['knockout', 'quark', 'text!./search.component.html',
+        'qk-alchemy/lib/utils',
+        '../sidebar.component'],
+        function(ko, $$, template, utils, Sidebar) {
+
+    function LayoutSidebarSearchComponent(params, $scope) {
         var self = this;
 
         // Component's parameters
@@ -26,7 +30,7 @@ define(['knockout', 'quark', 'qk-alchemy/lib/utils', 'text!./search.html', '../S
 
             // Check if its a Sidebar component
             if (!container) {
-                throw new Error('This component must be used inside an al-sidebar component');
+                throw new Error('This component must be used inside an al-layout-sidebar component');
             }
         }
 
@@ -47,5 +51,5 @@ define(['knockout', 'quark', 'qk-alchemy/lib/utils', 'text!./search.html', '../S
         }, $scope);
     }
 
-    return $$.component(SidebarSearch, template);
+    return $$.component(LayoutSidebarSearchComponent, template);
 });

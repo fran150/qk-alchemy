@@ -1,5 +1,9 @@
-define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../dropdown'], function(ko, $$, template, utils, NavbarDropdown) {
-    function NavbarDropdownLink(params, $scope) {
+define(['knockout', 'quark', 'text!./link.component.html',
+        'qk-alchemy/lib/utils',
+        '../dropdown.component'],
+       function(ko, $$, template, utils, NavbarDropdown) {
+
+    function LayoutNavbarDropdownLinkComponent(params, $scope) {
         var self = this;
 
         $$.parameters({
@@ -33,7 +37,7 @@ define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../dro
                 dropdownActive = container.active;
                 checkActive();
             } else {
-                throw new Error('This component must be used inside an al-navbar-dropdown component');
+                throw new Error('This component must be used inside an al-layout-navbar-dropdown component');
             }
         }
 
@@ -55,5 +59,5 @@ define(['knockout', 'quark', 'text!./link.html', 'qk-alchemy/lib/utils', '../dro
         }
     }
 
-    return $$.component(NavbarDropdownLink, template);
+    return $$.component(LayoutNavbarDropdownLinkComponent, template);
 });

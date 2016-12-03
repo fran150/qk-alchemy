@@ -1,5 +1,5 @@
-define(['quark', 'knockout', 'text!./layout.html'], function($$, ko, template) {
-    function Layout(params, $scope, $imports) {
+define(['quark', 'knockout', 'text!./layout.component.html'], function($$, ko, template) {
+    function LayoutComponent(params, $scope, $imports) {
         var self = this;
 
         // The layout has a navbar
@@ -71,5 +71,5 @@ define(['quark', 'knockout', 'text!./layout.html'], function($$, ko, template) {
         }
     }
 
-    return $$.component(Layout, template)
+    return $$.component(LayoutComponent, template)
 })

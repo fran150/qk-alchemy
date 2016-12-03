@@ -1,5 +1,5 @@
-define(['quark', 'knockout', 'text!./pager.html'], function($$, ko, template) {
-    return $$.component(function(params, $scope) {
+define(['quark', 'knockout', 'text!./pager.component.html'], function($$, ko, template) {
+    function PagerComponent(params, $scope, $imports) {
         var self = this;
 
         var pageSizeDefault = 5;
@@ -82,5 +82,7 @@ define(['quark', 'knockout', 'text!./pager.html'], function($$, ko, template) {
             subscriptions.page.dispose();
         }
 
-    }, template);
+    }
+
+    return $$.component(PagerComponent, template);
 });

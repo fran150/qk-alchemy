@@ -3,29 +3,29 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
         prefix: 'al',
         version: '1.0.0',
         components: {
-            "pager": "components/pager/pager",
-            "panel-collapsable": "components/panel/collapsable"
+            "pager": "components/pager.component",
+            "panel-collapsable": "components/panel/collapsable.component"
         },
         namespaces: {
             "layout": {
-                "": "components/layout/layout",
-                "container": "components/layout/container",
+                "": "components/layout.component",
+                "container": "components/layout/container.component",
                 "sidebar": {
-                    "": "components/layout/sidebar/sidebar",
-                    "imagebutton": "components/layout/sidebar/controls/imageButton",
-                    "link": "components/layout/sidebar/controls/link",
-                    "search": "components/layout/sidebar/controls/search",
-                    "title": "components/layout/sidebar/controls/title"
+                    "": "components/layout/sidebar.component",
+                    "imagebutton": "components/layout/sidebar/imagebutton.component",
+                    "link": "components/layout/sidebar/link.component",
+                    "search": "components/layout/sidebar/search.component",
+                    "title": "components/layout/sidebar/title.component"
                 },
                 "navbar": {
-                    "": "components/layout/navbar/navbar",
-                    "button": "components/layout/navbar/controls/button",
-                    "link": "components/layout/navbar/controls/link",
+                    "": "components/layout/navbar.component",
+                    "button": "components/layout/navbar/button.component",
+                    "link": "components/layout/navbar/link.component",
                     "dropdown": {
-                        "": "components/layout/navbar/controls/dropdown",
-                        "link": "components/layout/navbar/controls/dropdown-items/link",
-                        "divider": "components/layout/navbar/controls/dropdown-items/divider",
-                        "header": "components/layout/navbar/controls/dropdown-items/header"
+                        "": "components/layout/navbar/dropdown.component",
+                        "link": "components/layout/navbar/dropdown/link.component",
+                        "divider": "components/layout/navbar/dropdown/divider.component",
+                        "header": "components/layout/navbar/dropdown/header.component"
                     }
                 }
             }

@@ -1,5 +1,5 @@
-define(['knockout', 'quark', 'text!./collapsable.html'], function(ko, $$, template) {
-    function PanelCollapsable(params, $scope) {
+define(['knockout', 'quark', 'text!./collapsable.component.html'], function(ko, $$, template) {
+    function PanelCollapsableComponent(params, $scope, $imports) {
         var self = this;
 
         var panelTypes = {
@@ -49,5 +49,5 @@ define(['knockout', 'quark', 'text!./collapsable.html'], function(ko, $$, templa
         }, $scope);
     }
 
-    return $$.component(PanelCollapsable, template);
+    return $$.component(PanelCollapsableComponent, template);
 });
