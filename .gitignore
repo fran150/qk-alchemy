@@ -1,5 +1,6 @@
 /dist
 /src/bower_components/
 /build/node_modules
+/build/bower_components
 /tests/bower_components
 /tests/node_modules

@@ -1,0 +1,18 @@
+{
+  "name": "qk-alchemy-build",
+  "description": "Quark Alchemy Build",
+  "main": "index.js",
+  "authors": [
+    "fran150 <panchi150@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/fran150/qk-alchemy",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

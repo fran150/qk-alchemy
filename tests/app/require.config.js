@@ -2,7 +2,7 @@ var require;
 
 require = requireConfigure(QuarkRequireConf(), {
     paths: {
-        'qk-alchemy': '../'
+        'qk-alchemy': '../src'
     }
 
 });

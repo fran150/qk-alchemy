@@ -22,10 +22,9 @@ var moduleName = 'qk-alchemy';
 
 // Config
 var requireJsRuntimeConfig = vm.runInNewContext(
-    fs.readFileSync('../tests/bower_components/quark/dist/require.configurator.js') + ';' +
-    fs.readFileSync('../tests/bower_components/quark/dist/quark.require.conf.js') + ';' +
-    fs.readFileSync('../tests/app/require.config.js') + ';' +
-    'require;');
+    fs.readFileSync('bower_components/quark/dist/require.configurator.js') + ';' +
+    fs.readFileSync('bower_components/quark/dist/quark.require.conf.js') + ';' +
+    'require = requireConfigure(QuarkRequireConf());');
 
     var config = {
         out: '../dist/main.js',
@@ -35,8 +34,8 @@ var requireJsRuntimeConfig = vm.runInNewContext(
             'quark': 'empty:',
             'knockout': 'empty:',
             'jquery': 'empty:',
-            text: '../tests/bower_components/requirejs-text/text',
-            requireLib: '../tests/bower_components/requirejs/require'
+            text: '../build/bower_components/requirejs-text/text',
+            requireLib: '../build/bower_components/requirejs/require'
         },
         include: [
             'components/pager.component',
