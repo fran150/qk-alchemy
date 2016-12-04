@@ -1,15 +1,16 @@
-(function() {
+define(['quark', 'jasmine-boot', 'qk-alchemy/main'], function($$, jazmine, main) {
     // Reference your test modules here
-    var testModules = [
-        'specs/layout'
-    ];
 
     // After the 'jasmine-boot' module creates the Jasmine environment, load all test modules then run them
-    require(['quark', 'jasmine-boot', 'qk-alchemy/main'], function ($$) {
-        var modulesCorrectedPaths = testModules.map(function(m) { return m; });
-        require(modulesCorrectedPaths, window.onload);
+    var testModules = [
+        'specs/layout.test'
+    ];
 
-        $$.routing.activateHasher();
-        $$.start();
+    var modulesCorrectedPaths = testModules.map(function(m) { return m; });
+
+    require(modulesCorrectedPaths, function() {
+        window.onload();
     });
-})();
+
+    $$.start();
+});

@@ -10,20 +10,20 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      { pattern: 'dist/**/*.css', included: false },
+      { pattern: 'dist/**/*.js', included: false },
+      { pattern: 'dist/**/*.html', included: false },
+      { pattern: 'tests/**/*.js', included: false },
+      { pattern: 'tests/**/*.html', included: false },
       'tests/bower_components/quark/dist/require.configurator.js',
       'tests/bower_components/quark/dist/quark.require.conf.js',
       'tests/app/require.config.js',
-      'tests/karma.js',
-      { pattern: '**/*.js', included: false },
-      { pattern: '**/*.html', included: false },
-      { pattern: 'tests/**/*.js', included: false },
-      { pattern: 'tests/**/*.html', included: false }
+      'tests/karma.js'
     ],
 
 
     // list of files to exclude
     exclude: [
-
     ],
 
     // preprocess matching files before serving them to the browser

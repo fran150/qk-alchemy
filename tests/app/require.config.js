@@ -2,9 +2,8 @@ var require;
 
 require = requireConfigure(QuarkRequireConf(), {
     paths: {
-        'qk-alchemy': '../src'
+        'qk-alchemy': '../dist'
     }
-
 });
 
 // It's not obvious, but this is a way of making Jasmine load and run in an AMD environment
