@@ -3,7 +3,8 @@ var fs = require('fs'),
     vm = require('vm'),
     merge = require('deeply'),
     chalk = require('chalk'),
-    es = require('event-stream');
+    es = require('event-stream'),
+    del = require('del');
 
 // Gulp and plugins
 var gulp = require('gulp'),
@@ -14,6 +15,11 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     htmlreplace = require('gulp-html-replace');
 
+
+
+var moduleName = 'qk-alchemy';
+
+
 // Config
 var requireJsRuntimeConfig = vm.runInNewContext(
     fs.readFileSync('../tests/bower_components/quark/dist/require.configurator.js') + ';' +
@@ -21,12 +27,11 @@ var requireJsRuntimeConfig = vm.runInNewContext(
     fs.readFileSync('../tests/app/require.config.js') + ';' +
     'require;');
 
-    requireJsOptimizerConfig = merge(requireJsRuntimeConfig, {
+    var config = {
         out: '../dist/main.js',
         baseUrl: '../src',
-        name: 'qk-alchemy/main',
+        name: 'main',
         paths: {
-            'qk-alchemy': '.',
             'quark': 'empty:',
             'knockout': 'empty:',
             'jquery': 'empty:',
@@ -34,65 +39,96 @@ var requireJsRuntimeConfig = vm.runInNewContext(
             requireLib: '../tests/bower_components/requirejs/require'
         },
         include: [
-            'qk-alchemy/components/layout.component',
-            'qk-alchemy/components/pager.component'
+            'components/pager.component',
+            'components/panel/collapsable.component',
         ],
         exclude: [
             'text'
         ],
-        insertRequire: ['qk-alchemy/main'],
+        insertRequire: ['main'],
         bundles: {
-            'qk-alchemy/layout': [
-                'qk-alchemy/components/layout/container.component',
-                'qk-alchemy/components/layout/navbar.component',
-                'qk-alchemy/components/layout/sidebar.component',
-                'qk-alchemy/components/layout/navbar/link.component',
-                'qk-alchemy/components/layout/sidebar/link.component'
+            'layout': [
+                'components/layout.component',
+                'components/layout/container.component',
+            ],
+            'sidebar': [
+                'components/layout/sidebar.component',
+                'components/layout/sidebar/imagebutton.component',
+                'components/layout/sidebar/link.component',
+                'components/layout/sidebar/search.component',
+                'components/layout/sidebar/title.component'
+            ],
+            'navbar': [
+                'components/layout/navbar.component',
+                'components/layout/navbar/button.component',
+                'components/layout/navbar/dropdown.component',
+                'components/layout/navbar/dropdown/divider.component',
+                'components/layout/navbar/dropdown/header.component',
+                'components/layout/navbar/dropdown/link.component',
+                'components/layout/navbar/link.component'
             ]
-            // If you want parts of the site to load on demand, remove them from the 'include' list
-            // above, and group them into bundles here.
-            // 'bundle-name': [ 'some/module', 'another/module' ],
-            // 'another-bundle-name': [ 'yet-another-module' ]
         }
-    });
+    }
+
+    config.name = moduleName + '/' + config.name;
+    config.paths[moduleName] = '.';
+
+    for (var i = 0; i < config.include.length; i++) {
+        config.include[i] = moduleName + '/' + config.include[i];
+    }
+
+    for (var i = 0; i < config.insertRequire.length; i++) {
+        config.insertRequire[i] = moduleName + '/' + config.insertRequire[i];
+    }
+
+    for (var name in config.bundles) {
+        var newName = moduleName + '/' + name;
+
+        config.bundles[newName] = config.bundles[name];
+        delete config.bundles[name];
+
+        for (var i = 0; i < config.bundles[newName].length; i++) {
+            config.bundles[newName][i] = moduleName + '/' + config.bundles[newName][i];
+        }
+    }
+
+
+    requireJsOptimizerConfig = merge(requireJsRuntimeConfig, config);
 
 // Discovers all AMD dependencies, concatenates together all required .js files, minifies them
 gulp.task('js', function () {
     return rjs(requireJsOptimizerConfig)
-        //.pipe(uglify({ preserveComments: 'some' }))
+        .pipe(uglify({ preserveComments: 'some' }))
         .pipe(gulp.dest('../dist/'));
 });
 
-/*
-// Concatenates CSS files, rewrites relative paths to Bootstrap fonts, copies Bootstrap fonts
-gulp.task('css', function () {
-    var bowerCss = gulp.src('src/css/navbar.css')
-            .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/')),
-        appCss = gulp.src('src/css/*.css'),
-        combinedCss = es.concat(bowerCss, appCss).pipe(concat('css.css')),
-        fontFiles = gulp.src('./src/bower_modules/components-bootstrap/fonts/*', { base: './src/bower_modules/components-bootstrap/' });
-    return es.concat(combinedCss, fontFiles)
-        .pipe(gulp.dest('./dist/'));
-});
+gulp.task('move-bundles', ['js'], function() {
+    return gulp.src('../dist/' + moduleName + '/*.js')
+                .pipe(clean({ force: true }))
+                .pipe(gulp.dest('../dist'));
+})
 
-// Copies index.html, replacing <script> and <link> tags to reference production URLs
-gulp.task('html', function() {
-    return gulp.src('./src/index.html')
-        .pipe(htmlreplace({
-            'css': 'css.css',
-            'js': 'scripts.js'
-        }))
-        .pipe(gulp.dest('./dist/'));
-});
-*/
+gulp.task('del-bundles-dir', ['js', 'move-bundles'], function() {
+    del.sync(['../dist/' + moduleName], { force: true });
+})
+
+gulp.task('move-css', function() {
+    return gulp.src('../src/css/*.css')
+                .pipe(gulp.dest('../dist/css'));
+})
+
+gulp.task('move-bower-components', function() {
+    return gulp.src('../src/bower_components/**')
+                .pipe(gulp.dest('../dist/bower_components'));
+})
 
 // Removes all files from ./dist/
 gulp.task('clean', function() {
     return gulp.src('../dist/**/*', { read: false })
-        .pipe(clean());
+        .pipe(clean({ force: true }));
 });
 
-gulp.task('default', ['js'], function(callback) {
+gulp.task('default', ['js', 'move-bundles', 'del-bundles-dir', 'move-css', 'move-bower-components'], function(callback) {
     callback();
     console.log('\nPlaced optimized files in ' + chalk.magenta('dist/\n'));
 });
