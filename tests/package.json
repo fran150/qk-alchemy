@@ -16,5 +16,8 @@
     "karma-requireglobal-preprocessor": "0.0.0",
     "karma-requirejs": "^1.1.0",
     "requirejs": "^2.3.2"
+  },
+  "dependencies": {
+    "karma-brackets": "^0.2.1"
   }
 }
