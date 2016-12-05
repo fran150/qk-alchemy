@@ -21,6 +21,7 @@
     "tests"
   ],
   "dependencies": {
-    "jasmine-core": "jasmine#^2.5.2"
+    "jasmine-core": "jasmine#^2.5.2",
+    "quark": "*"
   }
 }
