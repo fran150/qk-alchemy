@@ -8,7 +8,7 @@ for (var file in window.__karma__.files) {
 }
 
 requirejs.config({
-    baseUrl: '/base/tests',
+    baseUrl: '/base',
     deps: tests,
     callback: function() {
         require(['quark', 'qk-alchemy/main'], function($$) {

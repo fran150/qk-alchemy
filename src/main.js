@@ -1,4 +1,4 @@
-define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
+define(['module', 'knockout', 'jquery', 'quark', 'bootstrap-switch/js/bootstrap-switch.min'], function(mod, ko, $, $$) {
     return $$.module(mod, {
         prefix: 'al',
         version: '1.0.0',
@@ -31,14 +31,8 @@ define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
             }
         },
         css: [
-            "bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css",
             "css/sidebar.css",
             "css/navbar.css"
-        ],
-        require: {
-            paths: {
-                "bootstrap-switch": "bower_components/bootstrap-switch/dist/js/bootstrap-switch.min"
-            }
-        }
+        ]
     });
 });

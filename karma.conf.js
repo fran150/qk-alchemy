@@ -2,7 +2,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '..',
+    basePath: '.',
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -10,13 +10,15 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      { pattern: 'bower_modules/**/*.css', included: false },
+      { pattern: 'bower_modules/**/*.js', included: false },
       { pattern: 'dist/**/*.css', included: false },
       { pattern: 'dist/**/*.js', included: false },
       { pattern: 'dist/**/*.html', included: false },
       { pattern: 'tests/**/*.js', included: false },
       { pattern: 'tests/**/*.html', included: false },
-      'tests/bower_components/quark/dist/require.configurator.js',
-      'tests/bower_components/quark/dist/quark.require.conf.js',
+      'bower_modules/quark/dist/require.configurator.js',
+      'bower_modules/quark/dist/quark.require.conf.js',
       'tests/app/require.config.js',
       'tests/karma.js'
     ],
@@ -36,7 +38,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'brackets'],
+    reporters: ['progress'],
 
 
     // web server port

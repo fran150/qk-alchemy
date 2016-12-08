@@ -1,0 +1,172 @@
+.sidebar {
+    background-color: #F8F8F8;
+    border: #e7e7e7 solid 1px;
+
+    top: 0px;
+    left:0px;
+    bottom:-10px;
+    position:fixed;
+
+    overflow: auto;
+    direction: rtl;
+    padding:0;
+    margin-bottom: 15px;
+}
+
+.sidebar ul {
+    direction: ltr;
+
+    list-style: none;
+    padding-left:0px;
+    margin-bottom: 0px;
+}
+
+.sidebar .resizer {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+
+    border:0;
+    padding: 0;
+
+    cursor: ew-resize;
+
+    display: none;
+
+    z-index: 10;
+}
+
+.sidebar .resizer:focus {
+    border:0;
+    outline: 0;
+}
+
+.sidebar .imagebutton {
+    line-height: 20px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.sidebar .imagebutton a {
+    line-height: 20px !important;
+}
+
+.sidebar .notext {
+    display: none;
+}
+
+@media (max-width: 1199px) {
+    .sidebar .resizer-lg {
+        display:none;
+    }
+
+    .sidebar-col-lg {
+        left: 0px !important;
+        width: 100% !important;
+        position:relative;
+    }
+
+    .with-sidebar-col-lg {
+        padding-left: 0px !important;
+    }
+
+    .sidebar .notext {
+        display: inline;
+    }
+}
+
+@media (max-width: 991px) {
+    .sidebar .resizer-md {
+        display:none;
+    }
+
+    .sidebar-col-md {
+        left: 0px !important;
+        width: 100% !important;
+        position:relative;
+    }
+
+    .with-sidebar-col-md {
+        padding-left: 0px !important;
+    }
+
+    .sidebar .notext {
+        display: inline;
+    }
+}
+
+@media (max-width: 767px) {
+    .sidebar .resizer-sm {
+        display:none;
+    }
+
+    .sidebar-col-sm {
+        left: 0px !important;
+        width: 100% !important;
+        position:relative;
+    }
+
+    .with-sidebar-col-sm {
+        padding-left: 0px !important;
+    }
+
+    .sidebar .notext {
+        display: inline;
+    }
+}
+
+.sidebar li {
+    cursor: hand;
+    padding-left:0px;
+}
+
+.sidebar li .line {
+    cursor: hand;
+    padding-left:5px;
+}
+
+.sidebar li li {
+    margin-left: 5px;
+}
+
+.sidebar .option {
+    white-space: nowrap;
+}
+
+.sidebar .option:hover {
+    background-color: #e7e7e7;
+}
+
+.sidebar li,
+.sidebar li a:active,
+.sidebar li a:visited,
+.sidebar li a:link {
+    line-height: 25px;
+    color: #777;
+    text-decoration: none;
+}
+
+.sidebar .imagebutton:hover {
+    background-color: #e7e7e7;
+}
+
+.sidebar .imagebutton a:hover {
+    text-decoration: none;
+}
+
+.sidebar li input {
+    margin-left: 6px;
+    margin-top: 8px;
+}
+
+.sidebar li .glyphicon-menu-down,
+.sidebar li .glyphicon-menu-right {
+    position: absolute;
+    right: 10px;
+    line-height: 25px;
+}
+
+.sidebar .searchbutton {
+    margin-top: 8px;
+    margin-right: 6px;
+}

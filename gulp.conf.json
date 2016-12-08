@@ -1,0 +1,32 @@
+{
+    "name": "qk-alchemy",
+    "externals": [
+        "bootstrap-switch"
+    ],
+    "include": [
+        "components/pager.component",
+        "components/panel/collapsable.component"
+    ],
+    "bundles": {
+        "layout": [
+            "components/layout.component",
+            "components/layout/container.component"
+        ],
+        "sidebar": [
+            "components/layout/sidebar.component",
+            "components/layout/sidebar/imagebutton.component",
+            "components/layout/sidebar/link.component",
+            "components/layout/sidebar/search.component",
+            "components/layout/sidebar/title.component"
+        ],
+        "navbar": [
+            "components/layout/navbar.component",
+            "components/layout/navbar/button.component",
+            "components/layout/navbar/dropdown.component",
+            "components/layout/navbar/dropdown/divider.component",
+            "components/layout/navbar/dropdown/header.component",
+            "components/layout/navbar/dropdown/link.component",
+            "components/layout/navbar/link.component"
+        ]
+    }
+}

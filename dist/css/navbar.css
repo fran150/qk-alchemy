@@ -1,0 +1,12 @@
+.navbar-brand img {
+    position: relative;
+    top: -2px;
+    height:21px;
+    width:21px;
+    margin-right: 5px;
+    display: inline !important;
+}
+
+.font-icon {
+    margin-right: 5px;
+}
