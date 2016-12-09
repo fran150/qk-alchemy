@@ -1,1 +1,222 @@
-define("text!qk-alchemy/components/layout.component.html",[],function(){return"<!-- quark-component -->\n    <!-- ko content -->\n    <!-- /ko -->\n<!-- /ko -->\n"}),define("qk-alchemy/components/layout.component",["quark","knockout","text!./layout.component.html"],function(e,n,i){function t(i,t,a){function o(){var n=s.sidebarSize(),i=s.minSidebarSize(),t=$(window).width()/2;e.isNumeric(i)&&i>0&&i>n&&s.sidebarSize(i),0>n&&s.sidebarSize(0),n>t&&s.sidebarSize(t)}function r(e){e?$(document).css("margin-top","50px"):$(document).css("margin-top","auto")}var s=this;this.hasNavbar=n.observable(!1),this.hasSidebar=n.observable(!1),e.parameters({sidebarSize:n.observable(90),containerSize:n.observable("md"),minSidebarSize:n.observable(20),containerFluid:n.observable(!0)},i,this),a.initComponent=function(){o(s.sidebarSize()),r(s.hasNavbar())};var c={sidebarSize:s.sidebarSize.subscribe(o),minSidebarSize:s.minSidebarSize.subscribe(o),hasNavbar:s.hasNavbar.subscribe(r)};t.dispose=function(){c.sidebarSize.dispose(),c.minSidebarSize.dispose(),c.hasNavbar.dispose()}}return e.component(t,i)}),define("text!qk-alchemy/components/layout/container.component.html",[],function(){return'<quark-component>\n    <div data-bind="onBind: init,\n                    css: classes,\n                    style: styles">\n        <div data-bind="css: sidebarClass, style: sidebarStyle">\n            <!-- ko content -->\n            <!-- /ko -->\n        </div>\n    </div>\n</quark-component>\n'}),define("qk-alchemy/lib/utils",["quark","knockout"],function(e,n){function i(){var n=this;this.findContainer=function(i,t){var a=i.$container,o=!1;if(e.isArray(t))for(var r=0;r<t.length;r++){var s=t[r];if(a instanceof s){o=!0;break}}else o=a instanceof t;if(o)return a;var c=i.$parentContext;return c?n.findContainer(c,t):void 0}}return new i}),define("qk-alchemy/components/layout/container.component",["knockout","quark","text!./container.component.html","qk-alchemy/lib/utils","../layout.component"],function(e,n,i,t,a){function o(i,o,r){var s=this,c=e.observable(),d=e.observable(),u={sidebarSize:e.observable(),containerSize:e.observable(),containerFluid:e.observable()};o.init=function(e,o,r){var b=t.findContainer(r,a.modelType);if(!b)throw Error("The al-layout-container component must be used inside an al-layout component");c=b.hasNavbar,d=b.hasSidebar,u.sidebarSize=b.sidebarSize,u.containerSize=b.containerSize,u.containerFluid=b.containerFluid,n.inject(i,u),d(!1),s.containerSize=u.containerSize,s.containerFluid=u.containerFluid},o.styles=e.pureComputed(function(){var e={};return c()&&(e.marginTop="50px"),e}),o.sidebarStyle=e.pureComputed(function(){var e={};return d()&&(e.paddingLeft=u.sidebarSize(),u.containerFluid()&&(e.paddingLeft+=15),e.paddingLeft+="px"),e}),o.classes=e.pureComputed(function(){var e="container";return u.containerFluid()&&(e+="-fluid"),e}),o.sidebarClass=e.pureComputed(function(){return d()?"with-sidebar-col-"+u.containerSize():""})}return n.component(o,i)});
+
+define('text!qk-alchemy/components/layout.component.html',[],function () { return '<!-- quark-component -->\n    <!-- ko content -->\n    <!-- /ko -->\n<!-- /ko -->\n';});
+
+define('qk-alchemy/components/layout.component',['quark', 'knockout', 'text!./layout.component.html'], function($$, ko, template) {
+    function LayoutComponent(params, $scope, $imports) {
+        var self = this;
+
+        // The layout has a navbar
+        this.hasNavbar = ko.observable(false);
+        // The layout has a sidebar
+        this.hasSidebar = ko.observable(false);
+
+        // Component parameters
+        $$.parameters({
+            // Sidebar's width in pixels
+            sidebarSize: ko.observable(90),
+            // Main container responsive size
+            containerSize: ko.observable('md'),
+            // Min sidebar size in pixels
+            minSidebarSize: ko.observable(20),
+            // Container fluid?
+            containerFluid: ko.observable(true)
+        }, params, this);
+
+        // On component init
+        $imports.initComponent = function() {
+            // Validate sidebar size and apply body margin
+            validateSize(self.sidebarSize());
+            setBodyMargin(self.hasNavbar());
+        }
+
+        // Limit sidebar size
+        function validateSize() {
+            var size = self.sidebarSize();
+            var minSize = self.minSidebarSize();
+            var maxSize = $(window).width() / 2;
+
+            if ($$.isNumeric(minSize) && minSize > 0 && size < minSize) {
+                self.sidebarSize(minSize);
+            }
+
+            if (size < 0) {
+                self.sidebarSize(0);
+            }
+
+            if (size > maxSize) {
+                self.sidebarSize(maxSize);
+            }
+        }
+
+        // Applies the body margin if it has a navbar
+        function setBodyMargin(hasNavbar) {
+            if (hasNavbar) {
+                $(document).css('margin-top', '50px');
+            } else {
+                $(document).css('margin-top', 'auto');
+            }
+        }
+
+        var subscriptions = {
+            // Validate sidebar size on size change
+            sidebarSize: self.sidebarSize.subscribe(validateSize),
+            // Validate sidebar size on min size change
+            minSidebarSize: self.minSidebarSize.subscribe(validateSize),
+            // Apply body margin when hasNavbar changes
+            hasNavbar: self.hasNavbar.subscribe(setBodyMargin)
+        };
+
+        // Cleans component on dispose
+        $scope.dispose = function() {
+            subscriptions.sidebarSize.dispose();
+            subscriptions.minSidebarSize.dispose();
+            subscriptions.hasNavbar.dispose();
+        }
+    }
+
+    return $$.component(LayoutComponent, template)
+})
+;
+define('text!qk-alchemy/components/layout/container.component.html',[],function () { return '<quark-component>\n    <div data-bind="onBind: init,\n                    css: classes,\n                    style: styles">\n        <div data-bind="css: sidebarClass, style: sidebarStyle">\n            <!-- ko content -->\n            <!-- /ko -->\n        </div>\n    </div>\n</quark-component>\n';});
+
+define('qk-alchemy/lib/utils',['quark', 'knockout'], function($$, ko) {
+    function Utils() {
+        var self = this;
+
+        this.findContainer = function(context, type) {
+            // Get the context container
+            var container = context.$container;
+
+            var found = false;
+
+            if ($$.isArray(type)) {
+                for (var i = 0; i < type.length; i++) {
+                    var actualType = type[i];
+
+                    if (container instanceof actualType) {
+                        found = true;
+                        break;
+                    }
+                }
+            } else {
+                found = (container instanceof type);
+            }
+
+            // If the container exists and is of the requested type return it
+            if (found) {
+                return container;
+            } else {
+                // If there's a parent context search for the container type on it
+                var parentContext = context.$parentContext;
+
+                if (parentContext) {
+                    return self.findContainer(parentContext, type);
+                }
+            }
+        }
+    }
+
+    return new Utils();
+});
+
+define('qk-alchemy/components/layout/container.component',['knockout', 'quark', 'text!./container.component.html',
+        'qk-alchemy/lib/utils',
+        '../layout.component'],
+       function(ko, $$, template, utils, LayoutComponent) {
+
+    function LayoutContainerComponent(params, $scope, $imports) {
+        var self = this;
+
+        // The page has navbar
+        var hasNavbar = ko.observable();
+        // The page has sidebar
+        var hasSidebar = ko.observable();
+
+        // Layout values that can be overriden by parameters
+        var layout = {
+            // Stores the sidebar size observable of the layout component
+            sidebarSize: ko.observable(),
+            // Stores the container size observable of the layout component
+            containerSize: ko.observable(),
+            // Is container fluid?
+            containerFluid: ko.observable()
+        };
+
+        // When binding the main div
+        $scope.init = function(element, viewModel, context) {
+            // Get the main layout component
+            var layoutMain = utils.findContainer(context, LayoutComponent.modelType);
+
+            // If a main layout is defined
+            if (layoutMain) {
+                // Copy main layout component observables to local variables
+                hasNavbar = layoutMain.hasNavbar;
+                hasSidebar = layoutMain.hasSidebar;
+                layout.sidebarSize = layoutMain.sidebarSize;
+                layout.containerSize = layoutMain.containerSize;
+                layout.containerFluid = layoutMain.containerFluid;
+
+                // Inject values specified in local parameters
+                $$.inject(params, layout);
+
+                // Set the sidebar to false
+                hasSidebar(false);
+
+                // Publish properties of the layout as local properties of this model
+                self.containerSize = layout.containerSize;
+                self.containerFluid = layout.containerFluid;
+            } else {
+                throw Error('The al-layout-container component must be used inside an al-layout component');
+            }
+        }
+
+        $scope.styles = ko.pureComputed(function() {
+            var styles = {};
+
+            if (hasNavbar()) {
+                styles.marginTop = "50px";
+            }
+
+            return styles;
+        })
+
+        $scope.sidebarStyle = ko.pureComputed(function() {
+            var styles = {};
+
+            if (hasSidebar()) {
+                styles.paddingLeft = layout.sidebarSize();
+
+                if (layout.containerFluid()) {
+                    styles.paddingLeft += 15;
+                }
+
+                styles.paddingLeft += "px";
+            }
+
+            return styles;
+        });
+
+        // Clases que se deben aplicar al elemento para que se muestre como corresponde.
+        $scope.classes = ko.pureComputed(function() {
+            var res = "container";
+
+            if (layout.containerFluid()) {
+                res += "-fluid";
+            }
+
+            return res;
+        });
+
+        // Clases que se deben aplicar al elemento para que se muestre como corresponde.
+        $scope.sidebarClass = ko.pureComputed(function() {
+            if (hasSidebar()) {
+                return "with-sidebar-col-" + layout.containerSize();
+            }
+
+            return "";
+        });
+
+    }
+
+    return $$.component(LayoutContainerComponent, template);
+});

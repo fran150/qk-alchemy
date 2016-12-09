@@ -1,7 +1,7 @@
 {
   "name": "qk-alchemy",
-  "version": "1.0.0",
-  "description": "Quark Alchemy Build",
+  "version": "0.5.0",
+  "description": "Quark's web components",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Test with karma or jasmine\" && exit 1"

@@ -1,9 +1,10 @@
-define(['module', 'knockout', 'jquery', 'quark', 'bootstrap-switch/js/bootstrap-switch.min'], function(mod, ko, $, $$) {
+define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
     return $$.module(mod, {
         prefix: 'al',
         version: '1.0.0',
         components: {
             "pager": "components/pager.component",
+            "switch": "components/switch.component",
             "panel-collapsable": "components/panel/collapsable.component"
         },
         namespaces: {

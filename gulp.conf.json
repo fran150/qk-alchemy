@@ -5,6 +5,7 @@
     ],
     "include": [
         "components/pager.component",
+        "components/switch.component",
         "components/panel/collapsable.component"
     ],
     "bundles": {

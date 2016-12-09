@@ -22,7 +22,7 @@ var moduleConfig = require('./gulp.conf.json');
 var requireJsRuntimeConfig = vm.runInNewContext(
     fs.readFileSync('bower_modules/quark/dist/require.configurator.js') + ';' +
     fs.readFileSync('bower_modules/quark/dist/quark.require.conf.js') + ';' +
-    'require = requireConfigure(QuarkRequireConf());'
+    'require = requireConfigure(QuarkRequireConf(\'bower_modules\'));'
 );
 
 // Gulp default's configuration for Quark Modules
@@ -30,14 +30,11 @@ var config = {
     out: 'main.js',
     baseUrl: '.',
     paths: {
-        'text': 'bower_modules/requirejs-text/text',
         'quark': 'empty:',
         'knockout': 'empty:',
-        'jquery': 'empty:',
+        'jquery': 'empty:'
     },
-    exclude: [
-        'text'
-    ]
+    exclude: ['text', 'css']
 }
 
 // Add module's entry point as main file to process
@@ -96,7 +93,7 @@ requireJsOptimizerConfig = merge(requireJsRuntimeConfig, config);
 // and writes all files in ./dist.
 gulp.task('js', function () {
     return rjs(requireJsOptimizerConfig)
-        .pipe(uglify({ preserveComments: 'some' }))
+        //.pipe(uglify({ preserveComments: 'some' }))
         .pipe(gulp.dest('./dist/'));
 });
 
