@@ -92,9 +92,14 @@ requireJsOptimizerConfig = merge(requireJsRuntimeConfig, config);
 // Discovers all AMD dependencies, concatenates together all required .js files, minifies them
 // and writes all files in ./dist.
 gulp.task('js', function () {
-    return rjs(requireJsOptimizerConfig)
-        //.pipe(uglify({ preserveComments: 'some' }))
-        .pipe(gulp.dest('./dist/'));
+    if (moduleConfig.uglify !== false) {
+        return rjs(requireJsOptimizerConfig)
+            .pipe(uglify({ preserveComments: 'some' }))
+            .pipe(gulp.dest('./dist/'));
+    } else {
+        return rjs(requireJsOptimizerConfig)
+            .pipe(gulp.dest('./dist/'));
+    }
 });
 
 

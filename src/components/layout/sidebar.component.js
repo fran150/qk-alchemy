@@ -7,7 +7,10 @@ define(['knockout', 'quark', 'text!./sidebar.component.html',
         var self = this;
 
         // Indicates if the layout has a navbar
-        var hasNavbar = ko.observable();
+        var hasNavbar;
+        // Indicates if the layout has a sidebar
+        var hasSidebar;
+
         // Container bootstrap's size (when breaks to the top of page)
         var containerSize = ko.observable();
 
@@ -81,6 +84,22 @@ define(['knockout', 'quark', 'text!./sidebar.component.html',
             }
         }
 
+        // Observable subscriptions
+        var subscriptions = {
+            // Subscribe to the resizing flag
+            resizing: self.resizing.subscribe(function(newValue) {
+                // If its resizing attach events to the window to do the actual resizing and listen
+                // if it has to stop resizing, otherwise detach those events
+                if (newValue) {
+                    $(window).on('mousemove', resizeSidebar);
+                    $(window).on('mouseup', stopResizing);
+                } else {
+                    $(window).off('mousemove', resizeSidebar);
+                    $(window).off('mouseup', stopResizing);
+                }
+            })
+        }
+
 
         // When binding the main div
         $scope.init = function(element, viewModel, context) {
@@ -96,6 +115,7 @@ define(['knockout', 'quark', 'text!./sidebar.component.html',
                 layout.sidebarSize = layoutMain.sidebarSize;
                 layout.minSidebarSize = layoutMain.minSidebarSize;
                 hasNavbar = layoutMain.hasNavbar;
+                hasSidebar = layoutMain.hasSidebar;
                 containerSize = layoutMain.containerSize;
 
                 // Apply local parameter value to layout variables
@@ -107,6 +127,14 @@ define(['knockout', 'quark', 'text!./sidebar.component.html',
                 // Publish properties of the layout as local properties of this model
                 self.sidebarSize = layoutMain.sidebarSize;
                 self.minSidebarSize = layoutMain.minSidebarSize;
+
+                // Subscribe to has navbar change
+                subscriptions.hasNavbar = hasNavbar.subscribe(function(newValue) {
+                    // When the hasNavbar observable changes, move the top value of the sidebar
+                    // to make room for it
+                    setSidebarTop(newValue);
+                });
+
             } else {
                 throw new Error('The sidebar component must be used inside an al-layout component');
 
@@ -130,27 +158,6 @@ define(['knockout', 'quark', 'text!./sidebar.component.html',
             resizerElement = element;
             // Attach mouse down event to resizer element for resizing start
             $(resizerElement).on('mousedown', startResizing);
-        }
-
-        // Observable subscriptions
-        var subscriptions = {
-            // Subscribe to the resizing flag
-            resizing: self.resizing.subscribe(function(newValue) {
-                // If its resizing attach events to the window to do the actual resizing and listen
-                // if it has to stop resizing, otherwise detach those events
-                if (newValue) {
-                    $(window).on('mousemove', resizeSidebar);
-                    $(window).on('mouseup', stopResizing);
-                } else {
-                    $(window).off('mousemove', resizeSidebar);
-                    $(window).off('mouseup', stopResizing);
-                }
-            }),
-            hasNavbar: hasNavbar.subscribe(function(newValue) {
-                // When the hasNavbar observable changes, move the top value of the sidebar
-                // to make room for it
-                setSidebarTop(newValue);
-            })
         }
 
         // Sidebar's width
@@ -188,9 +195,14 @@ define(['knockout', 'quark', 'text!./sidebar.component.html',
 
         // Dispose the component
         $scope.dispose = function() {
+            // Alert the layout component that it has no more sidebar
+            hasSidebar(false);
+
+            // Dispose subscriptions
             subscriptions.resizing.dispose();
             subscriptions.hasNavbar.dispose();
 
+            // Delete events
             $(resizerElement).off('mousedown', startResizing);
             $(sidebarElement).off('mousemove', showResizerBar);
             $(sidebarElement).off('mouseleave', hideResizerBar);

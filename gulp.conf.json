@@ -1,6 +1,8 @@
 {
     "name": "qk-alchemy",
+    "uglify": true,
     "externals": [
+        "bootstrap",
         "bootstrap-switch"
     ],
     "include": [

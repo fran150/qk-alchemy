@@ -38,9 +38,6 @@ define(['knockout', 'quark', 'text!./container.component.html',
                 // Inject values specified in local parameters
                 $$.inject(params, layout);
 
-                // Set the sidebar to false
-                hasSidebar(false);
-
                 // Publish properties of the layout as local properties of this model
                 self.containerSize = layout.containerSize;
                 self.containerFluid = layout.containerFluid;

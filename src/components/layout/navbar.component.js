@@ -6,6 +6,8 @@ define(['knockout', 'quark', 'text!./navbar.component.html',
     function LayoutNavbarComponent(params, $scope) {
         var self = this;
 
+        var hasNavbar;
+
         // Component's parameters
         $$.parameters({
             pageName: ko.observable(),
@@ -21,7 +23,8 @@ define(['knockout', 'quark', 'text!./navbar.component.html',
 
             // Set the main layout component hasNavbar property to true
             if (layoutMain) {
-                layoutMain.hasNavbar(true);
+                hasNavbar = layoutMain.hasNavbar;
+                hasNavbar(true);
             } else {
                 throw new Error('The navbar component must be used inside an al-layout component');
             }
@@ -70,6 +73,11 @@ define(['knockout', 'quark', 'text!./navbar.component.html',
                 return '#' + $$.routing.hash(pageName, pageParams);
             }
         });
+
+        this.dispose = function() {
+            // Inform the main layout that a navbar is no longer available
+            hasNavbar(false);
+        }
     }
 
     return $$.component(LayoutNavbarComponent, template);

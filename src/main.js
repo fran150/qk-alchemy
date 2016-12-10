@@ -1,4 +1,8 @@
-define(['module', 'knockout', 'jquery', 'quark'], function(mod, ko, $, $$) {
+define(['module', 'knockout', 'jquery', 'quark',
+       'bootstrap',
+       'css!bootstrap/css']
+       , function(mod, ko, $, $$) {
+
     return $$.module(mod, {
         prefix: 'al',
         version: '1.0.0',

@@ -11,9 +11,9 @@ define(['knockout', 'quark', 'text!./switch.component.html',
         $$.parameters({
             checked: ko.observable(false),
             size: ko.observable('mini'),
-            onColor: ko.observable(),
+            onColor: ko.observable('primary'),
             onText: ko.observable('Si'),
-            offColor: ko.observable(),
+            offColor: ko.observable('default'),
             offText: ko.observable('No'),
             disabled: ko.observable(false)
         }, params, this);
