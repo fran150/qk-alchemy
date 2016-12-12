@@ -8,7 +8,7 @@ require = requireConfigure(QuarkRequireConf('bower_modules', true), {
         'bootstrap/css': 'bower_modules/bootstrap/dist/css/bootstrap.min',
         'bootstrap-switch': 'bower_modules/bootstrap-switch/dist/js/bootstrap-switch.min',
         'bootstrap-switch/bt3/css': 'bower_modules/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min',
-        'qk-alchemy': './src'
+        'qk-alchemy': './dist'
     },
     shim: {
         "bootstrap": {

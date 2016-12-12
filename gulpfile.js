@@ -8,7 +8,7 @@ var fs = require('fs'),
 
 // Gulp and plugins
 var gulp = require('gulp'),
-    rjs = require('gulp-requirejs-bundler'),
+    rjs = require('gulp-requirejs-bundler-quark'),
     concat = require('gulp-concat'),
     clean = require('gulp-clean'),
     replace = require('gulp-replace'),
@@ -114,7 +114,7 @@ gulp.task('cleaning', ['js', 'bundles'], function() {
 });
 
 gulp.task('css', function() {
-    return gulp.src('./src/css/*.css')
+    return gulp.src('./src/css/**/*')
                 .pipe(gulp.dest('./dist/css'));
 });
 
