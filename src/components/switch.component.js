@@ -1,6 +1,6 @@
 define(['knockout', 'quark', 'text!./switch.component.html',
         'bootstrap-switch',
-        'css!bootstrap-switch/bt3/css'
+        'loadCss!bootstrap-switch/bt3/css'
        ], function (ko, $$, template) {
     function SwitchComponent(params, $scope, $imports) {
         var self = this;

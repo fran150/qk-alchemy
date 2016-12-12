@@ -34,7 +34,7 @@ var config = {
         'knockout': 'empty:',
         'jquery': 'empty:'
     },
-    exclude: ['text', 'css']
+    exclude: ['text', 'loadCss']
 }
 
 // Add module's entry point as main file to process

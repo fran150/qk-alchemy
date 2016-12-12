@@ -1,6 +1,6 @@
 define(['module', 'knockout', 'jquery', 'quark',
        'bootstrap',
-       'css!bootstrap/css']
+       'loadCss!bootstrap/css']
        , function(mod, ko, $, $$) {
 
     return $$.module(mod, {
