@@ -1,4 +1,9 @@
-define(['quark', 'knockout', 'text!./layout.component.html'], function($$, ko, template) {
+define([
+    'quark',
+    'knockout',
+    'text!./layout.component.html'
+], function($$, ko, template) {
+
     function LayoutComponent(params, $scope, $imports) {
         var self = this;
 

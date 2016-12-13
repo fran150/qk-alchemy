@@ -1,11 +1,15 @@
-define(['module', 'knockout', 'jquery', 'quark',
-       'bootstrap',
-       'loadCss!bootstrap/css']
-       , function(mod, ko, $, $$) {
+define([
+    'module',
+    'knockout',
+    'jquery',
+    'quark',
+    'bootstrap/js',
+    'loadCss!bootstrap/css'
+], function(mod, ko, $, $$) {
 
     return $$.module(mod, {
         prefix: 'al',
-        version: '1.0.0',
+        version: '0.5.1',
         components: {
             "pager": "components/pager.component",
             "switch": "components/switch.component",

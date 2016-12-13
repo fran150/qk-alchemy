@@ -1,7 +1,10 @@
-define(['knockout', 'quark', 'text!./container.component.html',
-        'qk-alchemy/lib/utils',
-        '../layout.component'],
-       function(ko, $$, template, utils, LayoutComponent) {
+define([
+    'knockout',
+    'quark',
+    'text!./container.component.html',
+    '../../lib/utils',
+    '../layout.component'
+], function(ko, $$, template, utils, LayoutComponent) {
 
     function LayoutContainerComponent(params, $scope, $imports) {
         var self = this;

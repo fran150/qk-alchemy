@@ -2,8 +2,10 @@
     "name": "qk-alchemy",
     "uglify": true,
     "externals": [
-        "bootstrap",
-        "bootstrap-switch"
+        "bootstrap/js",
+        "bootstrap/css",
+        "bootstrap-switch/js",
+        "bootstrap-switch/bt3/css"
     ],
     "include": [
         "components/pager.component",

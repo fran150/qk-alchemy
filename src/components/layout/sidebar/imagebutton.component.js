@@ -1,7 +1,10 @@
-define(['knockout', 'quark', 'text!./imagebutton.component.html',
-        'qk-alchemy/lib/utils',
-        '../sidebar.component'],
-        function(ko, $$, template, utils, Sidebar) {
+define([
+    'knockout',
+    'quark',
+    'text!./imagebutton.component.html',
+    '../../../lib/utils',
+    '../sidebar.component'
+], function(ko, $$, template, utils, Sidebar) {
 
     function LayoutSidebarImageButtonComponent(params, $scope) {
         var self = this;

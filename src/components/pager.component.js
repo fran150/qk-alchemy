@@ -1,4 +1,9 @@
-define(['quark', 'knockout', 'text!./pager.component.html'], function($$, ko, template) {
+define([
+    'quark',
+    'knockout',
+    'text!./pager.component.html'
+], function($$, ko, template) {
+
     function PagerComponent(params, $scope, $imports) {
         var self = this;
 

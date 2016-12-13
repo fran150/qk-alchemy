@@ -1,7 +1,10 @@
-define(['knockout', 'quark', 'text!./navbar.component.html',
-        'qk-alchemy/lib/utils',
-        '../layout.component'],
-       function(ko, $$, template, utils, LayoutComponent) {
+define([
+    'knockout',
+    'quark',
+    'text!./navbar.component.html',
+    '../../lib/utils',
+    '../layout.component'
+], function(ko, $$, template, utils, LayoutComponent) {
 
     function LayoutNavbarComponent(params, $scope) {
         var self = this;

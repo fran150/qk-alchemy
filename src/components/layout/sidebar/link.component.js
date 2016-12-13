@@ -1,7 +1,10 @@
-define(['knockout', 'quark', 'text!./link.component.html',
-        'qk-alchemy/lib/utils',
-        '../sidebar.component'],
-        function(ko, $$, template, utils, Sidebar) {
+define([
+    'knockout',
+    'quark',
+    'text!./link.component.html',
+    '../../../lib/utils',
+    '../sidebar.component'
+], function(ko, $$, template, utils, Sidebar) {
 
     function LayoutSidebarLinkComponent(params, $scope) {
         var self = this;

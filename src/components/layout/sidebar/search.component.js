@@ -1,7 +1,10 @@
-define(['knockout', 'quark', 'text!./search.component.html',
-        'qk-alchemy/lib/utils',
-        '../sidebar.component'],
-        function(ko, $$, template, utils, Sidebar) {
+define([
+    'knockout',
+    'quark',
+    'text!./search.component.html',
+    '../../../lib/utils',
+    '../sidebar.component'
+], function(ko, $$, template, utils, Sidebar) {
 
     function LayoutSidebarSearchComponent(params, $scope) {
         var self = this;

@@ -1,4 +1,7 @@
-define(['quark', 'knockout'], function($$, ko) {
+define([
+    'quark',
+    'knockout'
+], function($$, ko) {
     function Utils() {
         var self = this;
 
