@@ -9,8 +9,8 @@
     ],
     "include": [
         "components/pager.component",
-        "components/switch.component",
-        "components/panel/collapsable.component"
+        "components/panel/collapsable.component",
+        "components/switch.component"
     ],
     "bundles": {
         "layout": [
