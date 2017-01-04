@@ -12,9 +12,10 @@ module.exports = function(config) {
     files: [
       { pattern: 'bower_modules/**/*.css', included: false },
       { pattern: 'bower_modules/**/*.js', included: false },
-      { pattern: 'dist/**/*.css', included: false },
-      { pattern: 'dist/**/*.js', included: false },
-      { pattern: 'dist/**/*.html', included: false },
+      { pattern: 'src/**/*.css', included: false },
+      { pattern: 'src/**/*.js', included: false },
+      { pattern: 'src/**/*.html', included: false },
+      { pattern: 'src/**/*.json', included: false },
       { pattern: 'tests/**/*.js', included: false },
       { pattern: 'tests/**/*.html', included: false },
       'bower_modules/quark/dist/require.configurator.js',

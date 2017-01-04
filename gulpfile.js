@@ -32,9 +32,10 @@ var config = {
     paths: {
         'quark': 'empty:',
         'knockout': 'empty:',
-        'jquery': 'empty:'
+        'jquery': 'empty:',
+        'json': 'bower_modules/requirejs-plugins/src/json'
     },
-    exclude: ['text', 'loadCss']
+    exclude: ['text', 'loadCss', 'json']
 }
 
 // Add module's entry point as main file to process
