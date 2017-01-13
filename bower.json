@@ -21,7 +21,7 @@
     "bower_modules"
   ],
   "dependencies": {
-    "quark": "~0.9.0",
+    "quark": "~0.9.1",
     "bootstrap-switch": "~3.3.2",
     "bootstrap": "^3.3.7",
     "requirejs-plugins": "^1.0.3"
