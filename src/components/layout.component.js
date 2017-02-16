@@ -11,6 +11,8 @@ define([
         this.hasNavbar = ko.observable(false);
         // The layout has a sidebar
         this.hasSidebar = ko.observable(false);
+        // The layout has submenu
+        this.hasSubmenu = ko.observable(false);
 
         // Component parameters
         $$.parameters({

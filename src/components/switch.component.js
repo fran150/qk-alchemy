@@ -1,34 +1,30 @@
 define([
-    'knockout',
     'quark',
+    'knockout',
     'text!./switch.component.html',
-    'bootstrap-switch/js',
-    'loadCss!bootstrap-switch/bt3/css'
-], function (ko, $$, template) {
+    'loadCss!bt-switch/css/bootstrap3/bootstrap-switch.min',
+    'bt-switch/js/bootstrap-switch.min'
+], function($$, ko, template) {
 
     function SwitchComponent(params, $scope, $imports) {
         var self = this;
 
-        var element;
-
         // Set component parameters
         $$.parameters({
-            checked: ko.observable(false),
+            value: ko.observable(false),
             size: ko.observable('mini'),
-            onColor: ko.observable('primary'),
+            onColor: ko.observable(),
             onText: ko.observable('Si'),
-            offColor: ko.observable('default'),
+            offColor: ko.observable(),
             offText: ko.observable('No'),
             disabled: ko.observable(false)
         }, params, this);
 
         // Get element
-        $scope.getElement = function(node) {
-            element = node;
-
+        $scope.getElement = function(element) {
             //Define las opciones para el switch
             var options = {
-                state: self.checked(),
+                state: self.value(),
                 disabled: self.disabled(),
                 size: self.size(),
                 onText: self.onText(),
@@ -36,46 +32,11 @@ define([
                 onColor: self.onColor(),
                 offColor: self.offColor(),
                 onSwitchChange: function(event, state) {
-                    if (state != self.checked()) {
-                        self.checked(state);
-                    }
+                    self.value(state);
                 }
             };
 
             $(element).bootstrapSwitch(options);
-        }
-
-        var subscriptions = {
-            checked: self.checked.subscribe(function(newValue) {
-                $(element).bootstrapSwitch('state', newValue);
-            }),
-            disabled: self.disabled.subscribe(function(newValue) {
-                $(element).bootstrapSwitch('disabled', newValue);
-            }),
-            size: self.size.subscribe(function(newValue) {
-                $(element).bootstrapSwitch('size', newValue);
-            }),
-            onText: self.onText.subscribe(function(newValue) {
-                $(element).bootstrapSwitch('onText', newValue);
-            }),
-            offText: self.offText.subscribe(function(newValue) {
-                $(element).bootstrapSwitch('offText', newValue);
-            }),
-            onColor: self.onColor.subscribe(function(newValue) {
-                $(element).bootstrapSwitch('onColor', newValue);
-            }),
-            offColor: self.offColor.subscribe(function(newValue) {
-                $(element).bootstrapSwitch('offColor', newValue);
-            })
-        }
-
-        this.dispose = function() {
-            subscriptions.disabled.dispose();
-            subscriptions.size.dispose();
-            subscriptions.onText.dispose();
-            subscriptions.offText.dispose();
-            subscriptions.onColor.dispose();
-            subscriptions.offColor.dispose();
         }
     }
 

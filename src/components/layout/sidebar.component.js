@@ -183,7 +183,7 @@ define([
 
         // Classes to apply to the resizer element
         $scope.resizerClass = ko.pureComputed(function() {
-            return "resizer resizer-" + containerSize();
+            return "resizer-" + containerSize();
         });
 
         // Element styles to apply to the resizer button

@@ -5,7 +5,8 @@
         "bootstrap/js",
         "bootstrap/css",
         "bootstrap-switch/js",
-        "bootstrap-switch/bt3/css"
+        "bootstrap-switch/bt3/css",
+        "loading-overlay"
     ],
     "include": [
         "components/pager.component",

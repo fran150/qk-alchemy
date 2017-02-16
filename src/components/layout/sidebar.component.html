@@ -2,11 +2,12 @@
     <div class="sidebar" data-bind="onBind: init,
                                     css: classes,
                                     style: styles">
-        <button data-bind="onBind: initResizer,
-                          style: resizerStyle,
-                          css: resizerClass">
-           <span class="glyphicon glyphicon-option-vertical"></span>
-        </button>
+        <span data-bind="css: resizerClass">
+            <button class="resizer" data-bind="onBind: initResizer,
+                              style: resizerStyle">
+               <span class="glyphicon glyphicon-option-vertical"></span>
+            </button>
+        </span>
 
         <ul data-bind="style: { marginTop: model.marginTop }">
             <!-- ko content -->

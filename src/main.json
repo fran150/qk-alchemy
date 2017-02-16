@@ -1,7 +1,8 @@
 {
     "css": [
         "css/sidebar.css",
-        "css/navbar.css"
+        "css/navbar.css",
+        "css/submenu.css"
     ],
     "namespaces": {
         "layout": {
@@ -24,6 +25,10 @@
                 "link": "components/layout/sidebar/link.component",
                 "search": "components/layout/sidebar/search.component",
                 "title": "components/layout/sidebar/title.component"
+            },
+            "submenu": {
+                "": "components/layout/submenu.component",
+                "button": "components/layout/submenu/button.component"
             }
         },
         "pager": "components/pager.component",

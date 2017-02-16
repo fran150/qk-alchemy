@@ -13,6 +13,8 @@ define([
         var hasNavbar = ko.observable();
         // The page has sidebar
         var hasSidebar = ko.observable();
+        // The page has submenu
+        var hasSubmenu = ko.observable();
 
         // Layout values that can be overriden by parameters
         var layout = {
@@ -21,7 +23,7 @@ define([
             // Stores the container size observable of the layout component
             containerSize: ko.observable(),
             // Is container fluid?
-            containerFluid: ko.observable()
+            containerFluid: ko.observable(),
         };
 
         // When binding the main div
@@ -34,6 +36,7 @@ define([
                 // Copy main layout component observables to local variables
                 hasNavbar = layoutMain.hasNavbar;
                 hasSidebar = layoutMain.hasSidebar;
+                hasSubmenu = layoutMain.hasSubmenu;
                 layout.sidebarSize = layoutMain.sidebarSize;
                 layout.containerSize = layoutMain.containerSize;
                 layout.containerFluid = layoutMain.containerFluid;
@@ -52,9 +55,17 @@ define([
         $scope.styles = ko.pureComputed(function() {
             var styles = {};
 
+            styles.marginTop = 0;
+
             if (hasNavbar()) {
-                styles.marginTop = "50px";
+                styles.marginTop += 50;
             }
+
+            if (hasSubmenu()) {
+                styles.marginTop += 40;
+            }
+
+            styles.marginTop += "px";
 
             return styles;
         })
