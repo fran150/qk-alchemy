@@ -4,8 +4,7 @@
     "externals": [
         "bootstrap/js",
         "bootstrap/css",
-        "bootstrap-switch/js",
-        "bootstrap-switch/bt3/css",
+        "ios-switch",
         "loading-overlay"
     ],
     "include": [

@@ -1,42 +1,75 @@
 define([
     'quark',
     'knockout',
+    'jquery',
     'text!./switch.component.html',
-    'loadCss!bt-switch/css/bootstrap3/bootstrap-switch.min',
-    'bt-switch/js/bootstrap-switch.min'
-], function($$, ko, template) {
+    'ios-switch/switchery',
+    'loadCss!ios-switch/switchery.min'
+], function($$, ko, $, template) {
 
     function SwitchComponent(params, $scope, $imports) {
         var self = this;
 
-        // Set component parameters
+        var element;
+        var switchElement;
+        var config = {};
+
         $$.parameters({
             value: ko.observable(false),
-            size: ko.observable('mini'),
-            onColor: ko.observable(),
-            onText: ko.observable('Si'),
-            offColor: ko.observable(),
-            offText: ko.observable('No'),
             disabled: ko.observable(false)
         }, params, this);
 
-        // Get element
-        $scope.getElement = function(element) {
-            //Define las opciones para el switch
-            var options = {
-                state: self.value(),
-                disabled: self.disabled(),
-                size: self.size(),
-                onText: self.onText(),
-                offText: self.offText(),
-                onColor: self.onColor(),
-                offColor: self.offColor(),
-                onSwitchChange: function(event, state) {
-                    self.value(state);
+        $$.parameters({
+            color: '#64bd63',
+            secondaryColor: '#dfdfdf',
+            jackColor: '#fff',
+            jackSecondaryColor: null,
+            size: 'small'
+        }, params, config);
+
+        function setDisabled() {
+            if (self.disabled()) {
+                switchElement.disable();
+            } else {
+                switchElement.enable();
+            }
+        }
+
+        $scope.getElement = function(dom) {
+            element = dom;
+
+            element.checked = self.value();
+
+            switchElement = new Switchery(element, config);
+
+            setDisabled();
+
+            element.onchange = function() {
+                if (self.value() != element.checked) {
+                    self.value(element.checked);
                 }
             };
+        }
 
-            $(element).bootstrapSwitch(options);
+        var subscriptions = {
+            value: self.value.subscribe(function(value) {
+                if (element.checked != value) {
+                    $(element).trigger('click');
+                    element.checked = value;
+                }
+            }),
+            disabled: self.disabled.subscribe(function(value) {
+                setDisabled();
+            })
+        }
+
+        $scope.dispose = function() {
+            if (switchElement) {
+                switchElement.destroy();
+            }
+
+            subscriptions.value.dispose();
+            subscriptions.disabled.dispose();
         }
     }
 
