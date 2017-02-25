@@ -4,7 +4,7 @@
     "externals": [
         "bootstrap/js",
         "bootstrap/css",
-        "ios-switch",
+        "switchery-require",
         "loading-overlay"
     ],
     "include": [

@@ -2,10 +2,10 @@ define([
     'quark',
     'knockout',
     'jquery',
+    'switchery-require/switchery.min',
     'text!./switch.component.html',
-    'ios-switch/switchery',
-    'loadCss!ios-switch/switchery.min'
-], function($$, ko, $, template) {
+    'loadCss!switchery-require/switchery.min'
+], function($$, ko, $, Switchery, template) {
 
     function SwitchComponent(params, $scope, $imports) {
         var self = this;

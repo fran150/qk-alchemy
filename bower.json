@@ -1,6 +1,6 @@
 {
   "name": "qk-alchemy",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "authors": [
     "fran150 <panchi150@gmail.com>"
   ],
@@ -25,7 +25,7 @@
     "bootstrap": "^3.3.7",
     "requirejs-plugins": "^1.0.3",
     "gasparesganga-jquery-loading-overlay": "^1.5.3",
-    "switchery": "^0.8.2"
+    "switchery-require": "^0.8.5"
   },
   "devDependencies": {
     "jasmine-core": "jasmine#^2.5.2"
