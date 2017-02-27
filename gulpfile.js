@@ -55,7 +55,7 @@ if (moduleConfig.include) {
 // Add all excluded files prefixing the module name
 if (moduleConfig.exclude) {
     for (var i = 0; i < moduleConfig.exclude.length; i++) {
-        config.exclude.push(moduleConfig.name + '/' + moduleConfig.include[i]);
+        config.exclude.push(moduleConfig.name + '/' + moduleConfig.exclude[i]);
     }
 }
 
