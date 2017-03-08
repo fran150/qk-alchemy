@@ -4,7 +4,7 @@ define(['knockout', 'jquery'], function(ko, $) {
         if (value) {
             $(element).LoadingOverlay('show');
         } else {
-            $(element).LoadingOverlay('hide');
+            $(element).LoadingOverlay('hide', true);
         }
     }
 
