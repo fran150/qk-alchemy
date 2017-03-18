@@ -3,12 +3,13 @@ var require;
 require = requireConfigure(QuarkRequireConf('bower_modules', true), {
     baseUrl: '..',
     paths: {
+        'qk-alchemy': './src',
         'testing-views': 'tests/views',
         'bootstrap/js': 'bower_modules/bootstrap/dist/js/bootstrap.min',
         'bootstrap/css': 'bower_modules/bootstrap/dist/css/bootstrap.min',
         'json': 'bower_modules/requirejs-plugins/src/json',
-        'switchery-require': 'bower_modules/switchery-require/dist',
-        'qk-alchemy': './src'
+        '$switchery-require': 'bower_modules/switchery-require/dist',
+        'loading-overlay': 'bower_modules/gasparesganga-jquery-loading-overlay/src/loadingoverlay.min'
     },
     shim: {
         "bootstrap/js": {

@@ -6,7 +6,6 @@ define([
     'json!./main.json',
     'bootstrap/js',
     'loadCss!bootstrap/css',
-    'loading-overlay',
     './bindings/overlay'
 ], function(mod, ko, $, $$, config) {
 

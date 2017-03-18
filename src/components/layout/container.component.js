@@ -55,17 +55,17 @@ define([
         $scope.styles = ko.pureComputed(function() {
             var styles = {};
 
-            styles.marginTop = 0;
+            styles.paddingTop = 0;
 
             if (hasNavbar()) {
-                styles.marginTop += 50;
+                styles.paddingTop += 50;
             }
 
             if (hasSubmenu()) {
-                styles.marginTop += 40;
+                styles.paddingTop += 40;
             }
 
-            styles.marginTop += "px";
+            styles.paddingTop += "px";
 
             return styles;
         })

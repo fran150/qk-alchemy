@@ -1,4 +1,4 @@
-define(['knockout', 'jquery'], function(ko, $) {
+define(['knockout', 'jquery', 'loading-overlay'], function(ko, $) {
 
     function showOverlay(element, value) {
         if (value) {

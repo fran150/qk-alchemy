@@ -55,9 +55,9 @@ define([
         // Applies the body margin if it has a navbar
         function setBodyMargin(hasNavbar) {
             if (hasNavbar) {
-                $(document).css('margin-top', '50px');
+                $(document).css('padding-top', '50px');
             } else {
-                $(document).css('margin-top', 'auto');
+                $(document).css('padding-top', 'auto');
             }
         }
 
