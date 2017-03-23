@@ -1,3 +1,8 @@
+/**
+    @component
+    Allows to define the general layout of the page. It coordinates the navbar,
+    sidebar and main container and interactions between them.
+*/
 define([
     'quark',
     'knockout',
@@ -7,22 +12,37 @@ define([
     function LayoutComponent(params, $scope, $imports) {
         var self = this;
 
-        // The layout has a navbar
+        /**
+            bool Observable true if the layout contains a al-layout-navbar component.
+        */
         this.hasNavbar = ko.observable(false);
-        // The layout has a sidebar
+        /**
+            bool Observable true if the layout has a al-layout-sidebar component.
+        */
         this.hasSidebar = ko.observable(false);
-        // The layout has submenu
+        /**
+            bool Observable true if the layout has a al-layout-submenu component.
+        */
         this.hasSubmenu = ko.observable(false);
 
-        // Component parameters
         $$.parameters({
-            // Sidebar's width in pixels
+            /**
+                int sidebar's width in pixels
+            */
             sidebarSize: ko.observable(90),
-            // Main container responsive size
+            /**
+                string Bootstrap size with the breaking point of the main container.
+                When the viewport is less than this size the sidebar breaks above
+                the main content.
+            */
             containerSize: ko.observable('md'),
-            // Min sidebar size in pixels
+            /**
+                int Minimal width of the sidebar in pixels
+            */
             minSidebarSize: ko.observable(20),
-            // Container fluid?
+            /**
+                bool True if the container is fluid
+            */
             containerFluid: ko.observable(true)
         }, params, this);
 
