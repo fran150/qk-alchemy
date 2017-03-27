@@ -13,38 +13,55 @@ define([
         var self = this;
 
         /**
-            bool Observable true if the layout contains a al-layout-navbar component.
+            @property bool True if the layout contains a al-layout-navbar component.
+            @observable
         */
         this.hasNavbar = ko.observable(false);
         /**
-            bool Observable true if the layout has a al-layout-sidebar component.
+            @property bool True if the layout has a al-layout-sidebar component.
+            @observable
         */
         this.hasSidebar = ko.observable(false);
         /**
-            bool Observable true if the layout has a al-layout-submenu component.
+            @property bool True if the layout has a al-layout-submenu component.
+            @observable
         */
         this.hasSubmenu = ko.observable(false);
 
         $$.parameters({
             /**
-                int sidebar's width in pixels
+                @parameter int sidebar's width in pixels
+                @observable
             */
             sidebarSize: ko.observable(90),
             /**
-                string Bootstrap size with the breaking point of the main container.
+                @parameter string Bootstrap size with the breaking point of the main container.
                 When the viewport is less than this size the sidebar breaks above
                 the main content.
+                @observable
             */
             containerSize: ko.observable('md'),
             /**
-                int Minimal width of the sidebar in pixels
+                @parameter int Minimal width of the sidebar in pixels
+                @observable
             */
             minSidebarSize: ko.observable(20),
             /**
-                bool True if the container is fluid
+                @parameter bool True if the container is fluid
+                @observable
             */
             containerFluid: ko.observable(true)
         }, params, this);
+
+        /**
+            @method Metodo de prueba
+            @param param1 int Parametro de prueba 1
+            @param param2 string Parametro de prueba 2
+            @returns bool Resultado de prueba
+        */
+        this.TestMethod = function(param1, param2) {
+
+        }
 
         // On component init
         $imports.initComponent = function() {
