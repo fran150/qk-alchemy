@@ -42,24 +42,24 @@ define([
         $$.parameters({
             /**
                 @parameter int sidebar's width in pixels
-                @observable
+                @observable @exposed
             */
             sidebarSize: ko.observable(90),
             /**
                 @parameter string Bootstrap size with the breaking point of the main container.
                 When the viewport is less than this size the sidebar breaks above
                 the main content.
-                @observable
+                @observable @exposed
             */
             containerSize: ko.observable('md'),
             /**
                 @parameter int Minimal width of the sidebar in pixels
-                @observable
+                @observable @exposed
             */
             minSidebarSize: ko.observable(20),
             /**
                 @parameter bool True if the container is fluid
-                @observable
+                @observable @exposed
             */
             containerFluid: ko.observable(true)
         }, params, this);
