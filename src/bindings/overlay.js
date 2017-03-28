@@ -1,3 +1,6 @@
+/**
+    @binding overlay Blocks the element with an overlay when the specified observable is true
+*/
 define(['knockout', 'jquery', 'loading-overlay'], function(ko, $) {
 
     function showOverlay(element, value) {
