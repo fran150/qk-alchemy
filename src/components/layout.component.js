@@ -2,6 +2,17 @@
     @component
     Allows to define the general layout of the page. It coordinates the navbar,
     sidebar and main container and interactions between them.
+    <br/>
+    For example, this is a layout with a navbar and sidebar
+    &lt;quark-component&lt;
+        &lt;al-layout&lt;
+            &lt;al-layout-sidebar&lt;
+            &lt;/al-layout-sidebar&lt;
+
+            &lt;al-layout-container&lt;
+            &lt;/al-layout-container&lt;
+        &lt;/al-layout&lt;
+    &lt;/quark-component&lt;
 */
 define([
     'quark',
