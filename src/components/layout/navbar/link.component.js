@@ -1,3 +1,7 @@
+/**
+    @component Shows a link button on the navbar. It must be used inside an al-layout-navbar
+    component as virtual.
+*/
 define([
     'knockout',
     'quark',
@@ -10,9 +14,25 @@ define([
         var self = this;
 
         $$.parameters({
+            /**
+                @parameter string Page to link when the user clicks on the element
+                @observable @exposed
+            */
             pageName: ko.observable(),
+            /**
+                @parameter object Parameter of the page to link when the user clicks on the element
+                @observable @exposed
+            */
             pageParams: ko.observable(),
+            /**
+                @parameter string Class of the icon font to show on the element
+                @observable @exposed
+            */
             iconFont: ko.observable('glyphicon glyphicon-star'),
+            /**
+                @parameter string Text to show on the link
+                @observable @exposed
+            */
             text: ko.observable('Navbar Link')
         }, params, this);
 

@@ -1,3 +1,10 @@
+/**
+    @component Defines the main content of the page in the layout. It must be used
+    inside a al-layout component and it's content will show on the main area of the
+    layout. In the al-layout component you can set the <code>containerFluid</code>
+    parameter to indicate that this component must use a <code>container</code>
+    or <code>container-fluid</code> class.
+*/
 define([
     'knockout',
     'quark',

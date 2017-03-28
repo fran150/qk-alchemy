@@ -1,3 +1,7 @@
+/**
+    @component Shows a button on the submenu. It must be used inside a
+    al-layout-submenu component.
+*/
 define([
     'knockout',
     'quark',
@@ -11,11 +15,20 @@ define([
 
         // Component's parameters
         $$.parameters({
-            // Font icon class to show
+            /**
+                @parameter string Font icon class to show
+                @observable @exposed
+            */
             iconFont: ko.observable('glyphicon glyphicon-floppy-disk'),
-            // Text of the menu
+            /**
+                @parameter string Text to show on the button
+                @observable @exposed
+            */
             text: ko.observable('Button'),
-            // Route name
+            /**
+                @parameter callback Called when the user clicks on the button
+                @exposed
+            */
             onClick: function() { }
         }, params, this);
 

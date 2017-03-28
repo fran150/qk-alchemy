@@ -1,3 +1,12 @@
+/**
+    @component <p>Shows a bootstrap panel that can be collapsed by the user.</p>
+    <p>It allows three content tags:
+    <ul>
+        <li>heading: content to show on the panel heading</li>
+        <li>content: content to show on the panel</li>
+        <li>footer: content to show on the panel footer</li>
+    </ul></p>
+*/
 define([
     'knockout',
     'quark',
@@ -19,9 +28,21 @@ define([
         };
 
         $$.parameters({
+            /**
+                @parameter string Bootstrap type indicating the color style of the panel
+                @observable @exposed
+            */
             type: ko.observable(),
+            /**
+                @parameter int True if the panel is collapsed
+                @observable @exposed
+            */
             collapsed: ko.observable(false),
-            click: function () {}
+            /**
+                @parameter callback Called when the user clicks on the collapse button
+                @observable @exposed
+            */
+            onClick: function () {}
         }, params, this);
 
         $scope.panelType = ko.pureComputed(function() {
@@ -32,16 +53,25 @@ define([
             }
         }, self);
 
+        /**
+            @method Opens the panel
+        */
         this.open = function() {
             self.collapsed(false);
         }
 
+        /**
+            @method Close the panel
+        */
         this.close = function() {
             self.collapsed(true);
         }
 
+        /**
+            @method Toggle the panel collapsed state
+        */
         this.toggle = function() {
-            $$.call(self.click);
+            $$.call(self.onClick);
             self.collapsed(!self.collapsed());
         }
 

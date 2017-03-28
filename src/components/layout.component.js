@@ -25,23 +25,27 @@ define([
 
         /**
             @property bool True if the layout contains a al-layout-navbar component.
+            Do not set this property by code.
             @observable
         */
         this.hasNavbar = ko.observable(false);
         /**
             @property bool True if the layout has a al-layout-sidebar component.
+            Do not set this property by code.
             @observable
         */
         this.hasSidebar = ko.observable(false);
         /**
             @property bool True if the layout has a al-layout-submenu component.
+            Do not set this property by code.
             @observable
         */
         this.hasSubmenu = ko.observable(false);
 
         $$.parameters({
             /**
-                @parameter int sidebar's width in pixels
+                @parameter int sidebar's width in pixels, sidebar's max size is
+                half the window
                 @observable @exposed
             */
             sidebarSize: ko.observable(90),
@@ -63,16 +67,6 @@ define([
             */
             containerFluid: ko.observable(true)
         }, params, this);
-
-        /**
-            @method Metodo de prueba
-            @param param1 int Parametro de prueba 1
-            @param param2 string Parametro de prueba 2
-            @returns bool Resultado de prueba
-        */
-        this.TestMethod = function(param1, param2) {
-
-        }
 
         // On component init
         $imports.initComponent = function() {

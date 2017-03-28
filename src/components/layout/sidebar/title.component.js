@@ -1,3 +1,7 @@
+/**
+    @component Shows a title on the sidebar. It must be used inside an
+    al-layout-sidebar component.
+*/
 define([
     'knockout',
     'quark',
@@ -11,9 +15,15 @@ define([
 
         // Component's parameters
         $$.parameters({
-            // Font icon class to show
+            /**
+                @parameter string Font icon class to show
+                @observable @exposed
+            */
             iconFont: ko.observable('glyphicon glyphicon-star'),
-            // Text of the title
+            /**
+                @parameter string Title text
+                @observable @exposed
+            */
             text: ko.observable('Menu Title')
         }, params, this);
 

@@ -1,3 +1,25 @@
+/**
+    @component Defines the navbar of the page. It must be used inside a al-layout
+    component. This component allows to define the elements that shows on the page's
+    navbar. It can define two virtual containers, left and right, elements on each
+    container will be aligned respectively. <br/>
+    For example: <br/>
+    <code-highlight params="language: 'html'">
+        &lt;al-layout&gt;
+            &lt;al-layout-navbar&gt;
+                &lt;-- left --&gt;
+                    <al-layout-navbar-link params="text: 'Left Aligned'" virtual>
+                    </al-layout-navbar-link>
+                &lt;-- /left --&gt;
+                &lt;-- right --&gt;
+                    <al-layout-navbar-link params="text: 'Right Aligned'" virtual>
+                    </al-layout-navbar-link>
+                &lt;-- /right --&gt;
+            &lt;/al-layout-navbar&gt;
+        &lt;/al-layout&gt;
+    </code-highlight>
+    All components inside the navbar must be virtual
+*/
 define([
     'knockout',
     'quark',
@@ -13,9 +35,23 @@ define([
 
         // Component's parameters
         $$.parameters({
+            /**
+                @parameter string Page name to link when the user clicks on the brand
+                @observable @exposed
+            */
             pageName: ko.observable(),
+            /**
+                @parameter object Object with parameters values for the link when the user
+                clicks on the brand. Empty if the page hasn't parameters.
+            */
             pageParams: ko.observable(),
+            /**
+                @parameter string Brand name to show on the navbar
+            */
             brand: ko.observable('Brand Name'),
+            /**
+                @parameter string URL to the icon to show on the brand
+            */
             icon: ko.observable()
         }, params, this);
 

@@ -1,3 +1,7 @@
+/**
+    @component Show a textbox and a search button on the sidebar menu. It must be
+    used inside an al-layout-sidebar component.
+*/
 define([
     'knockout',
     'quark',
@@ -11,13 +15,25 @@ define([
 
         // Component's parameters
         $$.parameters({
-            // Component value
+            /**
+                @parameter string Value of the textbox
+                @observable @exposed
+            */
             value: ko.observable(''),
-            // Placeholder text
+            /**
+                @parameter string Placeholder of the textbox
+                @observable @exposed
+            */
             placeholder: ko.observable('Search...'),
-            // Button's bootstrap type
+            /**
+                @parameter string Bootstrap style of the button
+                @observable @exposed
+            */
             style: ko.observable('default'),
-            // Search event
+            /**
+                @parameter callback Called when the user clicks on the button
+                @exposed
+            */
             onSearch: function(texto) {}
         }, params, this);
 

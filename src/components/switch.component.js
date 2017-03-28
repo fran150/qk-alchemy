@@ -1,3 +1,7 @@
+/**
+    @component A <a href="http://abpetkov.github.io/switchery/">Switchery</a> wrap.
+    An ios like switch.
+*/
 define([
     'quark',
     'knockout',
@@ -15,15 +19,38 @@ define([
         var config = {};
 
         $$.parameters({
+            /**
+                @parameter bool Indicates that the switch is on or off
+                @observable @exposed
+            */
             value: ko.observable(false),
+            /**
+                @parameter bool Indicates if the switch is disabled
+                @observable @exposed
+            */
             disabled: ko.observable(false)
         }, params, this);
 
         $$.parameters({
+            /**
+                @parameter string Color of the switch element (HEX or RGB value)
+            */
             color: '#64bd63',
+            /**
+                @parameter string Secondary color for the background color and border, when the switch is off
+            */
             secondaryColor: '#dfdfdf',
+            /**
+                @parameter string Default color of the jack/handle element
+            */
             jackColor: '#fff',
+            /**
+                @parameter string Color of unchecked jack/handle element
+            */
             jackSecondaryColor: null,
+            /**
+                @parameter string Size of the swich (small, normal, large)
+            */
             size: 'small'
         }, params, config);
 

@@ -1,3 +1,7 @@
+/**
+    @component Shows a button on the sidebar. It must be used inside an al-layout-sidebar
+    component as virtual.
+*/
 define([
     'knockout',
     'quark',
@@ -11,15 +15,30 @@ define([
 
         // Component's parameters
         $$.parameters({
-            // Name of the route to redirect when clicking on the button
+            /**
+                @parameter string Name of the route to redirect when clicking on the button
+                @observable @exposed
+            */
             pageName: ko.observable(),
-            // Route parameters
+            /**
+                @parameter string Page parameters
+                @observable @exposed
+            */
             pageParams: ko.observable(),
-            // Font icon class to show
+            /**
+                @parameter string Font icon class to show
+                @observable @exposed
+            */
             icon: ko.observable('glyphicon glyphicon-star'),
-            // Option text
+            /**
+                @parameter string Text to show
+                @observable @exposed
+            */
             text: ko.observable('Button'),
-            // Hide button text when sidebar width is less than this
+            /**
+                @parameter int Hide button text when sidebar width is less than this size in pixels
+                @observable @exposed
+            */
             hideTextAt: ko.observable(85)
         }, params, this);
 

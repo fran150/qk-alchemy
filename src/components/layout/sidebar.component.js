@@ -1,3 +1,17 @@
+/**
+    @component Defines the sidebar of the page. It must be used inside a al-layout
+    component. This component allows to define the elements that shows on the page's
+    sidebar. The sidebar is resizeable and the elements readapt to the sidebar's size.
+    For example: <br/>
+    <code-highlight params="language: 'html'">
+        &lt;al-layout&gt;
+            &lt;al-layout-sidebar&gt;
+                <al-layout-sidebar-link params="text: 'Example menu'">
+                </al-layout-sidebar-link>
+            &lt;/al-layout-navbar&gt;
+        &lt;/al-layout&gt;
+    </code-highlight>
+*/
 define([
     'knockout',
     'quark',
@@ -17,12 +31,23 @@ define([
         // Container bootstrap's size (when breaks to the top of page)
         var containerSize = ko.observable();
 
-        // Indicates if the sidebar is resizing
+        /**
+            @property bool Indicates if the sidebar is resizing
+            @observable
+        */
         this.resizing = ko.observable(false);
 
         // This component local parameters
         $$.parameters({
+            /**
+                @parameter int Width in pixels of the resizer element
+                @observable @exposed
+            */
             resizerWidth: ko.observable(10),
+            /**
+                @parameter int Margin to the first element in the sidebar
+                @observable @exposed
+            */
             marginTop: ko.observable(0)
         }, params, this);
 

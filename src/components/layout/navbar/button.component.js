@@ -1,3 +1,7 @@
+/**
+    @component Shows a button on the navbar. It must be used inside an al-layout-navbar
+    component as virtual.
+*/
 define([
     'knockout',
     'quark',
@@ -10,9 +14,24 @@ define([
         var self = this;
 
         $$.parameters({
+            /**
+                @parameter string Text to show on the button
+                @observable @exposed
+            */
             text: ko.observable('Navbar Button'),
+            /**
+                @parameter string Class of the icon font to show on the element
+                @observable @exposed
+            */
             iconFont: ko.observable('glyphicon glyphicon-star'),
+            /**
+                @parameter bool True if the button must show as active on the navbar
+                @observable @exposed
+            */
             active: ko.observable(false),
+            /**
+                @parameter callback Called when the user clicks on the button
+            */
             onClick: function() {}
         }, params, this);
 

@@ -1,3 +1,28 @@
+/**
+    @component Allows to define a submenu that shows between the navbar and the main
+    content on the page. <br />
+    For example: <br/>
+    <code-highlight params="language: 'html'">
+        &lt;al-layout&gt;
+            &lt;al-layout-navbar&gt;
+                &lt;-- left --&gt;
+                    <al-layout-navbar-link params="text: 'Left Aligned'" virtual>
+                    </al-layout-navbar-link>
+                &lt;-- /left --&gt;
+                &lt;-- right --&gt;
+                    <al-layout-navbar-link params="text: 'Right Aligned'" virtual>
+                    </al-layout-navbar-link>
+                &lt;-- /right --&gt;
+            &lt;/al-layout-navbar&gt;
+            &lt;al-layout-container&gt;
+                &lt;al-layout-submenu&gt;
+                    &lt;al-layout-submenu-link params="text: 'Link'"&gt;
+                    &lt;/al-layout-submenu-link&gt;
+                &lt;/al-layout-submenu&gt;
+            &lt;/al-layout-container&gt;
+        &lt;/al-layout&gt;
+    </code-highlight>
+*/
 define([
     'quark',
     'knockout',

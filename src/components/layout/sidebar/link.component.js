@@ -1,3 +1,14 @@
+/**
+    @component <p>Shows a link on the sidebar. It must be used inside an al-layout-sidebar
+    component as virtual.
+    You can specify submenu by nesting this elements inside a virtual tag</p>
+    lt;al-layout-sidebar-link&gt;
+        lt;!-- submenu --&gt;
+            lt;al-layout-sidebar-link virtual&gt;
+            lt;/al-layout-sidebar-link&gt;
+        lt;!-- /submenu --&gt;
+    lt;/al-layout-sidebar-link&gt;
+*/
 define([
     'knockout',
     'quark',
@@ -11,15 +22,30 @@ define([
 
         // Component's parameters
         $$.parameters({
-            // Font icon class to show
+            /**
+                @parameter string Class of the icon font to show on the element
+                @observable @exposed
+            */
             iconFont: ko.observable('glyphicon glyphicon-star'),
-            // Text of the menu
+            /**
+                @parameter string Text to show
+                @observable @exposed
+            */
             text: ko.observable('Menu Option'),
-            // Route name
+            /**
+                @parameter string Page to link when the user clicks on the element
+                @observable @exposed
+            */
             pageName: ko.observable(),
-            // Route parameters
+            /**
+                @parameter string Page parameters
+                @observable @exposed
+            */
             pageParams: ko.observable(),
-            // True if the menu is opened showing submenus
+            /**
+                @parameter bool If the link has submenus returns if the dropdown is opened
+                showing the child elements
+            */
             opened: ko.observable(false)
         }, params, this);
 
