@@ -1,3 +1,6 @@
+/**
+    @component Shows a divider line on the al-navbar-dropdown component.
+*/
 define([
     'knockout',
     'quark',

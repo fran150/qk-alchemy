@@ -1,3 +1,6 @@
+/**
+    @component Shows a header text in the al-navbar-dropdown component.
+*/
 define([
     'knockout',
     'quark',
@@ -10,6 +13,10 @@ define([
         var self = this;
 
         $$.parameters({
+            /**
+                @parameter string Text to show on the header
+                @observable @exposed
+            */
             text: ko.observable('Header')
         }, params, this);
 

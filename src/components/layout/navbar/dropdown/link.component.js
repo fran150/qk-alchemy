@@ -1,3 +1,7 @@
+/**
+    @component Shows a link in the al-navbar-dropdown component. Allows the user to click on the option
+    redirecting the browser to a specific page.
+*/
 define([
     'knockout',
     'quark',
@@ -10,10 +14,30 @@ define([
         var self = this;
 
         $$.parameters({
+            /**
+                @parameter string Page name to redirect on click
+                @observable @exposed
+            */
             pageName: ko.observable(),
+            /**
+                @parameter object An object where each property is the name of a page parameter
+                and contains its value
+                @observable @exposed
+            */
             pageParams: ko.observable(),
+            /**
+                @parameter string Class of the icon font to show on the element
+                @observable @exposed
+            */
             iconFont: ko.observable('glyphicon glyphicon-star'),
+            /**
+                @parameter string Text to show on the element.
+                @observable @exposed
+            */
             text: ko.observable('Navbar Link'),
+            /**
+                @parameter bool True if the item must be disabled, false otherwise.
+            */
             disabled: ko.observable(false)
         }, params, this);
 
