@@ -22,6 +22,7 @@
             &lt;/al-layout-container&gt;
         &lt;/al-layout&gt;
     </code-highlight>
+    @allowContent
 */
 define([
     'quark',

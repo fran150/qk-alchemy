@@ -11,6 +11,7 @@
             &lt;/al-layout-navbar&gt;
         &lt;/al-layout&gt;
     </code-highlight>
+    @allowContent
 */
 define([
     'knockout',

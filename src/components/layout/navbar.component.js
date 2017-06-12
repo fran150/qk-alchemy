@@ -19,6 +19,7 @@
         &lt;/al-layout&gt;
     </code-highlight>
     All components inside the navbar must be virtual
+    @allowContent
 */
 define([
     'knockout',

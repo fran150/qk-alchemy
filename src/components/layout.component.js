@@ -13,6 +13,7 @@
             &lt;/al-layout-container&lt;
         &lt;/al-layout&lt;
     &lt;/quark-component&lt;
+    @allowContent
 */
 define([
     'quark',

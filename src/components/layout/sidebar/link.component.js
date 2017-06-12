@@ -8,6 +8,7 @@
             lt;/al-layout-sidebar-link&gt;
         lt;!-- /submenu --&gt;
     lt;/al-layout-sidebar-link&gt;
+    @allowContent
 */
 define([
     'knockout',

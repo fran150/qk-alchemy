@@ -6,6 +6,7 @@
         <li>content: content to show on the panel</li>
         <li>footer: content to show on the panel footer</li>
     </ul></p>
+    @allowContent
 */
 define([
     'knockout',
@@ -55,6 +56,7 @@ define([
 
         /**
             @method Opens the panel
+            @signature open()
         */
         this.open = function() {
             self.collapsed(false);
@@ -62,6 +64,7 @@ define([
 
         /**
             @method Close the panel
+            @signature close()
         */
         this.close = function() {
             self.collapsed(true);
@@ -69,6 +72,7 @@ define([
 
         /**
             @method Toggle the panel collapsed state
+            @signature toggle()
         */
         this.toggle = function() {
             $$.call(self.onClick);

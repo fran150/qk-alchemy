@@ -3,6 +3,7 @@
     array on the browser. It exposes a pageData property with the data
     to show on the current page. The content can be bound to this property to show
     the information of a given page.
+    @allowContent
 */
 define([
     'quark',
