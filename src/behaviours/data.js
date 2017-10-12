@@ -3,23 +3,22 @@ define([
     'knockout'
 ], function($$, ko) {
 
-    // Crea un metodo que funciona como origen de datos consultando un servicio REST
-    // a través de AJAX.
-    // Acepta la siguiente configuracion
-    // {
-    //      fnName: Nombre de la funcion a crear (por defecto read)
-    //      method: Metodo REST a invocar (por defecto GET)
-    //      args: Objeto donde cada elemento es el nombre de un atributo que recibe la funcion
-    //      auth: Boolean que indica si el servicio se debe invocar con token
-    //      url: Url a invocar
-    //          Si es un string invoca a $$.formatString pasandole un objeto con los parametros de la funcion
-    //          Si es una funcion la ejecuta para obtener la URL
-    //      payload: Datos a enviar al servicio
-    //          Si es una funcion la ejecuta y envia el resultado
-    //          Si no es una funcion envia el valor especificado
-    //          Si no se especifica envia un objeto vacio
-    //
-    // }
+    /**
+       @behaviour datasource Crea un metodo que funciona como origen de datos consultando un servicio REST a través de AJAX.
+       Acepta la siguiente configuracion
+     {
+          fnName: Nombre de la funcion a crear (por defecto read)
+          method: Metodo REST a invocar (por defecto GET)
+          args: Objeto donde cada elemento es el nombre de un atributo que recibe la funcion
+          auth: Boolean que indica si el servicio se debe invocar con token
+          url: Url a invocar
+            Si es un string invoca a $$.formatString pasandole un objeto con los parametros de la funcion
+            Si es una funcion la ejecuta para obtener la URL
+          payload: Datos a enviar al servicio
+            Si es una funcion la ejecuta y envia el resultado
+            Si no es una funcion envia el valor especificado
+            Si no se especifica envia un objeto vacio
+    }*/
     $$.behaviour.define('datasource', function(target, config) {
         var fnName = config.fnName || 'read';
         var method = config.method || 'GET';
@@ -80,6 +79,23 @@ define([
         };
 
     });
+
+    /**
+       @behaviour readIntoObservable Crea un metodo que funciona como origen de datos consultando un servicio REST a través de AJAX.
+       Acepta la siguiente configuracion
+     {
+          fnName: Nombre de la funcion a crear (por defecto read)
+          method: Metodo REST a invocar (por defecto GET)
+          args: Objeto donde cada elemento es el nombre de un atributo que recibe la funcion
+          auth: Boolean que indica si el servicio se debe invocar con token
+          url: Url a invocar
+            Si es un string invoca a $$.formatString pasandole un objeto con los parametros de la funcion
+            Si es una funcion la ejecuta para obtener la URL
+          payload: Datos a enviar al servicio
+            Si es una funcion la ejecuta y envia el resultado
+            Si no es una funcion envia el valor especificado
+            Si no se especifica envia un objeto vacio
+    }*/
 
     $$.behaviour.define('readIntoObservable', function(target, config) {
         var datasource = config.datasource;
