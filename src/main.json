@@ -1,9 +1,4 @@
 {
-    "css": [
-        "css/sidebar.css",
-        "css/navbar.css",
-        "css/submenu.css"
-    ],
     "namespaces": {
         "layout": {
             "": "components/layout.component",
