@@ -1,12 +1,4 @@
 {
-    "name": "qk-alchemy",
-    "uglify": true,
-    "externals": [
-        "bootstrap/js",
-        "bootstrap/css",
-        "switchery-require",
-        "loading-overlay"
-    ],
     "include": [
         "components/pager.component",
         "components/panel/collapsable.component",
