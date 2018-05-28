@@ -1,8 +1,12 @@
 {
-    "paths": {
-        "qk-alchemy": "src/main"
-    },
-    "shims": {
+    "package": {
+        "versions": {
+            "0.x": {
+                "paths": {
+                    "qk-alchemy": "src"
+                }        
+            }
+        }
     },
     "bundling": {
         "include": [
