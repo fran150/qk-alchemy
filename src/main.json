@@ -12,6 +12,7 @@
                     "header": "components/layout/navbar/dropdown/header.component",
                     "link": "components/layout/navbar/dropdown/link.component"
                 },
+                "mega-dropdown": "components/layout/navbar/mega-dropdown.component",
                 "link": "components/layout/navbar/link.component"
             },
             "sidebar": {

@@ -7,8 +7,9 @@ define([
     'quark',
     'text!./link.component.html',
     '../../../../lib/utils',
-    '../dropdown.component'
-], function(ko, $$, template, utils, NavbarDropdown) {
+    '../dropdown.component',
+    '../mega-dropdown.component'
+], function(ko, $$, template, utils, NavbarDropdown, MegaDropdown) {
 
     function LayoutNavbarDropdownLinkComponent(params, $scope) {
         var self = this;
@@ -29,7 +30,7 @@ define([
                 @parameter string Class of the icon font to show on the element
                 @observable @exposed
             */
-            iconFont: ko.observable('glyphicon glyphicon-star'),
+            iconFont: ko.observable(),
             /**
                 @parameter string Text to show on the element.
                 @observable @exposed
@@ -58,13 +59,19 @@ define([
         $scope.init = function(element, viewModel, context) {
             // Gets the model of the container component
             var container = utils.findContainer(context, NavbarDropdown.modelType);
+            var container2 = utils.findContainer(context, MegaDropdown.modelType);
 
             // Check if its a Navbar component
-            if (container) {
-                dropdownActive = container.active;
-                checkActive();
-            } else {
+            if (!container && !container2) {
                 throw new Error('This component must be used inside an al-layout-navbar-dropdown component');
+            } else {
+                if (container) {
+                    dropdownActive = container.active;
+                } else {
+                    dropdownActive = container2.active;
+                }
+                
+                checkActive();
             }
         }
 

@@ -1,0 +1,16 @@
+<!-- quark-component -->
+<li class="dropdown mega-dropdown" data-bind="onBind: init, css: { active: model.active }">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <!-- ko if: model.iconFont -->
+            <span data-bind="css: model.iconFont"></span>&nbsp;
+        <!-- /ko -->
+        <span data-bind="text: model.text"></span>
+        <span class="caret"></span>
+    </a>
+
+    <ul class="dropdown-menu mega-dropdown-menu row">
+        <!-- ko content -->
+        <!-- /ko -->
+    </ul>
+</li>
+<!-- /quark-component -->
