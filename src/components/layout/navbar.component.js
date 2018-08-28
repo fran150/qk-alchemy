@@ -53,7 +53,11 @@ define([
             /**
                 @parameter string URL to the icon to show on the brand
             */
-            icon: ko.observable()
+            icon: ko.observable(),
+            /**
+                @parameter bool If true the navbar will show black
+            */
+           inverse: ko.observable(false)
         }, params, this);
 
         // When binding the main div
@@ -69,6 +73,10 @@ define([
                 throw new Error('The navbar component must be used inside an al-layout component');
             }
         }
+
+        $scope.navbarClass = ko.pureComputed(function() {
+            return self.inverse() ? "navbar-inverse" : "navbar-default";
+        }, $scope);
 
         // Return true if an icon is defined
         $scope.visibleIcon = ko.pureComputed(function() {
